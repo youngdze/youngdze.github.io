@@ -1,0 +1,744 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Crawler,爬虫,Python,Scrapy," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Justin's Words" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这几天一直都在学 Scrapy，反正觉得它是很有用的，至少比以前独立写爬虫的时候写的代码量少多了。  安装 Scrapy 不适用于 Python 3.x 以上，所以还是得用 Python 2.x，安装如下： 1$ pip install scrapy 记得把 Python2x/Scripts 路径加入环境变量">
+<meta name="keywords" content="Crawler,爬虫,Python,Scrapy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrapy 初步学习">
+<meta property="og:url" content="http://youngdze.co/2015/02/28/scrapy-startup/index.html">
+<meta property="og:site_name" content="Justin&#39;s Words">
+<meta property="og:description" content="这几天一直都在学 Scrapy，反正觉得它是很有用的，至少比以前独立写爬虫的时候写的代码量少多了。  安装 Scrapy 不适用于 Python 3.x 以上，所以还是得用 Python 2.x，安装如下： 1$ pip install scrapy 记得把 Python2x/Scripts 路径加入环境变量">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2016-12-05T04:55:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scrapy 初步学习">
+<meta name="twitter:description" content="这几天一直都在学 Scrapy，反正觉得它是很有用的，至少比以前独立写爬虫的时候写的代码量少多了。  安装 Scrapy 不适用于 Python 3.x 以上，所以还是得用 Python 2.x，安装如下： 1$ pip install scrapy 记得把 Python2x/Scripts 路径加入环境变量">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://youngdze.co/2015/02/28/scrapy-startup/"/>
+
+
+
+
+
+  <title> Scrapy 初步学习 | Justin's Words </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-55843150-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Justin's Words</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2015/02/28/scrapy-startup/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Justin Young">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/cat.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Justin's Words">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scrapy 初步学习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-02-28T21:55:36+08:00">
+                2015-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/02/28/scrapy-startup/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/02/28/scrapy-startup/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>这几天一直都在学 Scrapy，反正觉得它是很有用的，至少比以前独立写爬虫的时候写的代码量少多了。</p>
+</blockquote>
+<p><strong>安装</strong></p>
+<p>Scrapy 不适用于 Python 3.x 以上，所以还是得用 Python 2.x，安装如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install scrapy</div></pre></td></tr></table></figure>
+<p>记得把 Python2x/Scripts 路径加入环境变量</p>
+<a id="more"></a>
+<p><strong>第一个 Project<b></b></strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scrrapy startproject hrtencent</div></pre></td></tr></table></figure>
+<p>名字自取，一般取和爬取的站点相同的名字，上面那个就是 <a href="http://hr.tencent.com/position.php" title="HR Tencent" target="_blank" rel="external">http://hr.tencent.com/position.php</a>。</p>
+<p><strong>目录树</strong></p>
+<pre>hrtencent/
+    scrapy.cfg
+    hrtencent/
+        __init__.py
+        items.py
+        pipelines.py
+        settings.py
+        spiders/
+            __init__.py
+            ...</pre>
+
+<p>首先是 <code>items.py</code>，它将保存爬下来的数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> scrapy.item <span class="keyword">import</span> Item, Field</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TencentItem</span><span class="params">(Item)</span>:</span></div><div class="line">    name = Field()          <span class="comment"># 职位名称</span></div><div class="line">    type = Field()          <span class="comment"># 职位类型</span></div><div class="line">    number = Field()        <span class="comment"># 职位需求数目</span></div><div class="line">    location = Field()      <span class="comment"># 职位所在</span></div><div class="line">    publish_date = Field()  <span class="comment"># 信息发布时间</span></div></pre></td></tr></table></figure>
+<p>当然可以定义多个 Item，用于处理不同种类的数据</p>
+<p>接下来创建 <code>HRTencentSpider.py</code> 在 spiders/</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">from</span> scrapy.contrib.spiders <span class="keyword">import</span> CrawlSpider, Rule</div><div class="line"><span class="keyword">from</span> scrapy.contrib.linkextractors <span class="keyword">import</span> LinkExtractor</div><div class="line"><span class="keyword">from</span> tencent.items <span class="keyword">import</span> TencentItem</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TecentSpider</span><span class="params">(CrawlSpider)</span>:</span></div><div class="line">    name = <span class="string">"hrtencent"</span></div><div class="line">    allowed_domains = [<span class="string">"tencent.com"</span>]</div><div class="line">    start_urls = [</div><div class="line">        <span class="string">"http://hr.tencent.com/position.php"</span></div><div class="line">    ]</div><div class="line"></div><div class="line">    rules = (</div><div class="line">        Rule(</div><div class="line">            LinkExtractor(</div><div class="line">                allow=(<span class="string">"/position.php\?&amp;amp;start=\d0#a"</span>,),</div><div class="line">                restrict_xpaths=(<span class="string">'//a[@href="position.php?&amp;amp;start=\d0#a"]'</span>)</div><div class="line">            ),</div><div class="line">            <span class="comment"># callback="parse_positions",</span></div><div class="line">            callback=<span class="string">"parse_position_url"</span>,</div><div class="line">            follow=<span class="keyword">True</span></div><div class="line">        ),</div><div class="line">        Rule(</div><div class="line">            LinkExtractor(</div><div class="line">                allow=(<span class="string">"/position_detail.php?id=\d*.*"</span>,),</div><div class="line">                restrict_xpaths=(<span class="string">'//a[@href*="position_detail.php?id="]'</span>)</div><div class="line">            ),</div><div class="line">            callback=<span class="string">"parse_position_details"</span>,</div><div class="line">            follow=<span class="keyword">True</span></div><div class="line">        )</div><div class="line">    )</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_positions</span><span class="params">(self, response)</span>:</span></div><div class="line">        positions = response.css(<span class="string">".even"</span>) + response.css(<span class="string">'.odd'</span>)</div><div class="line">        <span class="keyword">for</span> position <span class="keyword">in</span> positions:</div><div class="line">            item = TencentItem()</div><div class="line">            item[<span class="string">'name'</span>] = position.xpath(<span class="string">"td[1]/a/text()"</span>).extract()[<span class="number">0</span>]</div><div class="line">            item[<span class="string">'type'</span>] = position.xpath(<span class="string">"td[2]/text()"</span>).extract()[<span class="number">0</span>]</div><div class="line">            item[<span class="string">'number'</span>] = position.xpath(<span class="string">"td[3]/text()"</span>).extract()[<span class="number">0</span>]</div><div class="line">            item[<span class="string">'location'</span>] = position.xpath(<span class="string">"td[4]/text()"</span>).extract()[<span class="number">0</span>]</div><div class="line">            item[<span class="string">'publish_date'</span>] = position.xpath(<span class="string">"td[5]/text()"</span>).extract()[<span class="number">0</span>]</div><div class="line">            <span class="keyword">yield</span> item</div></pre></td></tr></table></figure>
+<p>保存文件为 json 用的，这是我的做法，<code>pipelines.py</code> 其实作用很大，就看你怎么用它：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">import</span> codecs</div><div class="line"><span class="keyword">import</span> os</div><div class="line"></div><div class="line"><span class="keyword">from</span> scrapy.exceptions <span class="keyword">import</span> DropItem</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TencentPipeline</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></div><div class="line">        <span class="keyword">return</span> item</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">JsonWriterPipeline</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line">    <span class="comment"># when open the spider</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span><span class="params">(self, spider)</span>:</span></div><div class="line">        self.file = codecs.open(<span class="string">'items.json'</span>, <span class="string">'wb'</span>, encoding=<span class="string">'utf-8'</span>)   <span class="comment"># create/open the file encoded with utf-8</span></div><div class="line">        self.file.write(<span class="string">"["</span>)    <span class="comment"># json array begins</span></div><div class="line"></div><div class="line">    <span class="comment"># process the items</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></div><div class="line">        line = json.dumps(dict(item)) + <span class="string">",\n"</span>   <span class="comment"># parse to json, add '\n' to the end of a line</span></div><div class="line">        self.file.write(line.decode(<span class="string">'unicode_escape'</span>))  <span class="comment"># unescape the string and write in the file handle</span></div><div class="line">        <span class="keyword">return</span> item</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close_spider</span><span class="params">(self, spider)</span>:</span></div><div class="line">        self.file.seek(<span class="number">-2</span>, os.SEEK_END)     <span class="comment"># seek ',\n' of the last line</span></div><div class="line">        self.file.truncate()        <span class="comment"># remove ',\n;' of the last line to be a standard json file</span></div><div class="line">        self.file.write(<span class="string">"]"</span>)        <span class="comment"># json end</span></div><div class="line">        self.file.close()</div></pre></td></tr></table></figure>
+<p>使用 <code>pipelines.py</code> 得将其加入 <code>settings.py</code> 使其生效：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ITEM_PIPELINES = &#123;</div><div class="line">    <span class="string">'tencent.pipelines.JsonWriterPipeline'</span>: <span class="number">800</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样一个递归爬虫就搞定了，操作如下即可，名字对应 <code>spider.name</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scrapy crawl hrtencent</div></pre></td></tr></table></figure>
+<p><strong>为不同的 parse 设置不同的 pipeline</strong></p>
+<p>可以如下在 <code>pipelines</code> 处理：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">open_spider</span><span class="params">(self, spider)</span>:</span></div><div class="line">    <span class="keyword">if</span> spider.name <span class="keyword">is</span> <span class="string">'hrtencent'</span>:</div><div class="line">        self.file = codecs.open(<span class="string">'items.json'</span>, <span class="string">'wb'</span>, encoding=<span class="string">"utf-8"</span>)</div><div class="line">        self.file.write(<span class="string">"["</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, hrtencent)</span>:</span></div><div class="line">    <span class="keyword">if</span> spider.name <span class="keyword">is</span> <span class="keyword">not</span> <span class="string">'hrtencent'</span>:</div><div class="line">        <span class="keyword">return</span> item</div><div class="line"></div><div class="line">    line = json.dumps(dict(item)) + <span class="string">",\n"</span></div><div class="line">    self.file.write(line.decode(<span class="string">'unicode_escape'</span>))</div><div class="line">    <span class="keyword">return</span> item</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">close_spider</span><span class="params">(self, spider)</span>:</span></div><div class="line">    <span class="keyword">if</span> spider.name <span class="keyword">is</span> <span class="string">'hrtencent'</span>:</div><div class="line">        self.file.seek(<span class="number">-2</span>, os.SEEK_END)</div><div class="line">        self.file.truncate()</div><div class="line">        self.file.write(<span class="string">"]"</span>)</div><div class="line">        self.file.close()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<p>或者多个选项：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> spider.name <span class="keyword">in</span> [<span class="string">'hrtencent'</span>, <span class="string">'hrtencent_details'</span>]:</div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<p>使用 <a href="http://doc.scrapy.org/en/0.24/topics/request-response.html#request-objects" title="Request" target="_blank" rel="external">Request</a> 进一步爬取：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_lists</span><span class="params">(self, response)</span>:</span></div><div class="line">    tuigirls = response.css(<span class="string">"#piclist .cl li"</span>)</div><div class="line"></div><div class="line">    <span class="keyword">for</span> tuigirl <span class="keyword">in</span> tuigirls:</div><div class="line">        item = LeisimaoItem()</div><div class="line">        item[<span class="string">'id'</span>] = tuigirl.css(<span class="string">'h3 a::text'</span>)[<span class="number">0</span>].extract().strip()[<span class="number">15</span>:<span class="number">18</span>]</div><div class="line"></div><div class="line">        title = tuigirl.css(<span class="string">'h3 a::text'</span>)[<span class="number">0</span>].extract().strip()</div><div class="line">        <span class="keyword">if</span> (<span class="string">"/"</span> <span class="keyword">in</span> title):</div><div class="line">            item[<span class="string">'title'</span>] = title[<span class="number">12</span>:title.find(<span class="string">'/'</span>)]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            item[<span class="string">'title'</span>] = title[<span class="number">12</span>:]</div><div class="line"></div><div class="line">        item[<span class="string">'link'</span>] = <span class="string">"http://bbs.leisimao.com/"</span> + tuigirl.css(<span class="string">'a::attr(href)'</span>)[<span class="number">0</span>].extract()</div><div class="line">        item[<span class="string">'count'</span>] = tuigirl.css(<span class="string">'.idata .idc::text'</span>)[<span class="number">0</span>].extract().strip()</div><div class="line"></div><div class="line">        <span class="comment"># 可以传递参数，指定 callback</span></div><div class="line">        request = Request(item[<span class="string">'link'</span>], meta=&#123;<span class="string">'item'</span>: item&#125;, callback=self.parse_imgs)</div><div class="line"></div><div class="line">        <span class="keyword">yield</span> request</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_imgs</span><span class="params">(self, response)</span>:</span></div><div class="line">    item = response.meta[<span class="string">'item'</span>]</div><div class="line">    item[<span class="string">"imgs"</span>] = response.css(<span class="string">"#pic-list li img::attr(src)"</span>).extract()</div><div class="line">    <span class="keyword">return</span> item</div></pre></td></tr></table></figure>
+<p><strong>断点调试</strong></p>
+<p>在需要断点的地方加入， 将会进入一个 python shell，拥有当前 response</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">inspect_response(response)</div></pre></td></tr></table></figure>
+<p>看看我写的也无妨，不过水平很菜，且看且过：<a href="https://github.com/youngdze/ScrapyExecise" title="Scrapy Execise" target="_blank" rel="external">https://github.com/youngdze/ScrapyExecise</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Crawler/" rel="tag"># Crawler</a>
+          
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Scrapy/" rel="tag"># Scrapy</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/02/18/pomodoro-technique/" rel="next" title="Pomodoro Technique">
+                <i class="fa fa-chevron-left"></i> Pomodoro Technique
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/28/permutation/" rel="prev" title="全排列（Permutation)">
+                全排列（Permutation) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/cat.png"
+               alt="Justin Young" />
+          <p class="site-author-name" itemprop="name">Justin Young</p>
+          <p class="site-description motion-element" itemprop="description">You Deserve A Better Life</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/youngdze" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/youngdze" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Justin Young</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'youngdze';
+      var disqus_identifier = '2015/02/28/scrapy-startup/';
+
+      var disqus_title = "Scrapy 初步学习";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

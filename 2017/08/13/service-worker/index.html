@@ -1,0 +1,770 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Service Workers," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Justin's Words" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="常用 web 静态资源的缓存 代理服务器缓存 CDN 缓存 浏览器端缓存  浏览器缓存 Cache-Control: max-age=3600(s) | no-cache | no-store Pragma: no-cache | Pragma Expires: Fri, 11 Aug 2017, 17:00:00 GMT Last-Modified: Fri, 11 Aug 2017, 17:0">
+<meta name="keywords" content="Service Workers">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Service workers">
+<meta property="og:url" content="http://youngdze.co/2017/08/13/service-worker/index.html">
+<meta property="og:site_name" content="Justin&#39;s Words">
+<meta property="og:description" content="常用 web 静态资源的缓存 代理服务器缓存 CDN 缓存 浏览器端缓存  浏览器缓存 Cache-Control: max-age=3600(s) | no-cache | no-store Pragma: no-cache | Pragma Expires: Fri, 11 Aug 2017, 17:00:00 GMT Last-Modified: Fri, 11 Aug 2017, 17:0">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://youngdze.co/images/sw-lifecycle.png">
+<meta property="og:image" content="http://youngdze.co/images/sw-events.png">
+<meta property="og:image" content="http://youngdze.co/images/sw1.png">
+<meta property="og:image" content="http://youngdze.co/images/sw2.png">
+<meta property="og:image" content="http://youngdze.co/images/sw3.png">
+<meta property="og:updated_time" content="2017-08-13T11:15:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Service workers">
+<meta name="twitter:description" content="常用 web 静态资源的缓存 代理服务器缓存 CDN 缓存 浏览器端缓存  浏览器缓存 Cache-Control: max-age=3600(s) | no-cache | no-store Pragma: no-cache | Pragma Expires: Fri, 11 Aug 2017, 17:00:00 GMT Last-Modified: Fri, 11 Aug 2017, 17:0">
+<meta name="twitter:image" content="http://youngdze.co/images/sw-lifecycle.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://youngdze.co/2017/08/13/service-worker/"/>
+
+
+
+
+
+  <title> Service workers | Justin's Words </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-55843150-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Justin's Words</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2017/08/13/service-worker/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Justin Young">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/cat.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Justin's Words">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Service workers
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-13T19:08:41+08:00">
+                2017-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-End/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-End</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/08/13/service-worker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/08/13/service-worker/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="常用-web-静态资源的缓存"><a href="#常用-web-静态资源的缓存" class="headerlink" title="常用 web 静态资源的缓存"></a>常用 web 静态资源的缓存</h2><ul>
+<li>代理服务器缓存</li>
+<li>CDN 缓存</li>
+<li>浏览器端缓存</li>
+</ul>
+<h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><ul>
+<li>Cache-Control: max-age=3600(s) | no-cache | no-store</li>
+<li>Pragma: no-cache | Pragma</li>
+<li>Expires: Fri, 11 Aug 2017, 17:00:00 GMT</li>
+<li>Last-Modified: Fri, 11 Aug 2017, 17:00:00 GMT</li>
+<li>If-Modified-Since: Fri, 11 Aug 2017, 17:00:00 GMT</li>
+<li>Etag: “v2.6”</li>
+<li>If-None-Match: “v2.6”</li>
+</ul>
+<p>no-cache 是允许缓存的，但是使用缓存之前必须和服务器进行新鲜度对比，no-store 才是禁止缓存。</p>
+<a id="more"></a>
+<h2 id="AppCache"><a href="#AppCache" class="headerlink" title="AppCache"></a>AppCache</h2><p>对app内存缓存的方案，具体表现为当请求某个文件时不是从网络获取该文件，而是从本地获取。</p>
+<p>index.appcache</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">CACHE MANIFEST</div><div class="line">index.html</div><div class="line">index.css</div><div class="line">index.js</div><div class="line">logo.jpg</div><div class="line">NETWORK:</div><div class="line">*</div><div class="line">FALLBACK:</div><div class="line">/404.html</div></pre></td></tr></table></figure>
+<p>index.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">manifest</span>=<span class="string">"index.appcache"</span>&gt;</span></div><div class="line">...</div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这样的话，每次都会请求 index.appcache，如果请求的文件存在在 <code>index.appcache</code> 里面，就无需向服务器请求。</p>
+<h3 id="弊端"><a href="#弊端" class="headerlink" title="弊端"></a>弊端</h3><ul>
+<li>除非改变 index.appcache，否则 index.appcache 里面的文件永远只会来自应用缓存</li>
+<li>不在 appcache 缓存列表里面的文件不会被缓存，再次请求也不会去请求 😶</li>
+</ul>
+<h2 id="Service-workers"><a href="#Service-workers" class="headerlink" title="Service workers"></a>Service workers</h2><p>本质上充当浏览器和网络之间的代理服务器。它们旨在能够创建有效的离线体验，拦截网络请求并基于网络是否可用判断资源是否需要更新来采取适当的动作。他们还允许访问推送通知和后台同步API。</p>
+<p>Service worker 运行在 worker 线程，和驱动应用的 JavaScript 线程是分开的，两者相互不受影响，所以 Service worker 是不能访问 DOM 的。</p>
+<p>完全的使用 Promise 异步设计，不允许使用同步 API。必须在 HTTPS 下使用，但是调试的时候在 localhost 下面可以使用 HTTP。</p>
+<p>X5 内核浏览器是支持 service worker 的。</p>
+<h3 id="Service-workers-生命周期"><a href="#Service-workers-生命周期" class="headerlink" title="Service workers 生命周期"></a>Service workers 生命周期</h3><p><img src="/images/sw-lifecycle.png" alt=""></p>
+<h3 id="Service-workers-监听事件"><a href="#Service-workers-监听事件" class="headerlink" title="Service workers 监听事件"></a>Service workers 监听事件</h3><p><img src="/images/sw-events.png" alt=""></p>
+<h3 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h3><p>这里指定的 <code>sw.js</code> 是在 worker 线程工作，所以它不能访问 DOM。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">registerSW</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="string">'serviceWorker'</span> <span class="keyword">in</span> navigator) &#123;</div><div class="line">  	 <span class="comment">// 指定 service worker 执行文件和其控制的文件的子目录</span></div><div class="line">    <span class="keyword">return</span> navigator.serviceWorker.register(<span class="string">'/sw.js'</span>, &#123;<span class="attr">scope</span>: <span class="string">'/'</span>&#125;)</div><div class="line">      .then(<span class="function"><span class="params">reg</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">if</span> (reg.installing) &#123;</div><div class="line">          log(<span class="string">'Service worker status'</span>, <span class="string">'installing'</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (reg.waiting) &#123;</div><div class="line">          log(<span class="string">'Service worker status'</span>, <span class="string">'waiting'</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (reg.active) &#123;</div><div class="line">          log(<span class="string">'Service worker status'</span>, <span class="string">'active'</span>);</div><div class="line">        &#125;</div><div class="line">      &#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.error(<span class="string">`Registration failed with <span class="subst">$&#123;error&#125;</span>`</span>);</div><div class="line">      &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 需要缓存的文件列表，可以通过 Legos 生成或者 Webpack 获取</span></div><div class="line"><span class="keyword">const</span> assets = [</div><div class="line">  <span class="string">"/bg-header.24e53c7254a141935d68580e59ac3e2a.jpg"</span>,</div><div class="line">  <span class="string">"/i-logo.fe4eaaab959dae955171e85dd6451f01.png"</span>,</div><div class="line">  <span class="string">"/sprite-index.155b7aa999c0b00c8b3041e88dab5e3a.png"</span>,</div><div class="line">  <span class="string">"/bundle.9eb1d16891f485d70cfd.js"</span>,</div><div class="line">  <span class="string">"/style.9eb1d16891f485d70cfd.css"</span></div><div class="line">];</div><div class="line"></div><div class="line"><span class="comment">// 版本号</span></div><div class="line"><span class="keyword">const</span> CACHE_NAME = (<span class="keyword">new</span> <span class="built_in">Date</span>()).toISOString();</div><div class="line"></div><div class="line"><span class="comment">// 执行安装，将需要缓存的文件存入 CacheStorage</span></div><div class="line">self.addEventListener(<span class="string">'install'</span>, event =&gt; &#123;</div><div class="line">  event.waitUntil(</div><div class="line">    caches.open(CACHE_NAME)</div><div class="line">    .then(<span class="function"><span class="params">cache</span> =&gt;</span> &#123;</div><div class="line">      log(<span class="string">'Install'</span>, assets);</div><div class="line">      <span class="keyword">return</span> cache.addAll(assets);</div><div class="line">    &#125;).then(self.skipWaiting)</div><div class="line">  );</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="请求拦截"><a href="#请求拦截" class="headerlink" title="请求拦截"></a>请求拦截</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这里会监听浏览器的 HTTP 请求，并做一层拦截</span></div><div class="line">self.addEventListener(<span class="string">'fetch'</span>, event =&gt; &#123;</div><div class="line">  event.respondWith(</div><div class="line">    caches.match(event.request)</div><div class="line">    .then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</div><div class="line">      <span class="keyword">if</span> (response) &#123;</div><div class="line">        <span class="comment">// 如果这个请求已经缓存过了，则直接使用 Cache 里面的缓存</span></div><div class="line">        log(<span class="string">'Use cache'</span>, response.url);</div><div class="line">        <span class="keyword">return</span> response;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="comment">// 如果没有请求过，前往服务器请求</span></div><div class="line">      <span class="keyword">return</span> fetch(event.request).then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">if</span> (!response || response.status !== <span class="number">200</span> || response.type !== <span class="string">'basic'</span>) &#123;</div><div class="line">          <span class="keyword">return</span> response;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        log(<span class="string">'Fetch'</span>, event.request);</div><div class="line"></div><div class="line">  	     <span class="comment">// 将新的请求回复也缓存下来</span></div><div class="line">        <span class="keyword">let</span> responseToCache = response.clone();</div><div class="line">        caches.open(CACHE_NAME)</div><div class="line">          .then(<span class="function"><span class="params">cache</span> =&gt;</span> &#123;</div><div class="line">            cache.put(event.request, responseToCache);</div><div class="line">            log(<span class="string">'Add fetch'</span>, event.request);</div><div class="line">          &#125;);</div><div class="line">      &#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</div><div class="line">        log(<span class="string">'Fetch failed'</span>, error);</div><div class="line">      &#125;);</div><div class="line">    &#125;)</div><div class="line">  );</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="缓存更新"><a href="#缓存更新" class="headerlink" title="缓存更新"></a>缓存更新</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 如果请求回来的 sw.js 有改变，则触发 activate 事件，</span></div><div class="line"><span class="comment"> * 然后触发 install 事件重新拉取文件进行缓存</span></div><div class="line"><span class="comment"> */</span></div><div class="line">self.addEventListener(<span class="string">'activate'</span>, event =&gt; &#123;</div><div class="line">  event.waitUntil(</div><div class="line">    caches.keys().then(</div><div class="line">      keys =&gt; <span class="built_in">Promise</span>.all(</div><div class="line">        keys</div><div class="line">        .filter(<span class="function"><span class="params">key</span> =&gt;</span> key !== CACHE_NAME)</div><div class="line">        .map(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</div><div class="line">          <span class="comment">// 把旧的缓存全部删掉，以免占用空间</span></div><div class="line">          caches.delete(key);</div><div class="line">          log(<span class="string">'Delete cache'</span>, key);</div><div class="line">        &#125;)</div><div class="line">      )</div><div class="line">    ).then(self.skipWaiting)</div><div class="line">  );</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p><img src="/images/sw1.png" alt=""></p>
+<p><img src="/images/sw2.png" alt=""></p>
+<p><img src="/images/sw3.png" alt=""></p>
+<h3 id="一些新的-API"><a href="#一些新的-API" class="headerlink" title="一些新的 API"></a>一些新的 API</h3><p>Request</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">interface</span> Request <span class="keyword">extends</span> Object, Body &#123;</div><div class="line">    readonly cache: RequestCache;</div><div class="line">    readonly credentials: RequestCredentials;</div><div class="line">    readonly destination: RequestDestination;</div><div class="line">    readonly headers: Headers;</div><div class="line">    readonly integrity: <span class="built_in">string</span>;</div><div class="line">    readonly keepalive: <span class="built_in">boolean</span>;</div><div class="line">    readonly method: <span class="built_in">string</span>;</div><div class="line">    readonly mode: RequestMode;</div><div class="line">    readonly redirect: RequestRedirect;</div><div class="line">    readonly referrer: <span class="built_in">string</span>;</div><div class="line">    readonly referrerPolicy: ReferrerPolicy;</div><div class="line">    readonly <span class="keyword">type</span>: RequestType;</div><div class="line">    readonly url: <span class="built_in">string</span>;</div><div class="line">    clone(): Request;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Resopnse</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">interface</span> Response <span class="keyword">extends</span> Object, Body &#123;</div><div class="line">    readonly body: ReadableStream | <span class="literal">null</span>;</div><div class="line">    readonly headers: Headers;</div><div class="line">    readonly ok: <span class="built_in">boolean</span>;</div><div class="line">    readonly status: <span class="built_in">number</span>;</div><div class="line">    readonly statusText: <span class="built_in">string</span>;</div><div class="line">    readonly <span class="keyword">type</span>: ResponseType;</div><div class="line">    readonly url: <span class="built_in">string</span>;</div><div class="line">    clone(): Response;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Cache 是一个专为为 Request 和 Response 对象提供缓存机制的接口，它可以把 Request 和 Response 对象缓存起来，并且提供一些很方便的 API 供调用。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">interface</span> Cache &#123;</div><div class="line">	 <span class="comment">// 单个添加</span></div><div class="line">    add(request: RequestInfo): <span class="built_in">Promise</span>&lt;<span class="built_in">void</span>&gt;;</div><div class="line">    <span class="comment">// 批量添加</span></div><div class="line">    addAll(requests: RequestInfo[]): <span class="built_in">Promise</span>&lt;<span class="built_in">void</span>&gt;;</div><div class="line">    <span class="comment">// 单个删除</span></div><div class="line">    <span class="keyword">delete</span>(request: RequestInfo, options?: CacheQueryOptions): <span class="built_in">Promise</span>&lt;<span class="built_in">boolean</span>&gt;;</div><div class="line">    <span class="comment">// 获取存储的所有对象的 key</span></div><div class="line">    keys(request?: RequestInfo, options?: CacheQueryOptions): <span class="built_in">any</span>;</div><div class="line">    <span class="comment">// 查看是否存有该对象</span></div><div class="line">    match(request: RequestInfo, options?: CacheQueryOptions): <span class="built_in">Promise</span>&lt;Response&gt;;</div><div class="line">    <span class="comment">// 批量查看是否存有这些对象</span></div><div class="line">    matchAll(request?: RequestInfo, options?: CacheQueryOptions): <span class="built_in">any</span>;</div><div class="line">    <span class="comment">// 添加对象</span></div><div class="line">    put(request: RequestInfo, response: Response): <span class="built_in">Promise</span>&lt;<span class="built_in">void</span>&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://x5.tencent.com/tbs/guide/serviceworker.html" target="_blank" rel="external">https://x5.tencent.com/tbs/guide/serviceworker.html</a></p>
+<p><a href="https://alistapart.com/article/application-cache-is-a-douchebag" target="_blank" rel="external">https://alistapart.com/article/application-cache-is-a-douchebag</a></p>
+<p><a href="http://harttle.com/2017/04/10/service-worker-update.html" target="_blank" rel="external">http://harttle.com/2017/04/10/service-worker-update.html</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Service-Workers/" rel="tag"># Service Workers</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/07/regex-match-xml-attribute/" rel="next" title="正则匹配 XML 里面的属性">
+                <i class="fa fa-chevron-left"></i> 正则匹配 XML 里面的属性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/cat.png"
+               alt="Justin Young" />
+          <p class="site-author-name" itemprop="name">Justin Young</p>
+          <p class="site-description motion-element" itemprop="description">You Deserve A Better Life</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/youngdze" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/youngdze" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用-web-静态资源的缓存"><span class="nav-number">1.</span> <span class="nav-text">常用 web 静态资源的缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器缓存"><span class="nav-number">1.1.</span> <span class="nav-text">浏览器缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AppCache"><span class="nav-number">2.</span> <span class="nav-text">AppCache</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#弊端"><span class="nav-number">2.1.</span> <span class="nav-text">弊端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service-workers"><span class="nav-number">3.</span> <span class="nav-text">Service workers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-workers-生命周期"><span class="nav-number">3.1.</span> <span class="nav-text">Service workers 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-workers-监听事件"><span class="nav-number">3.2.</span> <span class="nav-text">Service workers 监听事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#入口"><span class="nav-number">3.3.</span> <span class="nav-text">入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">3.4.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求拦截"><span class="nav-number">3.5.</span> <span class="nav-text">请求拦截</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存更新"><span class="nav-number">3.6.</span> <span class="nav-text">缓存更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试"><span class="nav-number">3.7.</span> <span class="nav-text">调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些新的-API"><span class="nav-number">3.8.</span> <span class="nav-text">一些新的 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Justin Young</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'youngdze';
+      var disqus_identifier = '2017/08/13/service-worker/';
+
+      var disqus_title = "Service workers";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

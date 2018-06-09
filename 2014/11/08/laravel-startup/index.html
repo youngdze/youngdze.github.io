@@ -1,0 +1,803 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Laravel," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Justin's Words" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Laravel 初上手 11-07-2014 起步路由app/routes.php 1234Route::get(&apos;users&apos;, function()&amp;#123;    return &apos;Users!&apos;;&amp;#125;);">
+<meta name="keywords" content="Laravel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel 初上手">
+<meta property="og:url" content="http://youngdze.co/2014/11/08/laravel-startup/index.html">
+<meta property="og:site_name" content="Justin&#39;s Words">
+<meta property="og:description" content="Laravel 初上手 11-07-2014 起步路由app/routes.php 1234Route::get(&apos;users&apos;, function()&amp;#123;    return &apos;Users!&apos;;&amp;#125;);">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2016-12-05T11:50:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Laravel 初上手">
+<meta name="twitter:description" content="Laravel 初上手 11-07-2014 起步路由app/routes.php 1234Route::get(&apos;users&apos;, function()&amp;#123;    return &apos;Users!&apos;;&amp;#125;);">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://youngdze.co/2014/11/08/laravel-startup/"/>
+
+
+
+
+
+  <title> Laravel 初上手 | Justin's Words </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-55843150-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Justin's Words</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2014/11/08/laravel-startup/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Justin Young">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/cat.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Justin's Words">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Laravel 初上手
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-08T03:03:00+08:00">
+                2014-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2014/11/08/laravel-startup/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/08/laravel-startup/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Laravel 初上手 11-07-2014</p>
+<h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p><code>app/routes.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'users'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'Users!'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>访问 <code>/users</code> 将会看到 <code>Users!</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">return</span> View::make(<span class="string">'hello'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>访问 <code>/</code> 将会从 <code>app/views/</code> 中找到 <code>hello.blade.php</code> 进行渲染。 路由也可以指向一个控制器类和动作方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'users'</span>, <span class="string">'UserController@getIndex'</span>);</div></pre></td></tr></table></figure>
+<p>访问 <code>/user</code> 将会使用 <code>UserController</code> 类的 <code>getIndex</code> 方法</p>
+<h3 id="建立视图"><a href="#建立视图" class="headerlink" title="建立视图"></a>建立视图</h3><p>视图之间的引用， 引用： <code>users.blade.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;!-- layout.blade.php --&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h1&gt;Laravel Quickstart&lt;/h1&gt;</div><div class="line"></div><div class="line">        @<span class="keyword">yield</span>(<span class="string">'content'</span>)</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p><code>layout.blade.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;!-- users.blade.php --&gt;</div><div class="line">@extends(<span class="string">'layout'</span>)</div><div class="line"></div><div class="line">@section(<span class="string">'content'</span>)</div><div class="line">    Users!</div><div class="line">@stop</div></pre></td></tr></table></figure>
+<p><code>app/routes.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'users'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">return</span> View::make(<span class="string">'users'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>访问 <code>/users</code> 生成的页面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Laravel QuickStart<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"></div><div class="line">        Users!</div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="建立迁移文件"><a href="#建立迁移文件" class="headerlink" title="建立迁移文件"></a>建立迁移文件</h3><p>首先在<code>app/config/database.php</code>配置数据库连接信息，之后创建迁移文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan migrage:make create_users_table</div></pre></td></tr></table></figure>
+<p>生成对应的迁移文件包含 <code>up</code> 和 <code>down</code> 类在 <code>app/database/migrations</code>，在 <code>up</code> 方法写上对数据表做的更动，在 <code>down</code> 方法写上对应的回滚代码。 迁移文件示例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="comment">// 生成 users 表，列为：id(increment), email(unique), name, timestamps(timestamp)</span></div><div class="line">    Schema::create(<span class="string">'users'</span>, <span class="function"><span class="keyword">function</span><span class="params">($table)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        $table-&gt;increments(<span class="string">'id'</span>);</div><div class="line">        $table-&gt;string(<span class="string">'email'</span>)-&gt;unique();</div><div class="line">        $table-&gt;string(<span class="string">'name'</span>);</div><div class="line">        $table-&gt;timestamps();</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    Schema::drop(<span class="string">'users'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>执行 <code>migrate</code> 命令来执行迁移动作：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan margrate</div></pre></td></tr></table></figure>
+<p>将会生成两个表：<code>migrations</code> 和 <code>users</code>。 执行回滚迁移：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan migrate:rollback</div></pre></td></tr></table></figure>
+<h3 id="Eloquent-ORM"><a href="#Eloquent-ORM" class="headerlink" title="Eloquent ORM"></a>Eloquent ORM</h3><p>定义一个 Eloquent 模型用来查询关联的数据库表在 <code>app/models</code>，以下是一个 <code>User.php</code>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span>&#123;</div><div class="line">    <span class="keyword">protected</span> $table = <span class="string">'users'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不指定表时默认关联类名称的小写复数形态的数据库表也就是 <code>users</code>，不希望自动更新 <code>update_at</code> 和 <code>created_at</code> 可以按下面处理：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> $timestamps = <span class="keyword">false</span>;</div></pre></td></tr></table></figure>
+<p>取出所有模型数据：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$users = User::all();</div></pre></td></tr></table></figure>
+<p>根据主键取出一条数据：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$user = User::find(<span class="number">1</span>);</div><div class="line">var_dump($user-&gt;name);</div></pre></td></tr></table></figure>
+<p>根据主键取出一条数据或抛出异常，让 <code>App::error</code> 处理并显示 404：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$model = User::findOrFail(<span class="number">1</span>);</div><div class="line">$model = User::where(<span class="string">'votes'</span>, <span class="string">'&gt;'</span>, <span class="number">100</span>)-&gt;firstOrFail();</div></pre></td></tr></table></figure>
+<p>注册异常处理，通过监听 <code>ModelNotFoundException</code>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Eloquent</span>\<span class="title">ModelNotFoundException</span>;</div><div class="line"></div><div class="line">App::error(<span class="function"><span class="keyword">function</span><span class="params">(ModelNotFoundException $e)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">return</span> Response::make(<span class="string">'Not Found'</span>, <span class="number">404</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>Eloquent 模型结合查询语法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$users = User::where(<span class="string">'votes'</span>, <span class="string">'&gt;'</span>, <span class="number">100</span>)-&gt;take(<span class="number">10</span>)-&gt;get();</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($users <span class="keyword">as</span> $user)</div><div class="line">&#123;</div><div class="line">    var_dump($user-&gt;name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Eloquent 聚合查询：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$count = User::where(<span class="string">'votes'</span>, <span class="string">'&gt;'</span>, <span class="number">100</span>)-&gt;count();</div></pre></td></tr></table></figure>
+<h3 id="显示数据"><a href="#显示数据" class="headerlink" title="显示数据"></a>显示数据</h3><p>在 <code>rootes.php</code> 部署 <code>with</code> 方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'users'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    $users = User::all();</div><div class="line">    <span class="keyword">return</span> View::make(<span class="string">'users'</span>)-&gt;with(<span class="string">'users'</span>, $users);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><code>users.blade.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@extends(<span class="string">'layout'</span>)</div><div class="line"></div><div class="line">@section(<span class="string">'content'</span>)</div><div class="line">    @<span class="keyword">foreach</span>($users <span class="keyword">as</span> $user)</div><div class="line">        &lt;p&gt;&#123; &#123; $user-&gt;name &#125;&#125;&lt;/p&gt;</div><div class="line">    @<span class="keyword">endforeach</span></div><div class="line">@stop</div></pre></td></tr></table></figure>
+<p>Blade 使用两个大括号来输出数据，AngularJS 也是如此。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>访问一个配置的值：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Config::get(<span class="string">'app.timezone'</span>);</div></pre></td></tr></table></figure>
+<p>指定一个默认值不存在则返回：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$timezone = Config::get(<span class="string">'app.timezone'</span>, <span class="string">'UTC'</span>);</div></pre></td></tr></table></figure>
+<p>设置一个配置：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Config::set(<span class="string">'database.default`, `sqlite`);</span></div></pre></td></tr></table></figure>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>在 <code>app/config/local/</code> 可以创建与 <code>app/config/</code> 下同名的配置文件对其进行覆盖，不过不能使用 <code>testing</code> 作为环境名称，这是为单元测试预留的。</p>
+<h4 id="访问当前应用环境"><a href="#访问当前应用环境" class="headerlink" title="访问当前应用环境"></a>访问当前应用环境</h4><p><code>bootstrap/start.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$enviroment = App::enviroment();</div></pre></td></tr></table></figure>
+<p>检查环境：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (App::environment(<span class="string">'local'</span>))</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 当前为 local 运行环境</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (App::environment(<span class="string">'local'</span>, <span class="string">'staging'</span>))</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 当前为 local 或 staging 运行环境</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="维护模式"><a href="#维护模式" class="headerlink" title="维护模式"></a>维护模式</h3><p>维护方法 <code>App::down</code> 位于 <code>app/start/global.php</code>，启用：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan down</div></pre></td></tr></table></figure>
+<p>禁用维护模式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan up</div></pre></td></tr></table></figure>
+<p>维护模式显示自定义视图，在 <code>app/start/global.php</code> 添加：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">App::down(<span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">return</span> Response::view(<span class="string">'maintenance'</span>, <span class="keyword">array</span>(), <span class="number">503</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="请求的生命周期"><a href="#请求的生命周期" class="headerlink" title="请求的生命周期"></a>请求的生命周期</h2><p>发送给应用程序的所有请求都经由 <code>public/index.php</code> 脚本处理。如果是用的是 Apache 服务器，Larave 中包含的 <code>.htaccess</code> 文件将对所有请求进行处理并传递给 <code>index.php</code>。这是 Laravel 从接受客户端请求到返回响应给客户端的整个过程的开始。</p>
+<ol>
+<li>请求进入 <code>public/index.php</code> 文件。</li>
+<li><code>bootstrap/start.php</code> 文件创建应用程序对象并检测环境。</li>
+<li>内部的 <code>framework/start.php</code> 文件配置相关设置并加载服务提供器。</li>
+<li>加载应用程序 <code>app/start</code> 目录下的文件。</li>
+<li>加载应用程序的 <code>app/routes.php</code> 文件。</li>
+<li>将 Request 对象发送给应用程序对象，应用程序返回一个 Response 对象。</li>
+<li>将 Response 对象发回客户端。</li>
+</ol>
+<h3 id="启动文件"><a href="#启动文件" class="headerlink" title="启动文件"></a>启动文件</h3><p>启动文件被存放在 <code>app/start</code> 目录中，默认情况下内有 <code>global.php</code>、<code>local.php</code>、<code>artisan.php</code> 三个文件。</p>
+<h2 id="路由-1"><a href="#路由-1" class="headerlink" title="路由"></a>路由</h2><h3 id="基本路由"><a href="#基本路由" class="headerlink" title="基本路由"></a>基本路由</h3><h4 id="基本-GET-路由"><a href="#基本-GET-路由" class="headerlink" title="基本 GET 路由"></a>基本 GET 路由</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line"><span class="keyword">return</span> <span class="string">'Hello world'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="基本-POST-路由"><a href="#基本-POST-路由" class="headerlink" title="基本 POST 路由"></a>基本 POST 路由</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Route::post(<span class="string">'foo/bar'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123; <span class="keyword">return</span> <span class="string">'Hello world'</span>; &#125;);</div></pre></td></tr></table></figure>
+<p>为多个动作注册同一个路由：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Route::match(<span class="keyword">array</span>(<span class="string">'GET'</span>, <span class="string">'POST'</span>), <span class="string">'/'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123; <span class="keyword">return</span> <span class="string">'Hello World'</span>; &#125;);</div></pre></td></tr></table></figure>
+<p>注册一个可以响应任何 <strong>HTTP</strong> 动作的路由：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Route:any(<span class="string">'foo'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123; <span class="keyword">return</span> <span class="string">'Hello World'</span>; &#125;);</div></pre></td></tr></table></figure>
+<p>仅支持 <strong>HTTPS</strong> 的路由：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Route:get(<span class="string">'foo'</span>, <span class="keyword">array</span>(<span class="string">'https'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123; <span class="keyword">return</span> <span class="string">'Must be over HTTPS'</span>; &#125;));</div></pre></td></tr></table></figure>
+<p>实际开发中需要根据路由生成 URL，<code>URL::to</code> 方法可以满足此需求：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$url = URL::to(<span class="string">'foo'</span>);</div></pre></td></tr></table></figure>
+<h3 id="路由参数"><a href="#路由参数" class="headerlink" title="路由参数"></a>路由参数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'user/&#123;id&#125;'</span>, <span class="function"><span class="keyword">function</span><span class="params">($id)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line"><span class="keyword">return</span> <span class="string">'User '</span>.$id;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Laravel/" rel="tag"># Laravel</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/10/16/angularjs-directive-note/" rel="next" title="AngularJS Directive 学习笔记">
+                <i class="fa fa-chevron-left"></i> AngularJS Directive 学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/11/10/php-scraper/" rel="prev" title="PHP 爬图脚本">
+                PHP 爬图脚本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/cat.png"
+               alt="Justin Young" />
+          <p class="site-author-name" itemprop="name">Justin Young</p>
+          <p class="site-description motion-element" itemprop="description">You Deserve A Better Life</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/youngdze" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/youngdze" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#起步"><span class="nav-number">1.</span> <span class="nav-text">起步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">1.1.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立视图"><span class="nav-number">1.2.</span> <span class="nav-text">建立视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立迁移文件"><span class="nav-number">1.3.</span> <span class="nav-text">建立迁移文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Eloquent-ORM"><span class="nav-number">1.4.</span> <span class="nav-text">Eloquent ORM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示数据"><span class="nav-number">1.5.</span> <span class="nav-text">显示数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引言"><span class="nav-number">2.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境配置"><span class="nav-number">2.2.</span> <span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#访问当前应用环境"><span class="nav-number">2.2.1.</span> <span class="nav-text">访问当前应用环境</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#维护模式"><span class="nav-number">2.3.</span> <span class="nav-text">维护模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求的生命周期"><span class="nav-number">3.</span> <span class="nav-text">请求的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动文件"><span class="nav-number">3.1.</span> <span class="nav-text">启动文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由-1"><span class="nav-number">4.</span> <span class="nav-text">路由</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本路由"><span class="nav-number">4.1.</span> <span class="nav-text">基本路由</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本-GET-路由"><span class="nav-number">4.1.1.</span> <span class="nav-text">基本 GET 路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本-POST-路由"><span class="nav-number">4.1.2.</span> <span class="nav-text">基本 POST 路由</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由参数"><span class="nav-number">4.2.</span> <span class="nav-text">路由参数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Justin Young</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'youngdze';
+      var disqus_identifier = '2014/11/08/laravel-startup/';
+
+      var disqus_title = "Laravel 初上手";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

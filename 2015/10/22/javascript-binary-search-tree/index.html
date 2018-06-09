@@ -1,0 +1,769 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="binary search tree," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Justin's Words" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="像我这种野生程序员连各大公司校招笔试都过不了，主要是数据结构和算法薄弱，今天小米出了道二叉树，考二叉树的分层遍历，我当然是不会做，然后就没有然后了。  节点定义二叉树节点定义： 12345function Node(data, left, right) &amp;#123;    this.data = data;    this.left = left;    this.right = right;&amp;">
+<meta name="keywords" content="binary search tree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 二叉树">
+<meta property="og:url" content="http://youngdze.co/2015/10/22/javascript-binary-search-tree/index.html">
+<meta property="og:site_name" content="Justin&#39;s Words">
+<meta property="og:description" content="像我这种野生程序员连各大公司校招笔试都过不了，主要是数据结构和算法薄弱，今天小米出了道二叉树，考二叉树的分层遍历，我当然是不会做，然后就没有然后了。  节点定义二叉树节点定义： 12345function Node(data, left, right) &amp;#123;    this.data = data;    this.left = left;    this.right = right;&amp;">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sorted_binary_tree_inorder.svg/440px-Sorted_binary_tree_inorder.svg.png">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sorted_binary_tree_preorder.svg/440px-Sorted_binary_tree_preorder.svg.png">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Sorted_binary_tree_postorder.svg/440px-Sorted_binary_tree_postorder.svg.png?1445511399697">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Sorted_binary_tree_breadth-first_traversal.svg/320px-Sorted_binary_tree_breadth-first_traversal.svg.png">
+<meta property="og:updated_time" content="2016-12-05T04:55:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 二叉树">
+<meta name="twitter:description" content="像我这种野生程序员连各大公司校招笔试都过不了，主要是数据结构和算法薄弱，今天小米出了道二叉树，考二叉树的分层遍历，我当然是不会做，然后就没有然后了。  节点定义二叉树节点定义： 12345function Node(data, left, right) &amp;#123;    this.data = data;    this.left = left;    this.right = right;&amp;">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sorted_binary_tree_inorder.svg/440px-Sorted_binary_tree_inorder.svg.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://youngdze.co/2015/10/22/javascript-binary-search-tree/"/>
+
+
+
+
+
+  <title> JavaScript 二叉树 | Justin's Words </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-55843150-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Justin's Words</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2015/10/22/javascript-binary-search-tree/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Justin Young">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/cat.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Justin's Words">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript 二叉树
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-22T18:50:24+08:00">
+                2015-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/10/22/javascript-binary-search-tree/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/22/javascript-binary-search-tree/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>像我这种野生程序员连各大公司校招笔试都过不了，主要是数据结构和算法薄弱，今天小米出了道二叉树，考二叉树的分层遍历，我当然是不会做，然后就没有然后了。</p>
+</blockquote>
+<h4 id="节点定义"><a href="#节点定义" class="headerlink" title="节点定义"></a>节点定义</h4><p>二叉树节点定义：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Node</span>(<span class="params">data, left, right</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.data = data;</div><div class="line">    <span class="keyword">this</span>.left = left;</div><div class="line">    <span class="keyword">this</span>.right = right;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>给 <code>Node</code> 添加一个获得当前节点数据的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Node.prototype.getData = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.data;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="二叉树定义"><a href="#二叉树定义" class="headerlink" title="二叉树定义"></a>二叉树定义</h4><p>定义二叉树，初始根节点为 null：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">BST</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.root = <span class="literal">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>二叉树的插入规则：</p>
+<ol>
+<li>是否有根节点，没有则设插入节点为根节点2.  比当前节点值小，转 3，否则转 43.  是否有左叶子节点，没有则设插入节点为当前节点左叶子节点，否则设其左叶子节点为当前节点，转 24.  是否有右叶子节点，没有则设插入节点为当前结点右叶子节点，否则设其右叶子节点为当前节点， 转 2</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">BST.prototype.insert = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> n = <span class="keyword">new</span> Node(data, <span class="literal">null</span>, <span class="literal">null</span>);</div><div class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.root) &#123;</div><div class="line">        <span class="keyword">this</span>.root = n;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">let</span> current = <span class="keyword">this</span>.root;</div><div class="line">        <span class="keyword">let</span> parent;</div><div class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">            parent = current;</div><div class="line">            <span class="keyword">if</span> (data &lt; current.getData()) &#123;</div><div class="line">                current = current.left;</div><div class="line">                <span class="keyword">if</span> (!current) &#123;</div><div class="line">                    parent.left = n;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                current = current.right;</div><div class="line">                <span class="keyword">if</span> (!current) &#123;</div><div class="line">                    parent.right = n;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="获取最小值"><a href="#获取最小值" class="headerlink" title="获取最小值"></a>获取最小值</h4><p>在二叉树中，由于较小值都是在左节点，所以遍历完左节点即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">BST.prototype.getMin = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.root) <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">    <span class="keyword">let</span> current = <span class="keyword">this</span>.root;</div><div class="line">    <span class="keyword">while</span> (current.left) &#123;</div><div class="line">        current = current.left;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> current.getData();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="获取最大值"><a href="#获取最大值" class="headerlink" title="获取最大值"></a>获取最大值</h4><p>在二叉树中，由于较大值都是在右节点，所以遍历完右节点即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">BST.prototype.getMax = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.root) <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">    <span class="keyword">let</span> current = <span class="keyword">this</span>.root;</div><div class="line">    <span class="keyword">while</span> (current.right) &#123;</div><div class="line">        current = current.right;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> current.getData();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="获取节点数量"><a href="#获取节点数量" class="headerlink" title="获取节点数量"></a>获取节点数量</h4><p>总节点 = 左节点 + 右节点 + 1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">BST.prototype.countNode = <span class="function"><span class="keyword">function</span>(<span class="params">node</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!node) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.countNode(node.left) + <span class="keyword">this</span>.countNode(node.right) + <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><p>规则是先遍历左节点，然后到根节点，最后到右节点，图示(来自 <a href="https://en.wikipedia.org/wiki/Tree_traversal?oldformat=true" target="_blank" rel="external">Wikipedia</a>)：</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Sorted_binary_tree_inorder.svg/440px-Sorted_binary_tree_inorder.svg.png" alt="inOrder"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">BST.prototype.inOrder = <span class="function"><span class="keyword">function</span>(<span class="params">node</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (node) &#123;</div><div class="line">        inOrder(node.left);</div><div class="line">        <span class="built_in">console</span>.log(node.getData());</div><div class="line">        inOrder(node.right);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h4><p>规则是从根节点开始，先左节点，再右节点，图示(来自 <a href="https://en.wikipedia.org/wiki/Tree_traversal?oldformat=true" target="_blank" rel="external">Wikipedia</a>)：</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sorted_binary_tree_preorder.svg/440px-Sorted_binary_tree_preorder.svg.png" alt="preOrder"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">BST.prototype.preOrder = <span class="function"><span class="keyword">function</span>(<span class="params">node</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (node) &#123;</div><div class="line">        <span class="built_in">console</span>.log(node.getData());</div><div class="line">        preOrder(node.left);</div><div class="line">        preOrder(node.right);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h4><p>规则是从左节点开始，再右节点，最后到根节点，图示(来自 <a href="https://en.wikipedia.org/wiki/Tree_traversal?oldformat=true" target="_blank" rel="external">Wikipedia</a>)：</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Sorted_binary_tree_postorder.svg/440px-Sorted_binary_tree_postorder.svg.png?1445511399697" alt="postOrder"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">BST.prototype.postOrder = <span class="function"><span class="keyword">function</span>(<span class="params">node</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (node) &#123;</div><div class="line">        postOrder(node.left);</div><div class="line">        postOrder(node.right);</div><div class="line">        <span class="built_in">console</span>.log(node.getData());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="分层遍历广度查询-Breadth-First-Search"><a href="#分层遍历广度查询-Breadth-First-Search" class="headerlink" title="分层遍历广度查询(Breadth First Search)"></a>分层遍历广度查询(Breadth First Search)</h4><p>分层遍历相对复杂，它是一层一层进行遍历的，图示(来自 <a href="https://en.wikipedia.org/wiki/Tree_traversal?oldformat=true" target="_blank" rel="external">Wikipedia</a>)：</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Sorted_binary_tree_breadth-first_traversal.svg/320px-Sorted_binary_tree_breadth-first_traversal.svg.png" alt="level tranverse"></p>
+<p>具体思路是先定义一个数组，然后把各层节点在每次循环压入这个数组，每次循环都将这一层节点的值打印出来，同时设置循环结束条件为当前结点为最后节点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">BST.prototype.levelTraverse = <span class="function"><span class="keyword">function</span>(<span class="params">node</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!node) <span class="keyword">return</span>;</div><div class="line">    <span class="keyword">let</span> q = [node],</div><div class="line">        current = <span class="number">0</span>,</div><div class="line">        last = <span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span> (current &lt; q.length) &#123;</div><div class="line">        last = q.length;</div><div class="line">        <span class="keyword">let</span> A = [];</div><div class="line">        <span class="keyword">while</span> (current &lt; last) &#123;</div><div class="line">            A.push(q[current].getData());</div><div class="line">            <span class="keyword">if</span> (q[current].left) &#123;</div><div class="line">                q.push(q[current].left);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (q[current].right) &#123;</div><div class="line">                q.push(q[current].right);</div><div class="line">            &#125;</div><div class="line">            current++;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">console</span>.log(A.toString());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><p>查找其实相对简单，毕竟查找数值与当前结点，小则循环到左节点，大则循环到右节点，等于则返回，查找不到返回 null。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">BST.prototype.find = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> current = <span class="keyword">this</span>.root;</div><div class="line">    <span class="keyword">while</span> (current) &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="built_in">Object</span>.is(data, current.getData())) &#123;</div><div class="line">            <span class="keyword">return</span> current;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (data &lt; current.getData()) &#123;</div><div class="line">            current = current.left;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            current = current.right;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>这里有个视频讲解非常详细，不过要自备梯子：<a href="https://youtu.be/gcULXE7ViZw" target="_blank" rel="external">Delete a node from Binary Search Tree</a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gcULXE7ViZw" frameborder="0" allowfullscreen></iframe>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">BST.prototype.deleteNode = <span class="function"><span class="keyword">function</span>(<span class="params">node, data</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!node) &#123;</div><div class="line">        <span class="keyword">return</span> node;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (data &lt; node.data) &#123;</div><div class="line">        node.left = <span class="keyword">this</span>.deleteNode(node.left, data);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (data &gt; node.data) &#123;</div><div class="line">        node.right = <span class="keyword">this</span>.deleteNode(node.right, data);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> ((!node.left) &amp;&amp; (!node.right)) &#123;</div><div class="line">            node = <span class="literal">null</span>;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!node.left) &#123;</div><div class="line">            node = node.right;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!node.right) &#123;</div><div class="line">            node = node.left;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">let</span> temp = node.right.getMin();</div><div class="line">            node.data = temp;</div><div class="line">            node.right = <span class="keyword">this</span>.deleteNode(node.right, temp);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> node;</div><div class="line">&#125;</div><div class="line"></div><div class="line">BST.prototype.delete = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.root = <span class="keyword">this</span>.deleteNode(<span class="keyword">this</span>.root, data);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>全部代码在 <a href="https://github.com/youngdze/js-algorithms/blob/master/lib/dataStructures/binarySearchTree.js" target="_blank" rel="external">Github</a>。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="http://blog.csdn.net/luckyxiaoqiang/article/details/7518888" target="_blank" rel="external">http://blog.csdn.net/luckyxiaoqiang/article/details/7518888</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tree_traversal" target="_blank" rel="external">https://en.wikipedia.org/wiki/Tree_traversal</a></li>
+<li><a href="https://youtu.be/gcULXE7ViZw" target="_blank" rel="external">https://youtu.be/gcULXE7ViZw</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/binary-search-tree/" rel="tag"># binary search tree</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/18/css-hack/" rel="next" title="CSS Hack">
+                <i class="fa fa-chevron-left"></i> CSS Hack
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/23/front-end-interview-q-a/" rel="prev" title="我遇到的前端面试问题">
+                我遇到的前端面试问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/cat.png"
+               alt="Justin Young" />
+          <p class="site-author-name" itemprop="name">Justin Young</p>
+          <p class="site-description motion-element" itemprop="description">You Deserve A Better Life</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/youngdze" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/youngdze" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#节点定义"><span class="nav-number">1.</span> <span class="nav-text">节点定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树定义"><span class="nav-number">2.</span> <span class="nav-text">二叉树定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-number">3.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取最小值"><span class="nav-number">4.</span> <span class="nav-text">获取最小值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取最大值"><span class="nav-number">5.</span> <span class="nav-text">获取最大值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取节点数量"><span class="nav-number">6.</span> <span class="nav-text">获取节点数量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中序遍历"><span class="nav-number">7.</span> <span class="nav-text">中序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#先序遍历"><span class="nav-number">8.</span> <span class="nav-text">先序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后序遍历"><span class="nav-number">9.</span> <span class="nav-text">后序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分层遍历广度查询-Breadth-First-Search"><span class="nav-number">10.</span> <span class="nav-text">分层遍历广度查询(Breadth First Search)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找"><span class="nav-number">11.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">12.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">13.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Justin Young</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'youngdze';
+      var disqus_identifier = '2015/10/22/javascript-binary-search-tree/';
+
+      var disqus_title = "JavaScript 二叉树";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

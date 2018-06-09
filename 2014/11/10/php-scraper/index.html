@@ -1,0 +1,700 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Crawler," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Justin's Words" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="detect.php 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989">
+<meta name="keywords" content="Crawler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 爬图脚本">
+<meta property="og:url" content="http://youngdze.co/2014/11/10/php-scraper/index.html">
+<meta property="og:site_name" content="Justin&#39;s Words">
+<meta property="og:description" content="detect.php 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2016-12-05T11:51:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP 爬图脚本">
+<meta name="twitter:description" content="detect.php 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://youngdze.co/2014/11/10/php-scraper/"/>
+
+
+
+
+
+  <title> PHP 爬图脚本 | Justin's Words </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-55843150-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Justin's Words</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2014/11/10/php-scraper/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Justin Young">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/cat.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Justin's Words">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP 爬图脚本
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-10T01:48:00+08:00">
+                2014-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2014/11/10/php-scraper/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/10/php-scraper/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p>detect.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">IImage</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">private</span> $url;</div><div class="line">    <span class="keyword">private</span> $aContext = <span class="keyword">array</span>(</div><div class="line">        <span class="string">'http'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">            <span class="comment">// 'proxy' =&gt; 'tcp://192.168.1.105:2516',</span></div><div class="line">            <span class="string">'proxy'</span> =&gt; <span class="string">'tcp://127.0.0.1:80'</span>,</div><div class="line">            <span class="string">'request_fulluri'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">        ),</div><div class="line">    );</div><div class="line">    <span class="keyword">private</span> $pattern_title = <span class="string">"/&lt;title&gt;\[.*?\](.*?)\s\s.*?&lt;\/title&gt;/"</span>;</div><div class="line">    <span class="keyword">private</span> $pattern_images = <span class="string">"/&lt;input\stype=\'image\'\ssrc=\'(.*?)\'.*?&gt;/"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($url)</span> </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;url = $url;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getContent</span><span class="params">()</span> </span>&#123;</div><div class="line">        $contentArr = <span class="keyword">array</span>();</div><div class="line">        $cxContext = <span class="keyword">NULL</span>;</div><div class="line">        $content = <span class="keyword">NULL</span>;</div><div class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</div><div class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;url <span class="keyword">as</span> $key =&gt; $url) &#123;</div><div class="line">                $cxContext = stream_context_create(<span class="keyword">$this</span>-&gt;aContext);</div><div class="line">                $content = file_get_contents($url, <span class="keyword">False</span>, $cxContext);</div><div class="line">                $content = iconv(<span class="string">'gbk'</span>, <span class="string">'utf-8'</span>, $content);</div><div class="line">                array_push($contentArr, $content);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> $contentArr;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            $cxContext = stream_context_create(<span class="keyword">$this</span>-&gt;aContext);</div><div class="line">            $content = file_get_contents(<span class="keyword">$this</span>-&gt;url, <span class="keyword">False</span>, $cxContext);</div><div class="line">            $content = iconv(<span class="string">'gbk'</span>, <span class="string">'utf-8'</span>, $content);</div><div class="line">            <span class="keyword">return</span> $content;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</div><div class="line">        $titleArr = <span class="keyword">array</span>();</div><div class="line">        $title = <span class="keyword">NULL</span>;</div><div class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</div><div class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;getContent() <span class="keyword">as</span> $key =&gt; $content) &#123;</div><div class="line">                preg_match_all(<span class="keyword">$this</span>-&gt;pattern_title, $content, $title);</div><div class="line">                array_push($titleArr, $title[<span class="number">1</span>][<span class="number">0</span>]);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> $titleArr;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            preg_match_all(<span class="keyword">$this</span>-&gt;pattern_title, <span class="keyword">$this</span>-&gt;getContent(), $title);</div><div class="line">            <span class="keyword">return</span> $title[<span class="number">1</span>][<span class="number">0</span>];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getImages</span><span class="params">()</span> </span>&#123;</div><div class="line">        $imagesArr = <span class="keyword">array</span>();</div><div class="line">        $images = <span class="keyword">NULL</span>;</div><div class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</div><div class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;getContent() <span class="keyword">as</span> $key =&gt; $content) &#123;</div><div class="line">                preg_match_all(<span class="keyword">$this</span>-&gt;pattern_images, $content, $images);</div><div class="line">                array_push($imagesArr, $images[<span class="number">1</span>]);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> $imagesArr;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            preg_match_all(<span class="keyword">$this</span>-&gt;pattern_images, <span class="keyword">$this</span>-&gt;getContent(), <span class="keyword">$this</span>-&gt;images);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;images[<span class="number">1</span>];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">saveImages</span><span class="params">($dir)</span> </span>&#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"Starting...\n\r"</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!is_dir($dir)) &#123;</div><div class="line">            mkdir($dir);</div><div class="line">            <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$dir.<span class="string">"\n\r"</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// Create date directory</span></div><div class="line">        $today = getdate();</div><div class="line">        $toDir = $today[<span class="string">'mon'</span>].<span class="string">'-'</span>.$today[<span class="string">'mday'</span>].<span class="string">'-'</span>.$today[<span class="string">'year'</span>];</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!is_dir($dir.<span class="string">'/'</span>.$toDir)) &#123;</div><div class="line">            mkdir($dir.<span class="string">'/'</span>.$toDir);</div><div class="line">            <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$dir.<span class="string">'/'</span>.$toDir.<span class="string">"\n\r"</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</div><div class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;getTitle() <span class="keyword">as</span> $key =&gt; $title) &#123;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (!$title) &#123;</div><div class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/noTitle'</span>;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/'</span>.$title;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (!is_dir($image_dir)) &#123;</div><div class="line">                    mkdir($image_dir);</div><div class="line">                    <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$image_dir.<span class="string">"\n\r"</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">echo</span> <span class="string">"Downloading "</span>.$title.<span class="string">"\n\r"</span>;</div><div class="line">                <span class="keyword">foreach</span> (array_unique(<span class="keyword">$this</span>-&gt;getImages()[$key]) <span class="keyword">as</span> $key =&gt; $image) &#123;</div><div class="line">                    $image_name = $image_dir.<span class="string">"/"</span>.$key.<span class="string">"."</span>.pathinfo($image, PATHINFO_EXTENSION);</div><div class="line">                    <span class="keyword">if</span> (!file_exists($image_name) &amp;&amp; $image_stream=file_get_contents($image)) &#123;</div><div class="line">                        file_put_contents($image_name, $image_stream);</div><div class="line">                        <span class="keyword">echo</span> $image_name.<span class="string">" downloaded\n\r"</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">echo</span> <span class="string">"Download complete\n\r"</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (!<span class="keyword">$this</span>-&gt;getTitle()) &#123;</div><div class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/noTitle'</span>;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/'</span>.$title;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (!is_dir($image_dir)) &#123;</div><div class="line">                mkdir($image_dir);</div><div class="line">                <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$image_dir.<span class="string">"\n\r"</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">echo</span> <span class="string">"Downloading...\n\r"</span>;</div><div class="line">            <span class="keyword">foreach</span> (array_unique(<span class="keyword">$this</span>-&gt;getImages()) <span class="keyword">as</span> $key =&gt; $image) &#123;</div><div class="line">                $image_name = $image_dir.<span class="string">"/"</span>.$key.<span class="string">"."</span>.pathinfo($image, PATHINFO_EXTENSION);</div><div class="line">                <span class="keyword">if</span> (!file_exists($image_name) &amp;&amp; $image_stream=file_get_contents($image)) &#123;</div><div class="line">                    file_put_contents($image_name, $image_stream);</div><div class="line">                    <span class="keyword">echo</span> $image_name.<span class="string">" dowloaded\n\r"</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">echo</span> <span class="string">"Download complete\n\r"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>list.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">IList</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">private</span> $url;</div><div class="line">    <span class="keyword">private</span> $aContext = <span class="keyword">array</span>(</div><div class="line">        <span class="string">'http'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">            <span class="string">'proxy'</span> =&gt; <span class="string">'tcp://192.168.1.105:2516'</span>,</div><div class="line">            <span class="string">'request_fulluri'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">        ),</div><div class="line">    );</div><div class="line">    <span class="keyword">private</span> $list_link_pattern = <span class="string">"/&lt;tr.*?class=\"tr3.*?&gt;&lt;td&gt;&lt;a.*?href=\"(.*?)\"/"</span>;</div><div class="line">    <span class="keyword">private</span> $list_link_pattern1 = <span class="string">"/&lt;title&gt;.*?&lt;\/title&gt;/"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($url)</span> </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;url = $url;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getContent</span><span class="params">()</span> </span>&#123;</div><div class="line">        $cxContext = stream_context_create(<span class="keyword">$this</span>-&gt;aContext);</div><div class="line">        $content = file_get_contents(<span class="keyword">$this</span>-&gt;url, <span class="keyword">False</span>, $cxContext);</div><div class="line">        <span class="keyword">return</span> $content;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">resolveXMLtoList</span><span class="params">()</span> </span>&#123;</div><div class="line">        $xml = simplexml_load_string(trim(<span class="keyword">$this</span>-&gt;getContent()));</div><div class="line">        <span class="keyword">foreach</span> ($xml-&gt;channel-&gt;item <span class="keyword">as</span> $key =&gt; $item) &#123;</div><div class="line">            <span class="keyword">if</span> ($key === <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line">            array_push($list, (string)$item-&gt;link);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> $list;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getList</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $list;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>awesome.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include_once</span>(<span class="string">'list.php'</span>);</div><div class="line"><span class="keyword">include_once</span>(<span class="string">'detect.php'</span>);</div><div class="line"></div><div class="line">$rss = <span class="string">"http://t66y.com/rss.php?fid=16"</span>;</div><div class="line">$url = <span class="string">"http://wo.yao.cl/htm_data/16/1411/1274506.html"</span>;</div><div class="line"></div><div class="line">$L = <span class="keyword">new</span> IList($rss);</div><div class="line"><span class="comment">// $list = $L-&gt;getList();</span></div><div class="line"></div><div class="line">$I = <span class="keyword">new</span> IImage($url);</div><div class="line">$I-&gt;saveImages(<span class="string">'../img'</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveNaked</span><span class="params">($dir=<span class="string">'img'</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"Moving...\n\r"</span>;</div><div class="line">    $files = <span class="keyword">new</span> DirectoryIterator($dir);</div><div class="line">    $imagePattern = <span class="string">"/(jpg|png|gif)/"</span>;</div><div class="line">    <span class="keyword">foreach</span> ($files <span class="keyword">as</span> $fileinfo) &#123;</div><div class="line">        <span class="keyword">if</span> ($fileinfo-&gt;isFile() &amp;&amp; preg_match($imagePattern, $fileinfo-&gt;getExtension())) &#123;</div><div class="line">            $oldname = $fileinfo-&gt;getPath().<span class="string">"/"</span>.$fileinfo-&gt;getFilename();</div><div class="line">            $newname = realpath(<span class="string">"../img/noName\")."</span>/<span class="string">".$fileinfo-&gt;getFilename();</span></div><div class="line"><span class="string">            rename($oldname, $newname);</span></div><div class="line"><span class="string">            echo $fileinfo-&gt;getFilename()."</span> has moved to <span class="string">".$dir."</span>/noName/\n\r<span class="string">";</span></div><div class="line"><span class="string">        &#125;</span></div><div class="line"><span class="string">    &#125;</span></div><div class="line"><span class="string">    echo "</span>Move completed.\n\r<span class="string">";</span></div><div class="line"><span class="string">&#125;</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Crawler/" rel="tag"># Crawler</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/11/08/laravel-startup/" rel="next" title="Laravel 初上手">
+                <i class="fa fa-chevron-left"></i> Laravel 初上手
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/11/12/simplexml-stuff/" rel="prev" title="SimpleXML 解析 xml 类似 content:encoded 标签">
+                SimpleXML 解析 xml 类似 content:encoded 标签 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/cat.png"
+               alt="Justin Young" />
+          <p class="site-author-name" itemprop="name">Justin Young</p>
+          <p class="site-description motion-element" itemprop="description">You Deserve A Better Life</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/youngdze" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/youngdze" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Justin Young</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'youngdze';
+      var disqus_identifier = '2014/11/10/php-scraper/';
+
+      var disqus_title = "PHP 爬图脚本";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

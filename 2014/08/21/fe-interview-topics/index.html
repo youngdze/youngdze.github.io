@@ -1,0 +1,952 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Justin's Words" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="以下是我在 Github 上看到的一些前端面试试题，发出来提醒自己。2014年最新前端开发面试题 （题目列表页）目录 前言 HTML 部分 CSS 部分">
+<meta name="keywords" content="面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试试题">
+<meta property="og:url" content="http://youngdze.co/2014/08/21/fe-interview-topics/index.html">
+<meta property="og:site_name" content="Justin&#39;s Words">
+<meta property="og:description" content="以下是我在 Github 上看到的一些前端面试试题，发出来提醒自己。2014年最新前端开发面试题 （题目列表页）目录 前言 HTML 部分 CSS 部分">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2016-12-05T04:55:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面试试题">
+<meta name="twitter:description" content="以下是我在 Github 上看到的一些前端面试试题，发出来提醒自己。2014年最新前端开发面试题 （题目列表页）目录 前言 HTML 部分 CSS 部分">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://youngdze.co/2014/08/21/fe-interview-topics/"/>
+
+
+
+
+
+  <title> 前端面试试题 | Justin's Words </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-55843150-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Justin's Words</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2014/08/21/fe-interview-topics/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Justin Young">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/cat.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Justin's Words">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                前端面试试题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-21T00:31:09+08:00">
+                2014-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-End/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-End</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2014/08/21/fe-interview-topics/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/08/21/fe-interview-topics/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="以下是我在-Github-上看到的一些前端面试试题，发出来提醒自己。"><a href="#以下是我在-Github-上看到的一些前端面试试题，发出来提醒自己。" class="headerlink" title="以下是我在 Github 上看到的一些前端面试试题，发出来提醒自己。"></a>以下是我在 <a href="https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions" target="_blank" rel="external">Github</a> 上看到的一些前端面试试题，发出来提醒自己。</h3><h1 id="2014年最新前端开发面试题-（题目列表页）"><a href="#2014年最新前端开发面试题-（题目列表页）" class="headerlink" title="2014年最新前端开发面试题 （题目列表页）"></a>2014年最新前端开发面试题 （题目列表页）</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a><a name="list">目录</a></h2><ol>
+<li><a href="#preface">前言</a></li>
+<li><a href="#html">HTML 部分</a></li>
+<li><a href="#css">CSS 部分</a></li>
+</ol>
+<a id="more"></a>
+<ol>
+<li><a href="#js">JavaScript 部分</a></li>
+<li><a href="#other">其他问题</a>3.  <a href="#web">优质网站推荐</a></li>
+</ol>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><a name="preface">前言</a></h2><p>略</p>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a><a name="html">HTML</a></h2><ul>
+<li><p>Doctype作用? 严格模式与混杂模式如何区分？它们有何意义?</p>
+</li>
+<li><p>行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？</p>
+</li>
+<li><p>介绍一下CSS的盒子模型？</p>
+</li>
+<li><p>link 和@import 的区别是？</p>
+</li>
+<li><p>CSS 选择符有哪些？哪些属性可以继承？优先级算法如何计算？ CSS3新增伪类有那些？</p>
+</li>
+<li><p>如何居中div？如何居中一个浮动元素？</p>
+</li>
+<li><p>浏览器的内核分别是什么?</p>
+</li>
+<li><p>html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？</p>
+</li>
+<li><p>语义化的理解？</p>
+</li>
+<li><p>HTML5的离线储存？</p>
+</li>
+<li><p>(写)描述一段语义的html代码吧。</p>
+</li>
+<li><p>iframe有那些缺点？</p>
+</li>
+<li><p>Label的作用是什么？是怎么用的？（加 for）</p>
+</li>
+<li><p>请描述一下 cookies，sessionStorage 和 localStorage 的区别？</p>
+</li>
+<li><p>如何实现浏览器内多个标签页之间的通信? (阿里)</p>
+</li>
+<li><p>webSocket如何兼容低浏览器？(阿里)</p>
+</li>
+<li><p>你是怎么切图的？</p>
+</li>
+</ul>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a><a name="css">CSS</a></h2><ul>
+<li><p>列出display的值，说明他们的作用。position的值， relative和absolute定位原点是？</p>
+</li>
+<li><p>CSS3有哪些新特性？</p>
+</li>
+<li><p>一个满屏 品 字布局 如何设计?</p>
+</li>
+<li><p>经常遇到的浏览器的兼容性有哪些？原因，解决方法是什么，常用hack的技巧 ？</p>
+</li>
+<li><p>为什么要初始化CSS样式。</p>
+</li>
+<li><p>absolute的containing block计算方式跟正常流有什么不同？</p>
+</li>
+<li><p>position跟display、margin collapse、overflow、float这些特性相互叠加后会怎么样？</p>
+</li>
+<li><p>对BFC规范的理解？</p>
+</li>
+<li><p>css定义的权重？</p>
+</li>
+<li><p>解释下浮动和它的工作原理？清除浮动的技巧</p>
+</li>
+<li><p>用过媒体查询，针对移动端的布局吗？</p>
+</li>
+<li><p>使用 CSS 预处理器吗？喜欢那个？</p>
+</li>
+<li><p>CSS 优化、提高性能的方法有哪些？</p>
+</li>
+<li><p>浏览器是怎样解析CSS选择器的？</p>
+</li>
+<li><p>在网页中的应该使用奇数还是偶数的字体？为什么呢？</p>
+</li>
+<li><p>margin和padding分别适合什么场景使用？</p>
+</li>
+</ul>
+<p>**   你对line-height是如何理解的？</p>
+<ul>
+<li><p>怎么让Chrome支持小于12px 的文字？</p>
+</li>
+<li><p>如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）</p>
+</li>
+<li><p>display:inline-block 什么时候会显示间隙？(携程)</p>
+</li>
+</ul>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a><a name="js">JavaScript</a></h2><ul>
+<li><p>用原生JS的写过东西吗？</p>
+</li>
+<li><p>JavaScript原型，原型链 ? 有什么特点？</p>
+</li>
+<li><p>eval是做什么的？</p>
+</li>
+<li><p>null，undefined 的区别？</p>
+</li>
+<li><p>写一个通用的事件侦听器函数。</p>
+</li>
+<li><p>Node.js的适用场景？</p>
+</li>
+<li><p>介绍js的基本数据类型。</p>
+</li>
+<li><p>Javascript如何实现继承？</p>
+</li>
+<li><p>[“1”, “2”, “3”].map(parseInt) 答案是多少？</p>
+</li>
+<li><p>如何创建一个对象? （画出此对象的内存图）</p>
+</li>
+<li><p>谈谈This对象的理解。</p>
+</li>
+<li><p>事件、IE与火狐的事件机制有什么区别？ 如何阻止冒泡？</p>
+</li>
+<li><p>什么是闭包（closure），为什么要用它？</p>
+</li>
+<li><p>“use strict”;是什么意思 ? 使用它的好处和坏处分别是什么？</p>
+</li>
+<li><p>如何判断一个对象是否属于某个类？</p>
+</li>
+<li><p>new操作符具体干了什么呢?</p>
+</li>
+<li><p>Javascript中，有一个函数，执行时对象查找时，永远不会去查找原型，这个函数是？</p>
+</li>
+<li><p>JSON 的了解？</p>
+</li>
+<li><p>js延迟加载的方式有哪些？</p>
+</li>
+<li><p>ajax 是什么?</p>
+</li>
+<li><p>同步和异步的区别?</p>
+</li>
+<li><p>如何解决跨域问题?</p>
+</li>
+<li><p>模块化怎么做？</p>
+</li>
+<li><p>AMD（Modules/Asynchronous-Definition）、CMD（Common Module Definition）规范区别？</p>
+</li>
+<li><p>异步加载的方式有哪些？</p>
+</li>
+<li><p>.call() 和 .apply() 的区别？</p>
+</li>
+<li><p>Jquery与jQuery UI 有啥区别？</p>
+</li>
+<li><p>JQuery的源码看过吗？能不能简单说一下它的实现原理？</p>
+</li>
+<li><p>jquery 中如何将数组转化为json字符串，然后再转化回来？</p>
+</li>
+<li><p>针对 jQuery 的优化方法？</p>
+</li>
+<li><p>JavaScript中的作用域与变量声明提升？</p>
+</li>
+<li><p>如何编写高性能的Javascript？</p>
+</li>
+<li><p>那些操作会造成内存泄漏？</p>
+</li>
+<li><p>JQuery一个对象可以同时绑定多个事件，这是如何实现的？</p>
+</li>
+<li><p>如何判断当前脚本运行在浏览器还是node环境中？（阿里）</p>
+</li>
+</ul>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a><a name="other">其他问题</a></h2><ul>
+<li><p>你遇到过比较难的技术问题是？你是如何解决的？</p>
+</li>
+<li><p>常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？</p>
+</li>
+<li><p>页面重构怎么操作？</p>
+</li>
+<li><p>列举IE 与其他浏览器不一样的特性？</p>
+</li>
+<li><p>99%的网站都需要被重构是那本书上写的？</p>
+</li>
+<li><p>什么叫优雅降级和渐进增强？</p>
+</li>
+<li><p>WEB应用从服务器主动推送Data到客户端有那些方式？</p>
+</li>
+<li><p>对Node的优点和缺点提出了自己的看法？</p>
+</li>
+<li><p>你有哪些性能优化的方法？</p>
+</li>
+<li><p>http状态码有那些？分别代表是什么意思？</p>
+</li>
+<li><p>一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）</p>
+</li>
+<li><p>除了前端以外还了解什么其它技术么？你最最厉害的技能是什么？</p>
+</li>
+<li><p>你常用的开发工具是什么，为什么？</p>
+</li>
+<li><p>对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？</p>
+</li>
+<li><p>你怎么看待Web App 、hybrid App、Native App？</p>
+</li>
+<li><p>加班的看法？</p>
+</li>
+<li><p>平时如何管理你的项目？</p>
+</li>
+<li><p>如何设计突发大规模并发架构？</p>
+</li>
+<li><p>说说最近最流行的一些东西吧？常去哪些网站？</p>
+</li>
+<li><p>移动端（Android IOS）怎么做好用户体验?</p>
+</li>
+<li><p>你在现在的团队处于什么样的角色，起到了什么明显的作用？</p>
+</li>
+<li><p>你认为怎样才是全端工程师（Full Stack developer）？</p>
+</li>
+<li><p>介绍一个你最得意的作品吧？</p>
+</li>
+<li><p>你常去那些技术博客？</p>
+</li>
+<li><p>最近在学什么？能谈谈你未来3，5年给自己的规划吗？</p>
+</li>
+</ul>
+<h2 id="有趣的问题"><a href="#有趣的问题" class="headerlink" title="有趣的问题"></a>有趣的问题</h2><ul>
+<li><p>.A、B两人分别在两座岛上。B生病了，A有B所需要的药。C有一艘小船和一个可以上锁的箱子。C愿意在A和B之间运东西，但东西只能放在箱子里。只要箱子没被上锁，C都会偷走箱子里的东西，不管箱子里有什么。如果A和B各自有一把锁和只能开自己那把锁的钥匙，A应该如何把东西安全递交给B？</p>
+<p>答案：A把药放进箱子，用自己的锁把箱子锁上。B拿到箱子后，再在箱子上加一把自己的锁。<br>箱子运回A后，A取下自己的锁。箱子再运到B手中时，B取下自己的锁，获得药物。</p>
+</li>
+</ul>
+<pre><code>## &lt;a name=&apos;web&apos;&gt;优质网站推荐&lt;/a&gt;
+</code></pre><ol>
+<li>极客标签： <a href="http://www.gbtags.com/" target="_blank" rel="external">http://www.gbtags.com/</a></li>
+<li>码农周刊： <a href="http://weekly.manong.io/issues/" target="_blank" rel="external">http://weekly.manong.io/issues/</a></li>
+<li>前端周刊： <a href="http://www.feweekly.com/issues" target="_blank" rel="external">http://www.feweekly.com/issues</a></li>
+<li>极客头条： <a href="http://geek.csdn.net/" target="_blank" rel="external">http://geek.csdn.net/</a></li>
+<li>Startup News：<a href="http://news.dbanotes.net/" target="_blank" rel="external">http://news.dbanotes.net/</a></li>
+<li>Hacker News： <a href="https://news.ycombinator.com/news" target="_blank" rel="external">https://news.ycombinator.com/news</a></li>
+<li>InfoQ： <a href="http://www.infoq.com/" target="_blank" rel="external">http://www.infoq.com/</a></li>
+<li>w3cplus： <a href="http://www.w3cplus.com/" target="_blank" rel="external">http://www.w3cplus.com/</a></li>
+<li><p>Stack Overflow： <a href="http://stackoverflow.com/" target="_blank" rel="external">http://stackoverflow.com/</a></p>
+<h3 id="the-last-time-that-refresh-2014-7-28-23-09-21"><a href="#the-last-time-that-refresh-2014-7-28-23-09-21" class="headerlink" title="the last time that refresh: 2014/7/28 23:09:21"></a>the last time that refresh: 2014/7/28 23:09:21</h3><p>爱机车、爱骑行、爱旅行、爱摄影、爱阅读的理想青年，前端开发攻城师。</p>
+<p>我的微博：<a href="http://weibo.com/920802999" target="_blank" rel="external">http://weibo.com/920802999</a></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/16/php-multi-file-upload/" rel="next" title="解析多文件上传 - PHP">
+                <i class="fa fa-chevron-left"></i> 解析多文件上传 - PHP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/08/22/angularjs-f1-app/" rel="prev" title="AngularJS 制作 F1 车手积分 App">
+                AngularJS 制作 F1 车手积分 App <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/cat.png"
+               alt="Justin Young" />
+          <p class="site-author-name" itemprop="name">Justin Young</p>
+          <p class="site-description motion-element" itemprop="description">You Deserve A Better Life</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/youngdze" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/youngdze" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#以下是我在-Github-上看到的一些前端面试试题，发出来提醒自己。"><span class="nav-number">1.</span> <span class="nav-text">以下是我在 Github 上看到的一些前端面试试题，发出来提醒自己。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2014年最新前端开发面试题-（题目列表页）"><span class="nav-number"></span> <span class="nav-text">2014年最新前端开发面试题 （题目列表页）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number"></span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number"></span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number"></span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS"><span class="nav-number"></span> <span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript"><span class="nav-number"></span> <span class="nav-text">JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他问题"><span class="nav-number"></span> <span class="nav-text">其他问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有趣的问题"><span class="nav-number"></span> <span class="nav-text">有趣的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-last-time-that-refresh-2014-7-28-23-09-21"><span class="nav-number">1.</span> <span class="nav-text">the last time that refresh: 2014/7/28 23:09:21</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Justin Young</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'youngdze';
+      var disqus_identifier = '2014/08/21/fe-interview-topics/';
+
+      var disqus_title = "前端面试试题";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
