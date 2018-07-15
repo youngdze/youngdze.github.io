@@ -350,7 +350,7 @@
 
       
         <p>在 <code>app/routes.php</code> 添加函数 <code>App::missing(callback)</code>：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">|------------------------------------------</span></div><div class="line"><span class="comment">| Route 404</span></div><div class="line"><span class="comment">|------------------------------------------</span></div><div class="line"><span class="comment">|</span></div><div class="line"><span class="comment">*/</span></div><div class="line">App::missing(<span class="function"><span class="keyword">function</span><span class="params">($exception)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> Response::view(<span class="string">'error'</span>, <span class="keyword">array</span>(), <span class="number">404</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">|------------------------------------------</span></span><br><span class="line"><span class="comment">| Route 404</span></span><br><span class="line"><span class="comment">|------------------------------------------</span></span><br><span class="line"><span class="comment">|</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">App::missing(<span class="function"><span class="keyword">function</span><span class="params">($exception)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Response::view(<span class="string">'error'</span>, <span class="keyword">array</span>(), <span class="number">404</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>此时你应该在 <code>app/views</code> 下创建一个 <code>error.blade.php</code>，这个 <code>error.blade.php</code> 就是 <code>404</code> 时展示的页面。</p>
 
       
@@ -462,7 +462,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -479,7 +479,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

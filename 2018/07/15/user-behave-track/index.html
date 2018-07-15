@@ -1,0 +1,780 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="User behave," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Justin's Words" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="什么是用户行为系统用户行为系统应该是一个可以追溯用户操作路径、提供用户操作分析和解决用户投诉的系统。它可以帮我们回溯用户从进来页面后，他的每一步操作，点击了页面哪个位置，做了何种行为，比如抽奖、付款、充值等。">
+<meta name="keywords" content="User behave">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用户行为系统">
+<meta property="og:url" content="http://youngdze.co/2018/07/15/user-behave-track/index.html">
+<meta property="og:site_name" content="Justin&#39;s Words">
+<meta property="og:description" content="什么是用户行为系统用户行为系统应该是一个可以追溯用户操作路径、提供用户操作分析和解决用户投诉的系统。它可以帮我们回溯用户从进来页面后，他的每一步操作，点击了页面哪个位置，做了何种行为，比如抽奖、付款、充值等。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-07-15T03:55:34.418Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用户行为系统">
+<meta name="twitter:description" content="什么是用户行为系统用户行为系统应该是一个可以追溯用户操作路径、提供用户操作分析和解决用户投诉的系统。它可以帮我们回溯用户从进来页面后，他的每一步操作，点击了页面哪个位置，做了何种行为，比如抽奖、付款、充值等。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://youngdze.co/2018/07/15/user-behave-track/"/>
+
+
+
+
+
+  <title> 用户行为系统 | Justin's Words </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-55843150-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Justin's Words</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2018/07/15/user-behave-track/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Justin Young">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/cat.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Justin's Words">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用户行为系统
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T11:56:00+08:00">
+                2018-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Front-End/" itemprop="url" rel="index">
+                    <span itemprop="name">Front-End</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2018/07/15/user-behave-track/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/15/user-behave-track/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是用户行为系统"><a href="#什么是用户行为系统" class="headerlink" title="什么是用户行为系统"></a>什么是用户行为系统</h2><p>用户行为系统应该是一个可以追溯用户操作路径、提供用户操作分析和解决用户投诉的系统。它可以帮我们回溯用户从进来页面后，他的每一步操作，点击了页面哪个位置，做了何种行为，比如抽奖、付款、充值等。</p>
+<a id="more"></a>
+<h2 id="为什么要有用户行为系统"><a href="#为什么要有用户行为系统" class="headerlink" title="为什么要有用户行为系统"></a>为什么要有用户行为系统</h2><h3 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h3><p>我这里经历过一些用户投诉过来的问题，有时候一些问题非常难去定位，往往需要花大量时间去重现用户出现的问题，我们部门定的标准是用户投诉问题，必须在6个小时内解决。</p>
+<p>我们的日志只有埋点上报、接口调用记录和 nginx 访问日志，信息过少，如果这些日志都没问题了，那想解决用户投诉问题就只能靠不断重现了，幸运的话6个小时内就可以重现并解决，如果是很隐蔽的bug，估计6个小时都没法重现，如果是资金相关投诉，就很严重了。</p>
+<p>更有可能是有些用户是假投诉，没有遇到这个问题也投诉了要赔付，我们又不具备分辨他是真假的能力，因为是不可能重现的，如果没法验证没有证据，我们只能认栽赔付。</p>
+<h2 id="用户行为系统要怎么设计"><a href="#用户行为系统要怎么设计" class="headerlink" title="用户行为系统要怎么设计"></a>用户行为系统要怎么设计</h2><h3 id="旁路逻辑，非侵入式"><a href="#旁路逻辑，非侵入式" class="headerlink" title="旁路逻辑，非侵入式"></a>旁路逻辑，非侵入式</h3><p>用户行为收集应该是一个旁路的工具，它和具体的业务场景没有关系，调用方只需要将它引入到页面来，不需要管这个工具的内部实现，具体调用参数写好就可以了，就算这个工具报错，也不会对业务方产生任何阻塞。</p>
+<p>我们使用的框架是vue，最简单的调用就是：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-behavior</span>=<span class="string">"userBehaviorKey"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果用的不是vue，那么也可以直接引入调用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> behaveReport = <span class="built_in">require</span>(<span class="string">'my.behave.module'</span>);</span><br><span class="line"><span class="keyword">var</span> MY_UNIQ_KEY = <span class="string">'MY_UNIQ_KEY'</span>;</span><br><span class="line"></span><br><span class="line">behaveReport.init(MY_UNIQ_KEY);</span><br></pre></td></tr></table></figure>
+<h3 id="行为收集"><a href="#行为收集" class="headerlink" title="行为收集"></a>行为收集</h3><h4 id="收集用户行为的场景"><a href="#收集用户行为的场景" class="headerlink" title="收集用户行为的场景"></a>收集用户行为的场景</h4><ul>
+<li>用户进来页面收集一次</li>
+<li>如果是桌面页面，监听用户的点击事件，每次点击都去收集</li>
+<li>如果是移动端页面，监听用户的触屏事件，每次触屏都去收集</li>
+</ul>
+<p>其他场景看自己需要，可以自由添加，所以我会提供一个选项自行添加：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> BEHAVIORS = [<span class="string">'load'</span>, <span class="string">'touchstart'</span>];</span><br><span class="line">BEHAVIORS = options.BEHAVIORS || BEHAVIORS;</span><br><span class="line"></span><br><span class="line">BEHAVIORS.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">behave</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(behave, handleAddEventListner);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h4><p>如果用户在 500ms 内连续点了好几次，其实只是点了一个地方，我们就要考虑节流了，这种情况就只收集一次。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((time - LAST_TIME) &gt; MIN_INTERVAL_TIMER) &#123;</span><br><span class="line">    pushBehaveLog(eventLog);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="未上报数据保存"><a href="#未上报数据保存" class="headerlink" title="未上报数据保存"></a>未上报数据保存</h4><p>数据采集下来后不是立即上报，先压入一个数据，并在个地方先保存下来，可以保存在内存里面，也可以选择保存到 sessionStorage，之所以选择 sessionStorage，是因为它的数据只在当前打开窗口有效，这样可以避免污染到下次打开页面的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> logs = getBehaveLog();</span><br><span class="line">logs.stack.push(log);   <span class="comment">// 压入新收集到的数据</span></span><br></pre></td></tr></table></figure>
+<h4 id="收集什么数据"><a href="#收集什么数据" class="headerlink" title="收集什么数据"></a>收集什么数据</h4><p>需要收集什么数据看自己需要，这里我提供几个点，全部都是点击当时的数据：</p>
+<ul>
+<li>标签名(<code>h1/p/span/div</code>)</li>
+<li>类名(<code>.btn-default</code>)</li>
+<li>元素id</li>
+<li>点击的文字</li>
+<li>坐标轴，包括相对整个页面的x轴和y轴</li>
+<li>事件类型(<code>click/touchstart</code>)</li>
+<li>点击时间，这里记录的是用户侧时间，上报后我们会在服务端加上个服务器时间字段</li>
+<li>当前页面链接</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eventLog = &#123;</span><br><span class="line">    tagName: ev.target.tagName,</span><br><span class="line">    className: ev.target.className,</span><br><span class="line">    id: ev.target.id,</span><br><span class="line">    text: ev.target.innerText,</span><br><span class="line">    x: <span class="built_in">Math</span>.round(ev.clientX || ev.pageX || (ev.targetTouches &amp;&amp; ev.targetTouches[<span class="number">0</span>].clientX)),</span><br><span class="line">    y: <span class="built_in">Math</span>.round(ev.clientY || ev.pageY || (ev.targetTouches &amp;&amp; ev.targetTouches[<span class="number">0</span>].clientY)),</span><br><span class="line">    type: ev.type,</span><br><span class="line">    createTime: DateFormat(<span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="string">'yyyy-mm-dd hh:ii:ss'</span>),</span><br><span class="line">    location: location.pathname + location.search + location.hash</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="数据区分"><a href="#数据区分" class="headerlink" title="数据区分"></a>数据区分</h4><p>数据收集上去了，还要区分是哪个用户的行为或者是哪个业务上报的，所以每次上报需要带上用户的 uid 和各个业务自定义的 key。</p>
+<p>另外，如果用户在这个页面跳出去又跳回来了，两次的行为收集就需要做一个区分，所以需要每次进入页面提供一个 uuid，在这次页面的行为都会带上这个 uuid，跳出去后再次进来，uuid 就需要不一样了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 初始化行为事件储存队列</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initBehaveLog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> uuid = getUuid();</span><br><span class="line">    <span class="keyword">var</span> logs = &#123;</span><br><span class="line">        id: uuid,</span><br><span class="line">        stack: []</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="上报时机"><a href="#上报时机" class="headerlink" title="上报时机"></a>上报时机</h3><ul>
+<li>由于我们的页面大部分采用 hash 路由，所以 hash 改变的时候会上报一次</li>
+<li>当行为收集达到指定个数，那么把已收集的先上报，并清空本地已收集数据</li>
+<li>每隔指定时间就上报一次，并清空本地已手机数据</li>
+<li>在页面被关闭之前，同样上报一次</li>
+</ul>
+<p>如果上报方法发现上报队列没数据，就不上报。</p>
+<p>hash 改变和页面关闭前上报</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> REPORT_BEHAVIORS = [<span class="string">'hashchange'</span>, <span class="string">'beforeunload'</span>];</span><br><span class="line"></span><br><span class="line">REPORT_BEHAVIORS.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">behave</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(behave, reportELK);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>达到指定个数上报</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (logs.stack.length &gt;= MAX_STORED_LENGTH) &#123;</span><br><span class="line">    reportELK();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每隔指定时间上报一次</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每隔指定时间就上报一次</span></span><br><span class="line">reportTimer = setInterval(reportELK, REPORT_INTERVAL_TIME);</span><br></pre></td></tr></table></figure>
+<h3 id="如何上报"><a href="#如何上报" class="headerlink" title="如何上报"></a>如何上报</h3><p>前端上报一般是异步请求，但其实我们不用关心上报结果是否成功，用图片的形式发请求岂不是更好。</p>
+<p>还是有个棘手的问题，在用户关闭页面前怎么上报，如果是异步上报肯定上报不上去的，这里使用同步请求好一点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ev &amp;&amp; ev.type &amp;&amp; ev.type.indexOf &amp;&amp; ev.type.indexOf(<span class="string">'unload'</span>) &gt; <span class="number">-1</span> &amp;&amp; XMLHttpRequest) &#123;</span><br><span class="line">    <span class="keyword">var</span> reportMsg = <span class="built_in">encodeURIComponent</span>(<span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">        msg: logs</span><br><span class="line">    &#125;));</span><br><span class="line">    <span class="keyword">var</span> url = <span class="string">'/myReportPath?key='</span> + REPORT_KEY + <span class="string">'&amp;msg='</span> + reportMsg;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">'POST'</span>, url, <span class="literal">false</span>);   <span class="comment">// false 表明使用同步请求</span></span><br><span class="line">    xhr.send();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数据落地和查询"><a href="#数据落地和查询" class="headerlink" title="数据落地和查询"></a>数据落地和查询</h3><h4 id="数据落地"><a href="#数据落地" class="headerlink" title="数据落地"></a>数据落地</h4><p>我们使用了 ELK 来储存数据，ELK 优点包括检索性能高效和集群线性扩展，适合用来储存大量的数据。</p>
+<h4 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h4><p>数据查询可以通过 ELK 提供的查询接口来拉取数据，拉取到数据之后还需要对数据做进一步的解析才能转为可读信息，这里可以提供一个查询系统专门来查询收集到的行为数据，并支持下面维度的查询：</p>
+<ul>
+<li>按业务查询</li>
+<li>按用户查询</li>
+<li>开始时间</li>
+<li>结束时间</li>
+</ul>
+<h2 id="未来规划"><a href="#未来规划" class="headerlink" title="未来规划"></a>未来规划</h2><p>既然我们能拿到用户的操作行为路径了，那能不能直接就把用户的行为回放出来，我们直接在用户操作的页面一步步回放用户每一步操作了什么，把整个路径播放出来，是不是更简单更容易分析，可以朝这个方向发展。</p>
+<h2 id="真实使用案例"><a href="#真实使用案例" class="headerlink" title="真实使用案例"></a>真实使用案例</h2><p>曾经有用户通过某些业务上的巧合，虽然他并不具备赔付的条件，但是这种巧合可以让他具备投诉的条件，如果是之前，我们很难去区分他是不是假投诉，也没有证据来去验证，该业务接上这个用户行为系统后，我们快速查清这个用户其实是通过某种巧合来凑成我们给他赔付的条件，实际上他的实际操作并没有问题，我们的业务也没有bug，仅仅是巧合。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/User-behave/" rel="tag"># User behave</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/13/service-worker/" rel="next" title="Service workers">
+                <i class="fa fa-chevron-left"></i> Service workers
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/15/fe-bypass-system/" rel="prev" title="前端旁路系统">
+                前端旁路系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/cat.png"
+               alt="Justin Young" />
+          <p class="site-author-name" itemprop="name">Justin Young</p>
+          <p class="site-description motion-element" itemprop="description">You Deserve A Better Life</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">105</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/youngdze" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/youngdze" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是用户行为系统"><span class="nav-number">1.</span> <span class="nav-text">什么是用户行为系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要有用户行为系统"><span class="nav-number">2.</span> <span class="nav-text">为什么要有用户行为系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#痛点"><span class="nav-number">2.1.</span> <span class="nav-text">痛点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户行为系统要怎么设计"><span class="nav-number">3.</span> <span class="nav-text">用户行为系统要怎么设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#旁路逻辑，非侵入式"><span class="nav-number">3.1.</span> <span class="nav-text">旁路逻辑，非侵入式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行为收集"><span class="nav-number">3.2.</span> <span class="nav-text">行为收集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#收集用户行为的场景"><span class="nav-number">3.2.1.</span> <span class="nav-text">收集用户行为的场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#节流"><span class="nav-number">3.2.2.</span> <span class="nav-text">节流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#未上报数据保存"><span class="nav-number">3.2.3.</span> <span class="nav-text">未上报数据保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收集什么数据"><span class="nav-number">3.2.4.</span> <span class="nav-text">收集什么数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据区分"><span class="nav-number">3.2.5.</span> <span class="nav-text">数据区分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上报时机"><span class="nav-number">3.3.</span> <span class="nav-text">上报时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何上报"><span class="nav-number">3.4.</span> <span class="nav-text">如何上报</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据落地和查询"><span class="nav-number">3.5.</span> <span class="nav-text">数据落地和查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据落地"><span class="nav-number">3.5.1.</span> <span class="nav-text">数据落地</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据查询"><span class="nav-number">3.5.2.</span> <span class="nav-text">数据查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未来规划"><span class="nav-number">4.</span> <span class="nav-text">未来规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#真实使用案例"><span class="nav-number">5.</span> <span class="nav-text">真实使用案例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Justin Young</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'youngdze';
+      var disqus_identifier = '2018/07/15/user-behave-track/';
+
+      var disqus_title = "用户行为系统";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

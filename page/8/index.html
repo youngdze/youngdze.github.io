@@ -251,6 +251,293 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2014/11/23/php-curl-get-post/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Justin Young">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/cat.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Justin's Words">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/11/23/php-curl-get-post/" itemprop="url">
+                  PHP cURL GET & POST
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-23T20:04:51+08:00">
+                2014-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2014/11/23/php-curl-get-post/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/23/php-curl-get-post/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curlCrawler</span><span class="params">($url, $data=array<span class="params">()</span>, $method=<span class="string">'GET'</span>, $http_header = <span class="string">"application/x-www-form-urlencoded; charset=utf-8"</span>)</span> </span>&#123;</span><br><span class="line">    $fields_string = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">foreach</span> ($data <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">        $fields_string .= $key. <span class="string">'='</span> . $value . <span class="string">'&amp;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $curl_obj = curl_init();</span><br><span class="line">    curl_setopt($curl_obj, CURLOPT_HEADER, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (strtoupper($method) === <span class="string">'POST'</span>) &#123;</span><br><span class="line">        curl_setopt($curl_obj, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($curl_obj, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">        curl_setopt($curl_obj, CURLOPT_POSTFIELDS, $fields_string);</span><br><span class="line">    &#125; <span class="keyword">elseif</span> (strtoupper($method) === <span class="string">'GET'</span>) &#123;</span><br><span class="line">        curl_setopt($curl_obj, CURLOPT_URL, $url . <span class="string">'?'</span>. $fields_string);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    curl_setopt($curl_obj, CURLOPT_HTTPHEADER, <span class="keyword">array</span>($http_header, <span class="string">"Content-Length: "</span> . strlen($fields_string)));</span><br><span class="line">    curl_setopt($curl_obj, CURLOPT_RETURNTRANSFER, <span class="keyword">true</span>);</span><br><span class="line">    curl_setopt($curl_obj, CURLOPT_CONNECTTIMEOUT, <span class="number">3</span>);</span><br><span class="line">    curl_setopt($curl_obj, CURLOPT_TIMEOUT, <span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">    $rtn = curl_exec($curl_obj);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!curl_errno($curl_obj)) &#123;</span><br><span class="line">        $response = $rtn;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $response = <span class="string">'Curl error: '</span> . curl_error($curl_obj);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    curl_close($curl_obj);</span><br><span class="line">    <span class="keyword">return</span> $response;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2014/11/19/laravel-debug-on/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Justin Young">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/cat.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Justin's Words">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/11/19/laravel-debug-on/" itemprop="url">
+                  Laravel debug 功能开启
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-19T00:03:15+08:00">
+                2014-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2014/11/19/laravel-debug-on/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/19/laravel-debug-on/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>app/config/app.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="keyword">array</span>(</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="string">'debug'</span> =&gt; <span class="keyword">true</span>,</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>备忘：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod -R 777 /path/to/PHPApp/app/storage</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://youngdze.co/2014/11/18/nginx-restore-in-ubuntu/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -505,7 +792,7 @@
         
           
             <a id="more"></a>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</div><div class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlparse</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">fetchPics</span><span class="params">(request.FancyURLopener)</span>:</span></div><div class="line">    <span class="string">"""docstring for fetchPics"""</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, config = &#123;&#125;)</span>:</span></div><div class="line">        super(request.FancyURLopener, self).__init__()</div><div class="line"></div><div class="line">        default = &#123;</div><div class="line">            <span class="string">'url'</span>: <span class="string">'http://www.868aa.com/Se/Se-3-1.html'</span>,</div><div class="line">            <span class="string">'p_title'</span>: <span class="string">'&lt;title&gt;(.+?)_'</span>,</div><div class="line">            <span class="string">'p_link'</span>: <span class="string">'\/Se\/\d+\.html'</span>,</div><div class="line">            <span class="string">'p_image'</span>: <span class="string">'(td|br)\&gt;\&lt;img\ssrc=\"(.+?)\"'</span>,</div><div class="line">            <span class="string">'save_dir'</span>: <span class="string">'img'</span>,</div><div class="line">            <span class="string">'output'</span>: <span class="keyword">True</span></div><div class="line">        &#125;</div><div class="line">        config.update(default)</div><div class="line"></div><div class="line">        self.__url = config[<span class="string">'url'</span>]</div><div class="line">        self.__p_title = config[<span class="string">'p_title'</span>]</div><div class="line">        self.__p_link = config[<span class="string">'p_link'</span>]</div><div class="line">        self.__p_image = config[<span class="string">'p_image'</span>]</div><div class="line">        self.__save_dir = config[<span class="string">'save_dir'</span>]</div><div class="line">        self.__output = config[<span class="string">'output'</span>]</div><div class="line">        self.__tday = time.strftime(<span class="string">r"%m_%d_%Y"</span>)</div><div class="line">        version = <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isUrl</span><span class="params">(self)</span>:</span></div><div class="line">        regex = re.compile(</div><div class="line">            <span class="string">r'^(?:http|ftp)s?://'</span> <span class="comment"># http:// or https://</span></div><div class="line">            <span class="string">r'(?:(?:[A-Z0-9](?:[A-Z0-9-]&#123;0,61&#125;[A-Z0-9])?\.)+(?:[A-Z]&#123;2,6&#125;\.?|[A-Z0-9-]&#123;2,&#125;\.?)|'</span> <span class="comment">#domain...</span></div><div class="line">            <span class="string">r'localhost|'</span> <span class="comment">#localhost...</span></div><div class="line">            <span class="string">r'\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;)'</span> <span class="comment"># ...or ip</span></div><div class="line">            <span class="string">r'(?::\d+)?'</span> <span class="comment"># optional port</span></div><div class="line">            <span class="string">r'(?:/?|[/?]\S+)$'</span>, re.IGNORECASE)</div><div class="line">        <span class="keyword">if</span> (regex.match(self.__url)):</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">check_dir</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(self.__save_dir):</div><div class="line">            os.makedirs(self.__save_dir)</div><div class="line">            print(<span class="string">'Created directory '</span> + self.__save_dir)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_page</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.isUrl():</div><div class="line">            print(<span class="string">'Invalid url!'</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        page = self.open(self.__url)</div><div class="line">        content = page.read().decode(<span class="string">'gb18030'</span>)</div><div class="line">        <span class="keyword">return</span> content</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_links</span><span class="params">(self, save = True)</span>:</span></div><div class="line">        self.check_dir()</div><div class="line">        pattern = re.compile(self.__p_link)</div><div class="line">        links = pattern.findall(self.get_page())</div><div class="line">        new_links = []</div><div class="line">        file = open(<span class="string">'img/'</span> + self.__tday, <span class="string">'w'</span>)</div><div class="line"></div><div class="line">        <span class="keyword">for</span> link <span class="keyword">in</span> links:</div><div class="line">            link = <span class="string">'http://www.868aa.com'</span> + link</div><div class="line">            new_links.append(link)</div><div class="line">            file.write(link + <span class="string">'\n'</span>)</div><div class="line"></div><div class="line">        file.close()</div><div class="line">        print(<span class="string">'Links saved to img/'</span> + self.__tday)</div><div class="line">        <span class="keyword">return</span> new_links</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_imgs</span><span class="params">(self)</span>:</span></div><div class="line">        self.check_dir()</div><div class="line">        print(<span class="string">'Start to download images...'</span>)</div><div class="line"></div><div class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> self.get_links():</div><div class="line">            page = self.open(l)</div><div class="line">            content = page.read().decode(<span class="string">'gb18030'</span>)</div><div class="line">            p_title = re.compile(self.__p_title)</div><div class="line">            p_images = re.compile(self.__p_image)</div><div class="line">            title = p_title.findall(content)</div><div class="line">            images = p_images.findall(content)</div><div class="line"></div><div class="line">            print(<span class="string">'Start to download '</span> + title[<span class="number">0</span>] + <span class="string">'...'</span>)</div><div class="line"></div><div class="line">            i = <span class="number">1</span></div><div class="line">            <span class="keyword">for</span> img <span class="keyword">in</span> images:</div><div class="line">                fileName, fileExtension = os.path.splitext(img[<span class="number">1</span>])</div><div class="line"></div><div class="line">                <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">'img/'</span> + title[<span class="number">0</span>]):</div><div class="line">                    os.makedirs(<span class="string">'img/'</span> + title[<span class="number">0</span>])</div><div class="line">                    print(<span class="string">'Created directory img/'</span> + title[<span class="number">0</span>])</div><div class="line"></div><div class="line">                saveName = <span class="string">'img/'</span> + title[<span class="number">0</span>] + <span class="string">'/'</span> + str(i) + fileExtension</div><div class="line"></div><div class="line">                <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(saveName):</div><div class="line">                    self.retrieve(img[<span class="number">1</span>], saveName)</div><div class="line">                    print(saveName + <span class="string">' downloaded'</span>)</div><div class="line"></div><div class="line">                i +=<span class="number">1</span></div><div class="line"></div><div class="line">            print(title[<span class="number">0</span>] + <span class="string">'downloaded'</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlparse</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fetchPics</span><span class="params">(request.FancyURLopener)</span>:</span></span><br><span class="line">    <span class="string">"""docstring for fetchPics"""</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, config = &#123;&#125;)</span>:</span></span><br><span class="line">        super(request.FancyURLopener, self).__init__()</span><br><span class="line"></span><br><span class="line">        default = &#123;</span><br><span class="line">            <span class="string">'url'</span>: <span class="string">'http://www.868aa.com/Se/Se-3-1.html'</span>,</span><br><span class="line">            <span class="string">'p_title'</span>: <span class="string">'&lt;title&gt;(.+?)_'</span>,</span><br><span class="line">            <span class="string">'p_link'</span>: <span class="string">'\/Se\/\d+\.html'</span>,</span><br><span class="line">            <span class="string">'p_image'</span>: <span class="string">'(td|br)\&gt;\&lt;img\ssrc=\"(.+?)\"'</span>,</span><br><span class="line">            <span class="string">'save_dir'</span>: <span class="string">'img'</span>,</span><br><span class="line">            <span class="string">'output'</span>: <span class="keyword">True</span></span><br><span class="line">        &#125;</span><br><span class="line">        config.update(default)</span><br><span class="line"></span><br><span class="line">        self.__url = config[<span class="string">'url'</span>]</span><br><span class="line">        self.__p_title = config[<span class="string">'p_title'</span>]</span><br><span class="line">        self.__p_link = config[<span class="string">'p_link'</span>]</span><br><span class="line">        self.__p_image = config[<span class="string">'p_image'</span>]</span><br><span class="line">        self.__save_dir = config[<span class="string">'save_dir'</span>]</span><br><span class="line">        self.__output = config[<span class="string">'output'</span>]</span><br><span class="line">        self.__tday = time.strftime(<span class="string">r"%m_%d_%Y"</span>)</span><br><span class="line">        version = <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isUrl</span><span class="params">(self)</span>:</span></span><br><span class="line">        regex = re.compile(</span><br><span class="line">            <span class="string">r'^(?:http|ftp)s?://'</span> <span class="comment"># http:// or https://</span></span><br><span class="line">            <span class="string">r'(?:(?:[A-Z0-9](?:[A-Z0-9-]&#123;0,61&#125;[A-Z0-9])?\.)+(?:[A-Z]&#123;2,6&#125;\.?|[A-Z0-9-]&#123;2,&#125;\.?)|'</span> <span class="comment">#domain...</span></span><br><span class="line">            <span class="string">r'localhost|'</span> <span class="comment">#localhost...</span></span><br><span class="line">            <span class="string">r'\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;\.\d&#123;1,3&#125;)'</span> <span class="comment"># ...or ip</span></span><br><span class="line">            <span class="string">r'(?::\d+)?'</span> <span class="comment"># optional port</span></span><br><span class="line">            <span class="string">r'(?:/?|[/?]\S+)$'</span>, re.IGNORECASE)</span><br><span class="line">        <span class="keyword">if</span> (regex.match(self.__url)):</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">check_dir</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(self.__save_dir):</span><br><span class="line">            os.makedirs(self.__save_dir)</span><br><span class="line">            print(<span class="string">'Created directory '</span> + self.__save_dir)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_page</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.isUrl():</span><br><span class="line">            print(<span class="string">'Invalid url!'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        page = self.open(self.__url)</span><br><span class="line">        content = page.read().decode(<span class="string">'gb18030'</span>)</span><br><span class="line">        <span class="keyword">return</span> content</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_links</span><span class="params">(self, save = True)</span>:</span></span><br><span class="line">        self.check_dir()</span><br><span class="line">        pattern = re.compile(self.__p_link)</span><br><span class="line">        links = pattern.findall(self.get_page())</span><br><span class="line">        new_links = []</span><br><span class="line">        file = open(<span class="string">'img/'</span> + self.__tday, <span class="string">'w'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> link <span class="keyword">in</span> links:</span><br><span class="line">            link = <span class="string">'http://www.868aa.com'</span> + link</span><br><span class="line">            new_links.append(link)</span><br><span class="line">            file.write(link + <span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line">        file.close()</span><br><span class="line">        print(<span class="string">'Links saved to img/'</span> + self.__tday)</span><br><span class="line">        <span class="keyword">return</span> new_links</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_imgs</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.check_dir()</span><br><span class="line">        print(<span class="string">'Start to download images...'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> self.get_links():</span><br><span class="line">            page = self.open(l)</span><br><span class="line">            content = page.read().decode(<span class="string">'gb18030'</span>)</span><br><span class="line">            p_title = re.compile(self.__p_title)</span><br><span class="line">            p_images = re.compile(self.__p_image)</span><br><span class="line">            title = p_title.findall(content)</span><br><span class="line">            images = p_images.findall(content)</span><br><span class="line"></span><br><span class="line">            print(<span class="string">'Start to download '</span> + title[<span class="number">0</span>] + <span class="string">'...'</span>)</span><br><span class="line"></span><br><span class="line">            i = <span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> img <span class="keyword">in</span> images:</span><br><span class="line">                fileName, fileExtension = os.path.splitext(img[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">'img/'</span> + title[<span class="number">0</span>]):</span><br><span class="line">                    os.makedirs(<span class="string">'img/'</span> + title[<span class="number">0</span>])</span><br><span class="line">                    print(<span class="string">'Created directory img/'</span> + title[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">                saveName = <span class="string">'img/'</span> + title[<span class="number">0</span>] + <span class="string">'/'</span> + str(i) + fileExtension</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(saveName):</span><br><span class="line">                    self.retrieve(img[<span class="number">1</span>], saveName)</span><br><span class="line">                    print(saveName + <span class="string">' downloaded'</span>)</span><br><span class="line"></span><br><span class="line">                i +=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">            print(title[<span class="number">0</span>] + <span class="string">'downloaded'</span>)</span><br></pre></td></tr></table></figure>
 
           
         
@@ -646,7 +933,7 @@
 
       
         
-          <p>其实你如果查看<a href="http://blog.youngdze.com/index.php/feed/" target="_blank" rel="external">我的博客的 rss</a>，会发现有类似 <code>&lt;content:encoded&gt;</code> 或 <code>&lt;atom:link&gt;</code> 这种标签存在，那么怎么用 PHP 获取这种标签的信息呢？ 以下是一个带有 <code>&lt;content:encoded&gt;</code> 的 xml 片段： fragment.xml</p>
+          <p>其实你如果查看<a href="http://blog.youngdze.com/index.php/feed/" target="_blank" rel="noopener">我的博客的 rss</a>，会发现有类似 <code>&lt;content:encoded&gt;</code> 或 <code>&lt;atom:link&gt;</code> 这种标签存在，那么怎么用 PHP 获取这种标签的信息呢？ 以下是一个带有 <code>&lt;content:encoded&gt;</code> 的 xml 片段： fragment.xml</p>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/11/12/simplexml-stuff/#more" rel="contents">
@@ -795,11 +1082,11 @@
           
             <a id="more"></a>
 <p>detect.php</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">IImage</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">private</span> $url;</div><div class="line">    <span class="keyword">private</span> $aContext = <span class="keyword">array</span>(</div><div class="line">        <span class="string">'http'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">            <span class="comment">// 'proxy' =&gt; 'tcp://192.168.1.105:2516',</span></div><div class="line">            <span class="string">'proxy'</span> =&gt; <span class="string">'tcp://127.0.0.1:80'</span>,</div><div class="line">            <span class="string">'request_fulluri'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">        ),</div><div class="line">    );</div><div class="line">    <span class="keyword">private</span> $pattern_title = <span class="string">"/&lt;title&gt;\[.*?\](.*?)\s\s.*?&lt;\/title&gt;/"</span>;</div><div class="line">    <span class="keyword">private</span> $pattern_images = <span class="string">"/&lt;input\stype=\'image\'\ssrc=\'(.*?)\'.*?&gt;/"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($url)</span> </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;url = $url;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getContent</span><span class="params">()</span> </span>&#123;</div><div class="line">        $contentArr = <span class="keyword">array</span>();</div><div class="line">        $cxContext = <span class="keyword">NULL</span>;</div><div class="line">        $content = <span class="keyword">NULL</span>;</div><div class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</div><div class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;url <span class="keyword">as</span> $key =&gt; $url) &#123;</div><div class="line">                $cxContext = stream_context_create(<span class="keyword">$this</span>-&gt;aContext);</div><div class="line">                $content = file_get_contents($url, <span class="keyword">False</span>, $cxContext);</div><div class="line">                $content = iconv(<span class="string">'gbk'</span>, <span class="string">'utf-8'</span>, $content);</div><div class="line">                array_push($contentArr, $content);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> $contentArr;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            $cxContext = stream_context_create(<span class="keyword">$this</span>-&gt;aContext);</div><div class="line">            $content = file_get_contents(<span class="keyword">$this</span>-&gt;url, <span class="keyword">False</span>, $cxContext);</div><div class="line">            $content = iconv(<span class="string">'gbk'</span>, <span class="string">'utf-8'</span>, $content);</div><div class="line">            <span class="keyword">return</span> $content;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</div><div class="line">        $titleArr = <span class="keyword">array</span>();</div><div class="line">        $title = <span class="keyword">NULL</span>;</div><div class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</div><div class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;getContent() <span class="keyword">as</span> $key =&gt; $content) &#123;</div><div class="line">                preg_match_all(<span class="keyword">$this</span>-&gt;pattern_title, $content, $title);</div><div class="line">                array_push($titleArr, $title[<span class="number">1</span>][<span class="number">0</span>]);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> $titleArr;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            preg_match_all(<span class="keyword">$this</span>-&gt;pattern_title, <span class="keyword">$this</span>-&gt;getContent(), $title);</div><div class="line">            <span class="keyword">return</span> $title[<span class="number">1</span>][<span class="number">0</span>];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getImages</span><span class="params">()</span> </span>&#123;</div><div class="line">        $imagesArr = <span class="keyword">array</span>();</div><div class="line">        $images = <span class="keyword">NULL</span>;</div><div class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</div><div class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;getContent() <span class="keyword">as</span> $key =&gt; $content) &#123;</div><div class="line">                preg_match_all(<span class="keyword">$this</span>-&gt;pattern_images, $content, $images);</div><div class="line">                array_push($imagesArr, $images[<span class="number">1</span>]);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> $imagesArr;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            preg_match_all(<span class="keyword">$this</span>-&gt;pattern_images, <span class="keyword">$this</span>-&gt;getContent(), <span class="keyword">$this</span>-&gt;images);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;images[<span class="number">1</span>];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">saveImages</span><span class="params">($dir)</span> </span>&#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">"Starting...\n\r"</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!is_dir($dir)) &#123;</div><div class="line">            mkdir($dir);</div><div class="line">            <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$dir.<span class="string">"\n\r"</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// Create date directory</span></div><div class="line">        $today = getdate();</div><div class="line">        $toDir = $today[<span class="string">'mon'</span>].<span class="string">'-'</span>.$today[<span class="string">'mday'</span>].<span class="string">'-'</span>.$today[<span class="string">'year'</span>];</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!is_dir($dir.<span class="string">'/'</span>.$toDir)) &#123;</div><div class="line">            mkdir($dir.<span class="string">'/'</span>.$toDir);</div><div class="line">            <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$dir.<span class="string">'/'</span>.$toDir.<span class="string">"\n\r"</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</div><div class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;getTitle() <span class="keyword">as</span> $key =&gt; $title) &#123;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (!$title) &#123;</div><div class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/noTitle'</span>;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/'</span>.$title;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (!is_dir($image_dir)) &#123;</div><div class="line">                    mkdir($image_dir);</div><div class="line">                    <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$image_dir.<span class="string">"\n\r"</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">echo</span> <span class="string">"Downloading "</span>.$title.<span class="string">"\n\r"</span>;</div><div class="line">                <span class="keyword">foreach</span> (array_unique(<span class="keyword">$this</span>-&gt;getImages()[$key]) <span class="keyword">as</span> $key =&gt; $image) &#123;</div><div class="line">                    $image_name = $image_dir.<span class="string">"/"</span>.$key.<span class="string">"."</span>.pathinfo($image, PATHINFO_EXTENSION);</div><div class="line">                    <span class="keyword">if</span> (!file_exists($image_name) &amp;&amp; $image_stream=file_get_contents($image)) &#123;</div><div class="line">                        file_put_contents($image_name, $image_stream);</div><div class="line">                        <span class="keyword">echo</span> $image_name.<span class="string">" downloaded\n\r"</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">echo</span> <span class="string">"Download complete\n\r"</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (!<span class="keyword">$this</span>-&gt;getTitle()) &#123;</div><div class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/noTitle'</span>;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/'</span>.$title;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (!is_dir($image_dir)) &#123;</div><div class="line">                mkdir($image_dir);</div><div class="line">                <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$image_dir.<span class="string">"\n\r"</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">echo</span> <span class="string">"Downloading...\n\r"</span>;</div><div class="line">            <span class="keyword">foreach</span> (array_unique(<span class="keyword">$this</span>-&gt;getImages()) <span class="keyword">as</span> $key =&gt; $image) &#123;</div><div class="line">                $image_name = $image_dir.<span class="string">"/"</span>.$key.<span class="string">"."</span>.pathinfo($image, PATHINFO_EXTENSION);</div><div class="line">                <span class="keyword">if</span> (!file_exists($image_name) &amp;&amp; $image_stream=file_get_contents($image)) &#123;</div><div class="line">                    file_put_contents($image_name, $image_stream);</div><div class="line">                    <span class="keyword">echo</span> $image_name.<span class="string">" dowloaded\n\r"</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">echo</span> <span class="string">"Download complete\n\r"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IImage</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $url;</span><br><span class="line">    <span class="keyword">private</span> $aContext = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'http'</span> =&gt; <span class="keyword">array</span>(</span><br><span class="line">            <span class="comment">// 'proxy' =&gt; 'tcp://192.168.1.105:2516',</span></span><br><span class="line">            <span class="string">'proxy'</span> =&gt; <span class="string">'tcp://127.0.0.1:80'</span>,</span><br><span class="line">            <span class="string">'request_fulluri'</span> =&gt; <span class="keyword">true</span>,</span><br><span class="line">        ),</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">private</span> $pattern_title = <span class="string">"/&lt;title&gt;\[.*?\](.*?)\s\s.*?&lt;\/title&gt;/"</span>;</span><br><span class="line">    <span class="keyword">private</span> $pattern_images = <span class="string">"/&lt;input\stype=\'image\'\ssrc=\'(.*?)\'.*?&gt;/"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($url)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;url = $url;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getContent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $contentArr = <span class="keyword">array</span>();</span><br><span class="line">        $cxContext = <span class="keyword">NULL</span>;</span><br><span class="line">        $content = <span class="keyword">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;url <span class="keyword">as</span> $key =&gt; $url) &#123;</span><br><span class="line">                $cxContext = stream_context_create(<span class="keyword">$this</span>-&gt;aContext);</span><br><span class="line">                $content = file_get_contents($url, <span class="keyword">False</span>, $cxContext);</span><br><span class="line">                $content = iconv(<span class="string">'gbk'</span>, <span class="string">'utf-8'</span>, $content);</span><br><span class="line">                array_push($contentArr, $content);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> $contentArr;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $cxContext = stream_context_create(<span class="keyword">$this</span>-&gt;aContext);</span><br><span class="line">            $content = file_get_contents(<span class="keyword">$this</span>-&gt;url, <span class="keyword">False</span>, $cxContext);</span><br><span class="line">            $content = iconv(<span class="string">'gbk'</span>, <span class="string">'utf-8'</span>, $content);</span><br><span class="line">            <span class="keyword">return</span> $content;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $titleArr = <span class="keyword">array</span>();</span><br><span class="line">        $title = <span class="keyword">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;getContent() <span class="keyword">as</span> $key =&gt; $content) &#123;</span><br><span class="line">                preg_match_all(<span class="keyword">$this</span>-&gt;pattern_title, $content, $title);</span><br><span class="line">                array_push($titleArr, $title[<span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> $titleArr;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            preg_match_all(<span class="keyword">$this</span>-&gt;pattern_title, <span class="keyword">$this</span>-&gt;getContent(), $title);</span><br><span class="line">            <span class="keyword">return</span> $title[<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getImages</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $imagesArr = <span class="keyword">array</span>();</span><br><span class="line">        $images = <span class="keyword">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;getContent() <span class="keyword">as</span> $key =&gt; $content) &#123;</span><br><span class="line">                preg_match_all(<span class="keyword">$this</span>-&gt;pattern_images, $content, $images);</span><br><span class="line">                array_push($imagesArr, $images[<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> $imagesArr;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            preg_match_all(<span class="keyword">$this</span>-&gt;pattern_images, <span class="keyword">$this</span>-&gt;getContent(), <span class="keyword">$this</span>-&gt;images);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;images[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">saveImages</span><span class="params">($dir)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Starting...\n\r"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!is_dir($dir)) &#123;</span><br><span class="line">            mkdir($dir);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$dir.<span class="string">"\n\r"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create date directory</span></span><br><span class="line">        $today = getdate();</span><br><span class="line">        $toDir = $today[<span class="string">'mon'</span>].<span class="string">'-'</span>.$today[<span class="string">'mday'</span>].<span class="string">'-'</span>.$today[<span class="string">'year'</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!is_dir($dir.<span class="string">'/'</span>.$toDir)) &#123;</span><br><span class="line">            mkdir($dir.<span class="string">'/'</span>.$toDir);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$dir.<span class="string">'/'</span>.$toDir.<span class="string">"\n\r"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (is_array(<span class="keyword">$this</span>-&gt;url)) &#123;</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;getTitle() <span class="keyword">as</span> $key =&gt; $title) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (!$title) &#123;</span><br><span class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/noTitle'</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/'</span>.$title;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (!is_dir($image_dir)) &#123;</span><br><span class="line">                    mkdir($image_dir);</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$image_dir.<span class="string">"\n\r"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"Downloading "</span>.$title.<span class="string">"\n\r"</span>;</span><br><span class="line">                <span class="keyword">foreach</span> (array_unique(<span class="keyword">$this</span>-&gt;getImages()[$key]) <span class="keyword">as</span> $key =&gt; $image) &#123;</span><br><span class="line">                    $image_name = $image_dir.<span class="string">"/"</span>.$key.<span class="string">"."</span>.pathinfo($image, PATHINFO_EXTENSION);</span><br><span class="line">                    <span class="keyword">if</span> (!file_exists($image_name) &amp;&amp; $image_stream=file_get_contents($image)) &#123;</span><br><span class="line">                        file_put_contents($image_name, $image_stream);</span><br><span class="line">                        <span class="keyword">echo</span> $image_name.<span class="string">" downloaded\n\r"</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Download complete\n\r"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!<span class="keyword">$this</span>-&gt;getTitle()) &#123;</span><br><span class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/noTitle'</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    $image_dir = $dir.<span class="string">"/"</span>.$toDir.<span class="string">'/'</span>.$title;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!is_dir($image_dir)) &#123;</span><br><span class="line">                mkdir($image_dir);</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"Create directory "</span>.$image_dir.<span class="string">"\n\r"</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Downloading...\n\r"</span>;</span><br><span class="line">            <span class="keyword">foreach</span> (array_unique(<span class="keyword">$this</span>-&gt;getImages()) <span class="keyword">as</span> $key =&gt; $image) &#123;</span><br><span class="line">                $image_name = $image_dir.<span class="string">"/"</span>.$key.<span class="string">"."</span>.pathinfo($image, PATHINFO_EXTENSION);</span><br><span class="line">                <span class="keyword">if</span> (!file_exists($image_name) &amp;&amp; $image_stream=file_get_contents($image)) &#123;</span><br><span class="line">                    file_put_contents($image_name, $image_stream);</span><br><span class="line">                    <span class="keyword">echo</span> $image_name.<span class="string">" dowloaded\n\r"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"Download complete\n\r"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>list.php</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">IList</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">private</span> $url;</div><div class="line">    <span class="keyword">private</span> $aContext = <span class="keyword">array</span>(</div><div class="line">        <span class="string">'http'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">            <span class="string">'proxy'</span> =&gt; <span class="string">'tcp://192.168.1.105:2516'</span>,</div><div class="line">            <span class="string">'request_fulluri'</span> =&gt; <span class="keyword">true</span>,</div><div class="line">        ),</div><div class="line">    );</div><div class="line">    <span class="keyword">private</span> $list_link_pattern = <span class="string">"/&lt;tr.*?class=\"tr3.*?&gt;&lt;td&gt;&lt;a.*?href=\"(.*?)\"/"</span>;</div><div class="line">    <span class="keyword">private</span> $list_link_pattern1 = <span class="string">"/&lt;title&gt;.*?&lt;\/title&gt;/"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($url)</span> </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;url = $url;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getContent</span><span class="params">()</span> </span>&#123;</div><div class="line">        $cxContext = stream_context_create(<span class="keyword">$this</span>-&gt;aContext);</div><div class="line">        $content = file_get_contents(<span class="keyword">$this</span>-&gt;url, <span class="keyword">False</span>, $cxContext);</div><div class="line">        <span class="keyword">return</span> $content;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">resolveXMLtoList</span><span class="params">()</span> </span>&#123;</div><div class="line">        $xml = simplexml_load_string(trim(<span class="keyword">$this</span>-&gt;getContent()));</div><div class="line">        <span class="keyword">foreach</span> ($xml-&gt;channel-&gt;item <span class="keyword">as</span> $key =&gt; $item) &#123;</div><div class="line">            <span class="keyword">if</span> ($key === <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line">            array_push($list, (string)$item-&gt;link);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> $list;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getList</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $list;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IList</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $url;</span><br><span class="line">    <span class="keyword">private</span> $aContext = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'http'</span> =&gt; <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'proxy'</span> =&gt; <span class="string">'tcp://192.168.1.105:2516'</span>,</span><br><span class="line">            <span class="string">'request_fulluri'</span> =&gt; <span class="keyword">true</span>,</span><br><span class="line">        ),</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">private</span> $list_link_pattern = <span class="string">"/&lt;tr.*?class=\"tr3.*?&gt;&lt;td&gt;&lt;a.*?href=\"(.*?)\"/"</span>;</span><br><span class="line">    <span class="keyword">private</span> $list_link_pattern1 = <span class="string">"/&lt;title&gt;.*?&lt;\/title&gt;/"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($url)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;url = $url;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">getContent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $cxContext = stream_context_create(<span class="keyword">$this</span>-&gt;aContext);</span><br><span class="line">        $content = file_get_contents(<span class="keyword">$this</span>-&gt;url, <span class="keyword">False</span>, $cxContext);</span><br><span class="line">        <span class="keyword">return</span> $content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">resolveXMLtoList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $xml = simplexml_load_string(trim(<span class="keyword">$this</span>-&gt;getContent()));</span><br><span class="line">        <span class="keyword">foreach</span> ($xml-&gt;channel-&gt;item <span class="keyword">as</span> $key =&gt; $item) &#123;</span><br><span class="line">            <span class="keyword">if</span> ($key === <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            array_push($list, (string)$item-&gt;link);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> $list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getList</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> $list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>awesome.php</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include_once</span>(<span class="string">'list.php'</span>);</div><div class="line"><span class="keyword">include_once</span>(<span class="string">'detect.php'</span>);</div><div class="line"></div><div class="line">$rss = <span class="string">"http://t66y.com/rss.php?fid=16"</span>;</div><div class="line">$url = <span class="string">"http://wo.yao.cl/htm_data/16/1411/1274506.html"</span>;</div><div class="line"></div><div class="line">$L = <span class="keyword">new</span> IList($rss);</div><div class="line"><span class="comment">// $list = $L-&gt;getList();</span></div><div class="line"></div><div class="line">$I = <span class="keyword">new</span> IImage($url);</div><div class="line">$I-&gt;saveImages(<span class="string">'../img'</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveNaked</span><span class="params">($dir=<span class="string">'img'</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"Moving...\n\r"</span>;</div><div class="line">    $files = <span class="keyword">new</span> DirectoryIterator($dir);</div><div class="line">    $imagePattern = <span class="string">"/(jpg|png|gif)/"</span>;</div><div class="line">    <span class="keyword">foreach</span> ($files <span class="keyword">as</span> $fileinfo) &#123;</div><div class="line">        <span class="keyword">if</span> ($fileinfo-&gt;isFile() &amp;&amp; preg_match($imagePattern, $fileinfo-&gt;getExtension())) &#123;</div><div class="line">            $oldname = $fileinfo-&gt;getPath().<span class="string">"/"</span>.$fileinfo-&gt;getFilename();</div><div class="line">            $newname = realpath(<span class="string">"../img/noName\")."</span>/<span class="string">".$fileinfo-&gt;getFilename();</span></div><div class="line"><span class="string">            rename($oldname, $newname);</span></div><div class="line"><span class="string">            echo $fileinfo-&gt;getFilename()."</span> has moved to <span class="string">".$dir."</span>/noName/\n\r<span class="string">";</span></div><div class="line"><span class="string">        &#125;</span></div><div class="line"><span class="string">    &#125;</span></div><div class="line"><span class="string">    echo "</span>Move completed.\n\r<span class="string">";</span></div><div class="line"><span class="string">&#125;</span></div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_once</span>(<span class="string">'list.php'</span>);</span><br><span class="line"><span class="keyword">include_once</span>(<span class="string">'detect.php'</span>);</span><br><span class="line"></span><br><span class="line">$rss = <span class="string">"http://t66y.com/rss.php?fid=16"</span>;</span><br><span class="line">$url = <span class="string">"http://wo.yao.cl/htm_data/16/1411/1274506.html"</span>;</span><br><span class="line"></span><br><span class="line">$L = <span class="keyword">new</span> IList($rss);</span><br><span class="line"><span class="comment">// $list = $L-&gt;getList();</span></span><br><span class="line"></span><br><span class="line">$I = <span class="keyword">new</span> IImage($url);</span><br><span class="line">$I-&gt;saveImages(<span class="string">'../img'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveNaked</span><span class="params">($dir=<span class="string">'img'</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Moving...\n\r"</span>;</span><br><span class="line">    $files = <span class="keyword">new</span> DirectoryIterator($dir);</span><br><span class="line">    $imagePattern = <span class="string">"/(jpg|png|gif)/"</span>;</span><br><span class="line">    <span class="keyword">foreach</span> ($files <span class="keyword">as</span> $fileinfo) &#123;</span><br><span class="line">        <span class="keyword">if</span> ($fileinfo-&gt;isFile() &amp;&amp; preg_match($imagePattern, $fileinfo-&gt;getExtension())) &#123;</span><br><span class="line">            $oldname = $fileinfo-&gt;getPath().<span class="string">"/"</span>.$fileinfo-&gt;getFilename();</span><br><span class="line">            $newname = realpath(<span class="string">"../img/noName\")."</span>/<span class="string">".$fileinfo-&gt;getFilename();</span></span><br><span class="line"><span class="string">            rename($oldname, $newname);</span></span><br><span class="line"><span class="string">            echo $fileinfo-&gt;getFilename()."</span> has moved to <span class="string">".$dir."</span>/noName/\n\r<span class="string">";</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    echo "</span>Move completed.\n\r<span class="string">";</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 
           
         
@@ -942,7 +1229,7 @@
         
           <p>Laravel 初上手 11-07-2014</p>
 <h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p><code>app/routes.php</code></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'users'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'Users!'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Route::get(<span class="string">'users'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Users!'</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/11/08/laravel-startup/#more" rel="contents">
@@ -1389,295 +1676,8 @@
       
         
           
-            <h2 id="原代码出自-CSS-Tricks"><a href="#原代码出自-CSS-Tricks" class="headerlink" title="原代码出自 CSS-Tricks"></a>原代码出自 <a href="http://css-tricks.com/snippets/jquery/smooth-scrolling/" target="_blank" rel="external">CSS-Tricks</a></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">'a[href*=#]:not([herf=#])'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(location..pathname.replace(<span class="regexp">/^\//</span>) == <span class="keyword">this</span>.pathname.replace(<span class="regexp">/^\//</span>) &amp;&amp; location.hostname == <span class="keyword">this</span>.hostname) &#123;</div><div class="line">            <span class="keyword">var</span> target = $(<span class="keyword">this</span>.hash);</div><div class="line">            target = target.length ? target : $(<span class="string">'[name='</span> + <span class="keyword">this</span>.hash.slice(<span class="number">1</span>) + <span class="string">']'</span>);</div><div class="line">            <span class="keyword">if</span> (target.length) &#123;</div><div class="line">                $(<span class="string">'html, body'</span>).animate(&#123;</div><div class="line">                    scrollTop: target.offset().top</div><div class="line">                &#125;, <span class="number">1000</span>);</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+            <h2 id="原代码出自-CSS-Tricks"><a href="#原代码出自-CSS-Tricks" class="headerlink" title="原代码出自 CSS-Tricks"></a>原代码出自 <a href="http://css-tricks.com/snippets/jquery/smooth-scrolling/" target="_blank" rel="noopener">CSS-Tricks</a></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">'a[href*=#]:not([herf=#])'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(location..pathname.replace(<span class="regexp">/^\//</span>) == <span class="keyword">this</span>.pathname.replace(<span class="regexp">/^\//</span>) &amp;&amp; location.hostname == <span class="keyword">this</span>.hostname) &#123;</span><br><span class="line">            <span class="keyword">var</span> target = $(<span class="keyword">this</span>.hash);</span><br><span class="line">            target = target.length ? target : $(<span class="string">'[name='</span> + <span class="keyword">this</span>.hash.slice(<span class="number">1</span>) + <span class="string">']'</span>);</span><br><span class="line">            <span class="keyword">if</span> (target.length) &#123;</span><br><span class="line">                $(<span class="string">'html, body'</span>).animate(&#123;</span><br><span class="line">                    scrollTop: target.offset().top</span><br><span class="line">                &#125;, <span class="number">1000</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2014/09/08/learning-php-avoid-detour/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Justin Young">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/cat.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Justin's Words">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/08/learning-php-avoid-detour/" itemprop="url">
-                  自学 PHP，如何不走弯路？
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-08T11:57:00+08:00">
-                2014-09-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/09/08/learning-php-avoid-detour/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/09/08/learning-php-avoid-detour/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="这个问题来自知乎，我觉得下面回答不错，于是贴过来。"><a href="#这个问题来自知乎，我觉得下面回答不错，于是贴过来。" class="headerlink" title="这个问题来自知乎，我觉得下面回答不错，于是贴过来。"></a>这个问题来自<a href="http://www.zhihu.com/question/20476137" target="_blank" rel="external">知乎</a>，我觉得下面回答不错，于是贴过来。</h2>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/08/learning-php-avoid-detour/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2014/09/05/moto-x-2nd-gen/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Justin Young">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/cat.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Justin's Words">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Justin's Words" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/05/moto-x-2nd-gen/" itemprop="url">
-                  MOTO X 2nd Gen. 出了！
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-05T14:11:00+08:00">
-                2014-09-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NoneTech/" itemprop="url" rel="index">
-                    <span itemprop="name">NoneTech</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/09/05/moto-x-2nd-gen/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/09/05/moto-x-2nd-gen/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="MOTO-X-2nd-Gen-出了！！！啊啊啊中毒！！！"><a href="#MOTO-X-2nd-Gen-出了！！！啊啊啊中毒！！！" class="headerlink" title="MOTO X 2nd Gen. 出了！！！啊啊啊中毒！！！"></a>MOTO X 2nd Gen. 出了！！！啊啊啊中毒！！！</h2><h3 id="来自-the-Verge-的上手视频"><a href="#来自-the-Verge-的上手视频" class="headerlink" title="来自 the Verge 的上手视频"></a>来自 <a href="http://www.theverge.com/2014/9/5/6108473/the-new-moto-x-could-be-the-best-android-phone-ever-made" target="_blank" rel="external">the Verge</a> 的上手视频</h3><script height="393px" width="700px" src="http://player.ooyala.com/iframe.js#pbid=dcc84e41db014454b08662a766057e2b&ec=t5bXMzcDr5YMXe1gGGimIYLU2ryZBoxf"></script>
           
         
       
@@ -1751,7 +1751,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1768,7 +1768,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

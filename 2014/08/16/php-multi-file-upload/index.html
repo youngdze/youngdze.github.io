@@ -348,7 +348,7 @@
       
 
       
-        <h2 id="解析多文件上传"><a href="#解析多文件上传" class="headerlink" title="解析多文件上传"></a>解析多文件上传</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseMultiFileUpload</span><span class="params">($file, $e = false)</span> </span>&#123;</div><div class="line">    $arr = [];</div><div class="line">    <span class="keyword">foreach</span> ($file <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">    <span class="keyword">foreach</span> ($file[$key] <span class="keyword">as</span> $k =&gt; $v) &#123;</div><div class="line">        <span class="keyword">if</span> (!$e) &#123;</div><div class="line">        <span class="keyword">if</span> ($file[<span class="string">'error'</span>][$k] != <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;</div><div class="line">        &#125;</div><div class="line">        $arr[$k][$key] = $file[$key][$k];</div><div class="line">    &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> $arr;</div><div class="line">&#125;</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+        <h2 id="解析多文件上传"><a href="#解析多文件上传" class="headerlink" title="解析多文件上传"></a>解析多文件上传</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseMultiFileUpload</span><span class="params">($file, $e = false)</span> </span>&#123;</span><br><span class="line">    $arr = [];</span><br><span class="line">    <span class="keyword">foreach</span> ($file <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">    <span class="keyword">foreach</span> ($file[$key] <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!$e) &#123;</span><br><span class="line">        <span class="keyword">if</span> ($file[<span class="string">'error'</span>][$k] != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        $arr[$k][$key] = $file[$key][$k];</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -462,7 +462,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -479,7 +479,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

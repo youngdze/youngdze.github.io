@@ -349,16 +349,16 @@
       
 
       
-        <p>其实你如果查看<a href="http://blog.youngdze.com/index.php/feed/" target="_blank" rel="external">我的博客的 rss</a>，会发现有类似 <code>&lt;content:encoded&gt;</code> 或 <code>&lt;atom:link&gt;</code> 这种标签存在，那么怎么用 PHP 获取这种标签的信息呢？ 以下是一个带有 <code>&lt;content:encoded&gt;</code> 的 xml 片段： fragment.xml</p>
+        <p>其实你如果查看<a href="http://blog.youngdze.com/index.php/feed/" target="_blank" rel="noopener">我的博客的 rss</a>，会发现有类似 <code>&lt;content:encoded&gt;</code> 或 <code>&lt;atom:link&gt;</code> 这种标签存在，那么怎么用 PHP 获取这种标签的信息呢？ 以下是一个带有 <code>&lt;content:encoded&gt;</code> 的 xml 片段： fragment.xml</p>
 <a id="more"></a>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">content:encoded</span> <span class="attr">xml:lang</span>=<span class="string">"zh-CN"</span>&gt;</span></div><div class="line">        &lt;![CDATA[</div><div class="line">            我是 xml 片段</div><div class="line">        ]]&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">content:encoded</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">content:encoded</span> <span class="attr">xml:lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line">        &lt;![CDATA[</span><br><span class="line">            我是 xml 片段</span><br><span class="line">        ]]&gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">content:encoded</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>使用 SimpleXML 进行加载：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$xml = simplexml_load_file(<span class="string">'fragment.xml'</span>);</div></pre></td></tr></table></figure>
-<p>这里将会用到 <a href="http://php.net/manual/zh/simplexmlelement.children.php" target="_blank" rel="external">SimpleXMLElement::children</a> 对 <code>xml</code> 解析：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$content = $xml-&gt;children(<span class="string">'content'</span>, <span class="keyword">true</span>)-&gt;encoded;</div><div class="line"><span class="keyword">echo</span> $content;</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$xml = simplexml_load_file(<span class="string">'fragment.xml'</span>);</span><br></pre></td></tr></table></figure>
+<p>这里将会用到 <a href="http://php.net/manual/zh/simplexmlelement.children.php" target="_blank" rel="noopener">SimpleXMLElement::children</a> 对 <code>xml</code> 解析：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$content = $xml-&gt;children(<span class="string">'content'</span>, <span class="keyword">true</span>)-&gt;encoded;</span><br><span class="line"><span class="keyword">echo</span> $content;</span><br></pre></td></tr></table></figure>
 <p>这样就行了(^o^)/~</p>
-<p>诶里面还有个 <code>xml:lang=&quot;zh-CN&quot;</code> 的属性，怎么获得啊？一样的，就是使用的方法不同，这里用到 <a href="http://php.net/manual/zh/simplexmlelement.attributes.php" target="_blank" rel="external">SimpleXMLElement::attributes</a>：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$lang = $xml-&gt;children(<span class="string">'content'</span>, <span class="keyword">true</span>)-&gt;encoded-&gt;attributes(<span class="string">'xml'</span>, <span class="keyword">true</span>)-&gt;lang;</div><div class="line"><span class="keyword">echo</span> $lang;    <span class="comment">// zh-CN</span></div></pre></td></tr></table></figure>
+<p>诶里面还有个 <code>xml:lang=&quot;zh-CN&quot;</code> 的属性，怎么获得啊？一样的，就是使用的方法不同，这里用到 <a href="http://php.net/manual/zh/simplexmlelement.attributes.php" target="_blank" rel="noopener">SimpleXMLElement::attributes</a>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$lang = $xml-&gt;children(<span class="string">'content'</span>, <span class="keyword">true</span>)-&gt;encoded-&gt;attributes(<span class="string">'xml'</span>, <span class="keyword">true</span>)-&gt;lang;</span><br><span class="line"><span class="keyword">echo</span> $lang;    <span class="comment">// zh-CN</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -469,7 +469,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -486,7 +486,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

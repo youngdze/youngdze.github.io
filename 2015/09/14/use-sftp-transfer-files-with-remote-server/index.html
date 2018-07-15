@@ -350,20 +350,20 @@
 
       
         <p>使用 <strong>sftp</strong> 与服务器进行文件传输比 <strong>ftp</strong> 要安全。</p>
-<h4 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sftp username@remote_hostname_or_IP</div></pre></td></tr></table></figure>
+<h4 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sftp username@remote_hostname_or_IP</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h4 id="服务器操作"><a href="#服务器操作" class="headerlink" title="服务器操作"></a>服务器操作</h4><p><strong>sftp</strong> 在服务器的操作和 <strong>ssh</strong> 在服务器的操作是一样的，都可以用 <code>ls</code>, <code>pwd</code>, <code>cd</code> 等命令。</p>
 <h4 id="本地操作"><a href="#本地操作" class="headerlink" title="本地操作"></a>本地操作</h4><p><strong>sftp</strong> 操作本地可以在命令前加个 <code>l</code> 表示 <em>local</em>，比如 <code>ls</code> 就要 <code>lls</code>，<code>mkdir</code> 用 <code>lmkdir</code>。 也可以输入 <code>!</code> 进入本地 <em>shell</em> 操作，使用 <code>exit</code> 退出。</p>
 <h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>上传命令为：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">put localFile</div></pre></td></tr></table></figure>
-<h4 id="上传文件夹"><a href="#上传文件夹" class="headerlink" title="上传文件夹"></a>上传文件夹</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">put -r localDir</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put localFile</span><br></pre></td></tr></table></figure>
+<h4 id="上传文件夹"><a href="#上传文件夹" class="headerlink" title="上传文件夹"></a>上传文件夹</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put -r localDir</span><br></pre></td></tr></table></figure>
 <h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p>下载命令为：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get remoteFile</div></pre></td></tr></table></figure>
-<h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get remoteFile localName</div></pre></td></tr></table></figure>
-<h4 id="下载文件夹并保留权限"><a href="#下载文件夹并保留权限" class="headerlink" title="下载文件夹并保留权限"></a>下载文件夹并保留权限</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get -Pr remoteFile</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get remoteFile</span><br></pre></td></tr></table></figure>
+<h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get remoteFile localName</span><br></pre></td></tr></table></figure>
+<h4 id="下载文件夹并保留权限"><a href="#下载文件夹并保留权限" class="headerlink" title="下载文件夹并保留权限"></a>下载文件夹并保留权限</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get -Pr remoteFile</span><br></pre></td></tr></table></figure>
 <p>参考：</p>
 <ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-use-sftp-to-securely-transfer-files-with-a-remote-server" target="_blank" rel="external">How To Use SFTP to Securely Transfer Files with a Remote Server</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-use-sftp-to-securely-transfer-files-with-a-remote-server" target="_blank" rel="noopener">How To Use SFTP to Securely Transfer Files with a Remote Server</a></li>
 </ul>
 
       
@@ -484,7 +484,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -501,7 +501,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

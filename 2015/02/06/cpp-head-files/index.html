@@ -352,15 +352,15 @@
 
       
         <blockquote>
-<p>Refer to: <a href="http://www.learncpp.com/cpp-tutorial/19-header-files/" target="_blank" rel="external">Learn Cpp</a></p>
+<p>Refer to: <a href="http://www.learncpp.com/cpp-tutorial/19-header-files/" target="_blank" rel="noopener">Learn Cpp</a></p>
 </blockquote>
 <h2 id="直接上代码"><a href="#直接上代码" class="headerlink" title="直接上代码"></a>直接上代码</h2><h3 id="三个文件源码如下："><a href="#三个文件源码如下：" class="headerlink" title="三个文件源码如下："></a>三个文件源码如下：</h3><p>add.h:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ADD_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD_H</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ADD_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADD_H</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>add.cpp:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">return</span> x + y;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>main.cpp:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"add.h"</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"The sum of 3 and 4 is "</span> &lt;&lt; add(<span class="number">3</span>, <span class="number">4</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    system(<span class="string">"pause"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"add.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"The sum of 3 and 4 is "</span> &lt;&lt; add(<span class="number">3</span>, <span class="number">4</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="编译运行过程"><a href="#编译运行过程" class="headerlink" title="编译运行过程"></a>编译运行过程</h3><p><img src="http://www.learncpp.com/images/CppTutorial/Section1/IncludeHeader.png" alt="enter image description here"></p>
 <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="尖括号和双引号的区别"><a href="#尖括号和双引号的区别" class="headerlink" title="尖括号和双引号的区别"></a>尖括号和双引号的区别</h4><p>你可以看到 <code>iostream</code> 是使用尖括号进行引用的，而 <code>add.h</code> 是通过双引号进行引用，为什么呢？</p>
 <p>这是因为 <code>iostream</code> 是编译器自带的头文件，尖括号的意思是告诉编译器到系统目录下查找这个头文件。而双引号则告诉编译器这个头文件是由我们自己提供的，这样编译器就会在当前文件夹下查找这个头文件，如果编译器在当前文件夹下找不到这个头文件，它就会查找编译器或 IDE 设置好的路径下是否包含该文件，还是找不到的话编译器就会查找系统目录。</p>
@@ -373,7 +373,7 @@
 <p>规则是：如果一个库有不用 .h 后缀的版本存在，那就通过 std 命名空间访问它，但如果这个库没有不用 .h 后缀的版本，那你就得自己创建头部，同时使用 .h 版本。</p>
 </blockquote>
 <h4 id="引用其他路径的头文件"><a href="#引用其他路径的头文件" class="headerlink" title="引用其他路径的头文件"></a>引用其他路径的头文件</h4><p>如下代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"headers/myHeader.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"../moreHeaders/myOtherHeader.h"</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"headers/myHeader.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"../moreHeaders/myOtherHeader.h"</span></span></span><br></pre></td></tr></table></figure>
 <h4 id="能不能把函数定义到一个头文件内"><a href="#能不能把函数定义到一个头文件内" class="headerlink" title="能不能把函数定义到一个头文件内"></a>能不能把函数定义到一个头文件内</h4><p>可以。但强烈建议不这么做，或者说你不应该这么做。</p>
 <h4 id="一些-mention"><a href="#一些-mention" class="headerlink" title="一些 mention"></a>一些 mention</h4><ul>
 <li>Always include header guards.</li>
@@ -502,7 +502,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -519,7 +519,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

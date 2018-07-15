@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="9 月份一个同学叫我帮他做一个家教网站，我答应下来了。前端页面不复杂，很快就完成了，因为后端语言中我对 PHP 最熟悉，于是就决定用 PHP 来开发，听说 Laravel 名声不错，于是就直接上手 Laravel。  Laravel 有中文官网，里面文档很详细，不懂可以去查文档。 Laravel 链接 css 和 js 这些都以 public 文件夹为当前路径，务必注意。 本篇讲 HTML 函数">
+<meta name="description" content="9 月份一个同学叫我帮他做一个家教网站，我答应下来了。前端页面不复杂，很快就完成了，因为后端语言中我对 PHP 最熟悉，于是就决定用 PHP 来开发，听说 Laravel 名声不错，于是就直接上手 Laravel。  Laravel 有中文官网，里面文档很详细，不懂可以去查文档。 Laravel 链接 css 和 _js_ 这些都以 public 文件夹为当前路径，务必注意。 本篇讲 HTML">
 <meta name="keywords" content="Laravel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Laravel 笔记 （一）">
 <meta property="og:url" content="http://youngdze.co/2014/12/03/laravel-note-1/index.html">
 <meta property="og:site_name" content="Justin&#39;s Words">
-<meta property="og:description" content="9 月份一个同学叫我帮他做一个家教网站，我答应下来了。前端页面不复杂，很快就完成了，因为后端语言中我对 PHP 最熟悉，于是就决定用 PHP 来开发，听说 Laravel 名声不错，于是就直接上手 Laravel。  Laravel 有中文官网，里面文档很详细，不懂可以去查文档。 Laravel 链接 css 和 js 这些都以 public 文件夹为当前路径，务必注意。 本篇讲 HTML 函数">
+<meta property="og:description" content="9 月份一个同学叫我帮他做一个家教网站，我答应下来了。前端页面不复杂，很快就完成了，因为后端语言中我对 PHP 最熟悉，于是就决定用 PHP 来开发，听说 Laravel 名声不错，于是就直接上手 Laravel。  Laravel 有中文官网，里面文档很详细，不懂可以去查文档。 Laravel 链接 css 和 _js_ 这些都以 public 文件夹为当前路径，务必注意。 本篇讲 HTML">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2016-12-05T04:55:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Laravel 笔记 （一）">
-<meta name="twitter:description" content="9 月份一个同学叫我帮他做一个家教网站，我答应下来了。前端页面不复杂，很快就完成了，因为后端语言中我对 PHP 最熟悉，于是就决定用 PHP 来开发，听说 Laravel 名声不错，于是就直接上手 Laravel。  Laravel 有中文官网，里面文档很详细，不懂可以去查文档。 Laravel 链接 css 和 js 这些都以 public 文件夹为当前路径，务必注意。 本篇讲 HTML 函数">
+<meta name="twitter:description" content="9 月份一个同学叫我帮他做一个家教网站，我答应下来了。前端页面不复杂，很快就完成了，因为后端语言中我对 PHP 最熟悉，于是就决定用 PHP 来开发，听说 Laravel 名声不错，于是就直接上手 Laravel。  Laravel 有中文官网，里面文档很详细，不懂可以去查文档。 Laravel 链接 css 和 _js_ 这些都以 public 文件夹为当前路径，务必注意。 本篇讲 HTML">
 
 
 
@@ -352,8 +352,8 @@
         <blockquote>
 <p>9 月份一个同学叫我帮他做一个家教网站，我答应下来了。前端页面不复杂，很快就完成了，因为后端语言中我对 <em>PHP</em> 最熟悉，于是就决定用 <em>PHP</em> 来开发，听说 <em>Laravel</em> 名声不错，于是就直接上手 <em>Laravel</em>。</p>
 </blockquote>
-<p><em>Laravel</em> 有<a href="http://laravel-china.org/docs" target="_blank" rel="external">中文官网</a>，里面文档很详细，不懂可以去查文档。</p>
-<p><em>Laravel</em> 链接 <em>css</em> 和 <em>js</em> 这些都以 <code>public</code> 文件夹为当前路径，务必注意。</p>
+<p><em>Laravel</em> 有<a href="http://laravel-china.org/docs" target="_blank" rel="noopener">中文官网</a>，里面文档很详细，不懂可以去查文档。</p>
+<p><em>Laravel</em> 链接 <em>css</em> 和 _js_ 这些都以 <code>public</code> 文件夹为当前路径，务必注意。</p>
 <p>本篇讲 <strong>HTML</strong> 函数 和 <strong>Blade</strong></p>
 <a id="more"></a>
 <h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p><em>Laravel</em> 使用 <code>{ {}}</code> 双大括号来简化 <code>&lt;?= ?&gt;</code>，在数据注入时非常有用，不过如果你同时用 <em>AngularJS</em> 就得注意，因为 <em>AngularJS</em> 依赖注入用的也是双大括号，这时候你就只能用 <code>&lt;?php  ?&gt;</code> 了。</p>
@@ -366,20 +366,20 @@
 <li><code>HTML::image(&#39;path/to/image&#39;)</code>，第二个参数作为 <code>alt</code> 属性值，无则为空，第三个参数作用如上</li>
 <li><code>HTML::link(&#39;http://example.com&#39;)</code>，第二个参数为 <strong>TextNode</strong>，第三个参数作用如上</li>
 <li><code>HTML::secureLink(&#39;x)</code> 这个将会生成 <code>&lt;a href=\&quot;https://your.url/x\&quot;&gt;&lt;/a&gt;</code>，也就是 <code>https</code> 加密链接</li>
-<li><code>HTML::linkRoute(&#39;login)</code> 给链接指定一个命名的路由，查看<a href="http://laravel-china.org/docs/routing#named-routes" target="_blank" rel="external">命名路由的文档</a>。</li>
-<li><code>HTML::linkAction(&#39;Home@index&#39;)</code> 给链接指定控制器和方法，首先你得在 <code>route.php</code> 中已经设置好路由了，<a href="http://laravel-china.org/docs/controllers#basic-controllers" target="_blank" rel="external">查看基本控制器文档</a>。</li>
+<li><code>HTML::linkRoute(&#39;login)</code> 给链接指定一个命名的路由，查看<a href="http://laravel-china.org/docs/routing#named-routes" target="_blank" rel="noopener">命名路由的文档</a>。</li>
+<li><code>HTML::linkAction(&#39;Home@index&#39;)</code> 给链接指定控制器和方法，首先你得在 <code>route.php</code> 中已经设置好路由了，<a href="http://laravel-china.org/docs/controllers#basic-controllers" target="_blank" rel="noopener">查看基本控制器文档</a>。</li>
 <li><code>HTML::mailto(&#39;a@b.c&#39;)</code> 生成邮箱地址链接，第二个参数为 <strong>TextNode</strong>，第三个参数为数组设定属性</li>
 <li><code>HTML::ol(array(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;))</code> 生成有序列表，也就是 <code>ol&gt;li</code>，你甚至可以在数组中再嵌套数组生成子列表，第二个参数为数组设定属性</li>
 <li><code>HTML::ul(array(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;))</code> 生成无序列表，也就是 <code>ul&gt;li</code></li>
 </ul>
 <h2 id="Blade"><a href="#Blade" class="headerlink" title="Blade"></a>Blade</h2><p><em>Laravel</em> 是 <strong>MVC</strong> 式框架，<strong>Blade</strong> 是 <em>Laravel</em> 视图 (View) 的形式，视图在 <code>app/views</code> 文件夹下</p>
 <p>例子： <code>app/views/layoutsdefault.blade.php</code></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!doctype html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh_CN"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    @include('includes.head')</div><div class="line">    @yield('customStyleAndTitle')</div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"page-wrapper"</span>&gt;</span></div><div class="line">        @yield('mainContent')</div><div class="line"></div><div class="line">        @include('includes.footer')</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">    @include('includes.scripts')</div><div class="line"></div><div class="line">    @yield('customScript')</div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh_CN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    @include('includes.head')</span><br><span class="line">    @yield('customStyleAndTitle')</span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"page-wrapper"</span>&gt;</span></span><br><span class="line">        @yield('mainContent')</span><br><span class="line"></span><br><span class="line">        @include('includes.footer')</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    @include('includes.scripts')</span><br><span class="line"></span><br><span class="line">    @yield('customScript')</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>以上是一个默认模板，套用如下： 这里使用 ‘.’ 作为路径表现形式 <code>views/pages/home.blade.php</code></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@extends(layouts.default)</div><div class="line"></div><div class="line">@section('customStyleAndTitle)</div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">@stop</div><div class="line"></div><div class="line">@section('mainContent')</div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">@stop</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@extends(layouts.default)</span><br><span class="line"></span><br><span class="line">@section('customStyleAndTitle)</span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">@stop</span><br><span class="line"></span><br><span class="line">@section('mainContent')</span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">@stop</span><br></pre></td></tr></table></figure>
 <p>基本就是这样。</p>
 <p><code>app/views</code> 下面的文件树我建议是这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">views</div><div class="line">    includes</div><div class="line">        head.blade.php</div><div class="line">        footer.blade.php</div><div class="line">layouts</div><div class="line">    default.blade.php</div><div class="line">views</div><div class="line">    home.blade.php</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">views</span><br><span class="line">    includes</span><br><span class="line">        head.blade.php</span><br><span class="line">        footer.blade.php</span><br><span class="line">layouts</span><br><span class="line">    default.blade.php</span><br><span class="line">views</span><br><span class="line">    home.blade.php</span><br></pre></td></tr></table></figure>
 <p>主要是为了管理明了，复杂的网站下面文件树就相应的复杂。</p>
 <p>第一部分完。</p>
 
@@ -501,7 +501,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -518,7 +518,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

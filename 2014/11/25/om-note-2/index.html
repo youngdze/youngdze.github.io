@@ -351,29 +351,29 @@
       
 
       
-        <h4 id="SSH-登陆"><a href="#SSH-登陆" class="headerlink" title="SSH 登陆"></a>SSH 登陆</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh username@ServerIP</div></pre></td></tr></table></figure>
+        <h4 id="SSH-登陆"><a href="#SSH-登陆" class="headerlink" title="SSH 登陆"></a>SSH 登陆</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh username@ServerIP</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h4 id="开始搭建服务器-LEMP-Linux-Nginx-MySQL-PHP"><a href="#开始搭建服务器-LEMP-Linux-Nginx-MySQL-PHP" class="headerlink" title="开始搭建服务器 LEMP (Linux, Nginx, MySQL, PHP)"></a>开始搭建服务器 LEMP (Linux, Nginx, MySQL, PHP)</h4><h4 id="更新源"><a href="#更新源" class="headerlink" title="更新源"></a>更新源</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div></pre></td></tr></table></figure>
-<h4 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install nginx</div></pre></td></tr></table></figure>
+<h4 id="开始搭建服务器-LEMP-Linux-Nginx-MySQL-PHP"><a href="#开始搭建服务器-LEMP-Linux-Nginx-MySQL-PHP" class="headerlink" title="开始搭建服务器 LEMP (Linux, Nginx, MySQL, PHP)"></a>开始搭建服务器 LEMP (Linux, Nginx, MySQL, PHP)</h4><h4 id="更新源"><a href="#更新源" class="headerlink" title="更新源"></a>更新源</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<h4 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
 <p>获得你的公网 IP address</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ifconfig</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
 <p>在浏览器输入你的公网 IP address 或者 <code>localhost</code>，可以看到 <img src="https://assets.digitalocean.com/articles/lemp_1404/nginx_default.png" alt="nginx show"> 表示你已成功安装 Nginx 。</p>
-<h4 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mysql-server</div></pre></td></tr></table></figure>
+<h4 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server</span><br></pre></td></tr></table></figure>
 <p>安装过程中设置好你的 <code>root</code> 密码。 生成 MySQL 数据存储目录结构</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mysql_install_db</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql_install_db</span><br></pre></td></tr></table></figure>
 <p>对 MySQL 进行初始配置：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mysql_secure_installation</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql_secure_installation</span><br></pre></td></tr></table></figure>
 <p>在此过程中你应该拒绝匿名登陆，删除 <code>test</code> 用户和数据库。</p>
-<h4 id="安装-PHP"><a href="#安装-PHP" class="headerlink" title="安装 PHP"></a>安装 PHP</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install php5-fpm php5-mysql php5-cli php5-mcrypt php5-gd php5-imagick -y &amp;&amp; sudo php5enmod mcrypt</div></pre></td></tr></table></figure>
+<h4 id="安装-PHP"><a href="#安装-PHP" class="headerlink" title="安装 PHP"></a>安装 PHP</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install php5-fpm php5-mysql php5-cli php5-mcrypt php5-gd php5-imagick -y &amp;&amp; sudo php5enmod mcrypt</span><br></pre></td></tr></table></figure>
 <p>修改 <code>php.ini</code> 初始配置</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/php5/fpm/php.ini</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/php5/fpm/php.ini</span><br></pre></td></tr></table></figure>
 <p>把 <code>cig.fix_pathinfo</code> 去掉注释，即去掉前面的 <code>;</code>，同时设置其值为 \”0\” 重启 PHP 处理器使配置生效</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service php5-fpm restart</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service php5-fpm restart</span><br></pre></td></tr></table></figure>
 <h4 id="配置-Nginx-以使用-PHP-处理器-我之前写过一篇文章专门说这个的，移步："><a href="#配置-Nginx-以使用-PHP-处理器-我之前写过一篇文章专门说这个的，移步：" class="headerlink" title="配置 Nginx 以使用 PHP 处理器 我之前写过一篇文章专门说这个的，移步："></a>配置 Nginx 以使用 PHP 处理器 我之前写过一篇文章专门说这个的，移步：</h4><p><a href="http://youngdze.co/nginx-restore-in-ubuntu/">Nginx restore in Ubuntu</a></p>
-<h4 id="创建一个-PHP-文件测试配置是否生效"><a href="#创建一个-PHP-文件测试配置是否生效" class="headerlink" title="创建一个 PHP 文件测试配置是否生效"></a>创建一个 PHP 文件测试配置是否生效</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /usr/share/nginx/html/info.php</div></pre></td></tr></table></figure>
+<h4 id="创建一个-PHP-文件测试配置是否生效"><a href="#创建一个-PHP-文件测试配置是否生效" class="headerlink" title="创建一个 PHP 文件测试配置是否生效"></a>创建一个 PHP 文件测试配置是否生效</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/share/nginx/html/info.php</span><br></pre></td></tr></table></figure>
 <p>在打开的 <code>info.php</code> 写入：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">phpinfo();</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
-<p>保存文件并退出 在浏览器输入 <a href="http://ServerIP/info.php" target="_blank" rel="external">http://ServerIP/info.php</a> 或 <a href="http://localhost/info.php" target="_blank" rel="external">http://localhost/info.php</a> ，正常情况下你会看到</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>保存文件并退出 在浏览器输入 <a href="http://ServerIP/info.php" target="_blank" rel="noopener">http://ServerIP/info.php</a> 或 <a href="http://localhost/info.php" target="_blank" rel="noopener">http://localhost/info.php</a> ，正常情况下你会看到</p>
 <p><img src="https://assets.digitalocean.com/articles/lemp_1404/php_info.png" alt="php info"> 表明 <code>LEMP</code> 环境搭建成功，如果没看到，重新以上步骤或者 <strong>Google</strong></p>
 <p>完成！</p>
 
@@ -489,7 +489,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -506,7 +506,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

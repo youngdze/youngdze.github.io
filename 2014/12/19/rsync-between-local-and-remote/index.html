@@ -350,33 +350,33 @@
 
       
         <blockquote>
-<p>参考 <a href="https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps" target="_blank" rel="external">DigitalOcean</a></p>
+<p>参考 <a href="https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps" target="_blank" rel="noopener">DigitalOcean</a></p>
 </blockquote>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>For Debian/Ubuntu:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install rsync</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install rsync</span><br></pre></td></tr></table></figure>
 <p>For Redhat/Fedora:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum install rsync</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install rsync</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="本地同步"><a href="#本地同步" class="headerlink" title="本地同步"></a>本地同步</h2><p>把 <code>dir1</code> 内的文件 同步到 <code>dir2</code>：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -anv dir1/ dir2</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -anv dir1/ dir2</span><br></pre></td></tr></table></figure>
 <p>上面斜杠 <code>/</code> 表示同步 <code>dir1</code> 内部的文件而不是 <code>dir1</code> 这个文件夹，去掉 <code>/</code> 会导致整个 <code>dir1</code> 文件夹同步到 <code>dir2/</code> 下，也就是 <code>dir2/dir1</code>。</p>
 <p>参数 <code>a</code> 表示 <code>all</code>，参数 <code>v</code> 表示 <code>verbose</code>，参数 <code>n</code> 表示 <code>dry run</code>。</p>
 <h2 id="远程同步"><a href="#远程同步" class="headerlink" title="远程同步"></a>远程同步</h2><p>本地同步到远程服务器：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -av /path/to/local_dir username@remote_host:/path/to/destination_directory</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -av /path/to/local_dir username@remote_host:/path/to/destination_directory</span><br></pre></td></tr></table></figure>
 <p>远程服务器同步到本地：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -av username@remote_host:/path/to/remote_dir path/to/local_directory</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -av username@remote_host:/path/to/remote_dir path/to/local_directory</span><br></pre></td></tr></table></figure>
 <h2 id="一些有用的参数"><a href="#一些有用的参数" class="headerlink" title="一些有用的参数"></a>一些有用的参数</h2><p>同步过程中进行压缩以加快同步速度 <code>-z</code>：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -az <span class="built_in">source</span> destination</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -az <span class="built_in">source</span> destination</span><br></pre></td></tr></table></figure>
 <p>显示传播进度条 <code>-P</code>：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -azP <span class="built_in">source</span> destination</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -azP <span class="built_in">source</span> destination</span><br></pre></td></tr></table></figure>
 <p>进度显示如下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sending incremental file list</div><div class="line">./</div><div class="line">file1</div><div class="line">            0 100%    0.00kB/s    0:00:00 (xfer<span class="comment">#1, to-check=99/101)</span></div><div class="line">file10</div><div class="line">            0 100%    0.00kB/s    0:00:00 (xfer<span class="comment">#2, to-check=98/101)</span></div><div class="line">file100</div><div class="line">            0 100%    0.00kB/s    0:00:00 (xfer<span class="comment">#3, to-check=97/101)</span></div><div class="line">file11</div><div class="line">            0 100%    0.00kB/s    0:00:00 (xfer<span class="comment">#4, to-check=96/101)</span></div><div class="line">. . .</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sending incremental file list</span><br><span class="line">./</span><br><span class="line">file1</span><br><span class="line">            0 100%    0.00kB/s    0:00:00 (xfer<span class="comment">#1, to-check=99/101)</span></span><br><span class="line">file10</span><br><span class="line">            0 100%    0.00kB/s    0:00:00 (xfer<span class="comment">#2, to-check=98/101)</span></span><br><span class="line">file100</span><br><span class="line">            0 100%    0.00kB/s    0:00:00 (xfer<span class="comment">#3, to-check=97/101)</span></span><br><span class="line">file11</span><br><span class="line">            0 100%    0.00kB/s    0:00:00 (xfer<span class="comment">#4, to-check=96/101)</span></span><br><span class="line">. . .</span><br></pre></td></tr></table></figure>
 <p>过滤不需要同步的文件 <code>--exclude=</code>：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -a --exclude=pattern_to_exclude <span class="built_in">source</span> destination</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -a --exclude=pattern_to_exclude <span class="built_in">source</span> destination</span><br></pre></td></tr></table></figure>
 <p>删除目标文件：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -a --delete <span class="built_in">source</span> destination</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -a --delete <span class="built_in">source</span> destination</span><br></pre></td></tr></table></figure>
 <p>过滤中包含回需要的文件 <code>--include=</code>：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rsync -a --exclude=pattern_to_exclude --include=pattern_to_include <span class="built_in">source</span> destination</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -a --exclude=pattern_to_exclude --include=pattern_to_include <span class="built_in">source</span> destination</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -496,7 +496,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -513,7 +513,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

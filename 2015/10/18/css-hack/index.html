@@ -350,40 +350,40 @@
 
       
         <blockquote>
-<p>本篇文章就是为了我去前端笔试面试而写的，参考 <a href="http://www.webdevout.net/css-hacks" target="_blank" rel="external">CSS hacks</a> 和 <a href="http://browserhacks.com/" target="_blank" rel="external">Browserhacks</a>。</p>
+<p>本篇文章就是为了我去前端笔试面试而写的，参考 <a href="http://www.webdevout.net/css-hacks" target="_blank" rel="noopener">CSS hacks</a> 和 <a href="http://browserhacks.com/" target="_blank" rel="noopener">Browserhacks</a>。</p>
 </blockquote>
  <a id="more"></a>
 <h4 id="IE-有条件执行"><a href="#IE-有条件执行" class="headerlink" title="IE 有条件执行"></a>IE 有条件执行</h4><p><strong>语法</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if condition]&gt; HTML &lt;![endif]--&gt;</span></div><div class="line"><span class="comment">&lt;!--[if !condition]&gt; HTML &lt;![endif]--&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if condition]&gt; HTML &lt;![endif]--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if !condition]&gt; HTML &lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
 <p>等于</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if IE8]&gt;</span></div><div class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></div><div class="line"><span class="comment">&lt;![endif]--&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if IE8]&gt;</span></span><br><span class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
 <p>小于</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if lt IE8]&gt;</span></div><div class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></div><div class="line"><span class="comment">&lt;![endif]--&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if lt IE8]&gt;</span></span><br><span class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
 <p>小于或等于</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if lte IE8]&gt;</span></div><div class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></div><div class="line"><span class="comment">&lt;![endif]--&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if lte IE8]&gt;</span></span><br><span class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
 <p>大于或等于</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if gte IE8]&gt;</span></div><div class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></div><div class="line"><span class="comment">&lt;![endif]--&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if gte IE8]&gt;</span></span><br><span class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
 <p>大于</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if gt IE8]&gt;</span></div><div class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></div><div class="line"><span class="comment">&lt;![endif]--&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if gt IE8]&gt;</span></span><br><span class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
 <p>不大于</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if !gt IE8]&gt;</span></div><div class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></div><div class="line"><span class="comment">&lt;![endif]--&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if !gt IE8]&gt;</span></span><br><span class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
 <p>不是</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if !IE]&gt;</span></div><div class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></div><div class="line"><span class="comment">&lt;![endif]--&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if !IE]&gt;</span></span><br><span class="line"><span class="comment">&lt;script src="lib/html5shiv.js"&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="CSS-selectors"><a href="#CSS-selectors" class="headerlink" title="CSS selectors"></a>CSS selectors</h4><h5 id="这些实际上是用了浏览器的-bug-来实现的"><a href="#这些实际上是用了浏览器的-bug-来实现的" class="headerlink" title="这些实际上是用了浏览器的 bug 来实现的"></a>这些实际上是用了浏览器的 bug 来实现的</h5><p>IE6 和以下 IE 版本</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* <span class="selector-tag">html</span> &#123;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* <span class="selector-tag">html</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>IE7 和以下 IE 版本（包括 IE6）</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*<span class="selector-pseudo">:first-child+html</span> &#123;&#125; * <span class="selector-tag">html</span>&#123;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*<span class="selector-pseudo">:first-child+html</span> &#123;&#125; * <span class="selector-tag">html</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>IE7 only</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*<span class="selector-pseudo">:first-child+html</span> &#123;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*<span class="selector-pseudo">:first-child+html</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>IE7 和现代浏览器 only</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>&gt;<span class="selector-tag">body</span> &#123;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>&gt;<span class="selector-tag">body</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>只用于现代浏览器(IE8 and above)</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>&gt;<span class="comment">/**/</span><span class="selector-tag">body</span> &#123;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>&gt;<span class="comment">/**/</span><span class="selector-tag">body</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>用法(以 IE7 only 为例)</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*<span class="selector-pseudo">:first-child+html</span> <span class="selector-id">#foo</span> <span class="selector-class">.bar</span> &#123;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*<span class="selector-pseudo">:first-child+html</span> <span class="selector-id">#foo</span> <span class="selector-class">.bar</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="important"><a href="#important" class="headerlink" title="!important"></a>!important</h4><p>由于 IE6 及以下版本 IE 不支持 <code>!important</code>，所以如以下 CSS IE6 及以下版本会使用后面的样式</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span> &#123;</div><div class="line">    <span class="attribute">background</span>: green <span class="meta">!important</span>;   <span class="comment">/* 主流浏览器识别标识符 */</span></div><div class="line">    <span class="attribute">background</span>: red;    <span class="comment">/* IE6 和以下版本 IE 识别 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="import"><a href="#import" class="headerlink" title="@import"></a>@import</h4><p>IE7 及以下版本不支持 <code>@import</code>，<a href="http://www.webdevout.net/css-hacks" target="_blank" rel="external">CSS Hacks</a> 的解决做法是给非 IE7 及以下版本添加一个 css <code>@import &quot;non-ie.css&quot; all;</code>，怎么看都太奇葩了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: green <span class="meta">!important</span>;   <span class="comment">/* 主流浏览器识别标识符 */</span></span><br><span class="line">    <span class="attribute">background</span>: red;    <span class="comment">/* IE6 和以下版本 IE 识别 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="import"><a href="#import" class="headerlink" title="@import"></a>@import</h4><p>IE7 及以下版本不支持 <code>@import</code>，<a href="http://www.webdevout.net/css-hacks" target="_blank" rel="noopener">CSS Hacks</a> 的解决做法是给非 IE7 及以下版本添加一个 css <code>@import &quot;non-ie.css&quot; all;</code>，怎么看都太奇葩了。</p>
 <h4 id="property-value-和-property-value"><a href="#property-value-和-property-value" class="headerlink" title="_property: value 和 -property: value"></a>_property: value 和 -property: value</h4><p>只有 IE6 及以下版本 IE 支持这种 hack，并且这种 CSS 写法是非法的，当然如果想只用与 IE6 及以下版本 IE 就可以这样写。 其实 IE6 及以下版本 IE 不会对 CSS 属性前缀为非字母的属性报错才有这种 hack。</p>
 <h4 id="property-value"><a href="#property-value" class="headerlink" title="*property: value"></a>*property: value</h4><p>IE7 修复了 CSS 属性为 <code>-</code> 和 <code>_</code> 同样识别的问题，当其他非字母前缀应用还是可以，比如 <code>*</code>，所以这种 hack 可以用于 IE7 及其以下版本。</p>
 <h4 id="gt-body"><a href="#gt-body" class="headerlink" title="&gt;body"></a>&gt;body</h4><p><code>&gt;body</code> 按标准是错误的 CSS 写法，但 IE7 会将其视为合法选择器等同于 <code>*&gt;body</code>，同样对于 <code>*+p</code> 之类 IE7 也会视为 <code>*+p</code>，不过其他浏览器则会无视这个错误的选择器，因此这种 hack 可以用于 IE7。</p>
@@ -391,7 +391,7 @@
 <h4 id="ie"><a href="#ie" class="headerlink" title="!ie"></a>!ie</h4><p><code>!ie</code> 按标准是错误的 CSS 写法，但 IE7 会将其视为合法，主要是它修复 <code>!important</code> 问题时又出现的问题，甚至你在 <code>!</code> 加任何字母都是合法的，这种 hack 可以用于 IE7 及以下版本。</p>
 <h4 id="important-1"><a href="#important-1" class="headerlink" title="!important!"></a>!important!</h4><p>好吧这个在 IE7 也是合法的，真是个巨坑。</p>
 <h4 id="property-value-9"><a href="#property-value-9" class="headerlink" title="property: value\9"></a>property: value\9</h4><p>一开始看到我也是想“这什么鬼写法”，它确实是在 IE6~IE8 起作用的。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.selector</span> &#123; <span class="attribute">property</span>: value\<span class="number">9</span>; &#125;</div><div class="line">.selector &#123; property/*\**/: value\9; &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.selector</span> &#123; <span class="attribute">property</span>: value\<span class="number">9</span>; &#125;</span><br><span class="line">.selector &#123; property/*\**/: value\9; &#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -511,7 +511,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -528,7 +528,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

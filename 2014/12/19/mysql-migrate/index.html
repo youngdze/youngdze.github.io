@@ -349,12 +349,12 @@
 
       
         <blockquote>
-<p>参考 <a href="https://www.digitalocean.com/community/tutorials/how-to-migrate-a-mysql-database-between-two-servers" target="_blank" rel="external">DigitalOcean</a></p>
+<p>参考 <a href="https://www.digitalocean.com/community/tutorials/how-to-migrate-a-mysql-database-between-two-servers" target="_blank" rel="noopener">DigitalOcean</a></p>
 </blockquote>
 <p>备份数据库：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump -u [username] -p --opt [database name] &gt; [database name].sql</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u [username] -p --opt [database name] &gt; [database name].sql</span><br></pre></td></tr></table></figure>
 <p>迁移数据库数据到新数据库，你得先创建这个新数据库：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u [username] -p [new database name] &lt; /path/to/[new database name].sql</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u [username] -p [new database name] &lt; /path/to/[new database name].sql</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -459,7 +459,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -476,7 +476,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

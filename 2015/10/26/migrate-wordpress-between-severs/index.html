@@ -350,24 +350,24 @@
 
       
         <p>我尝试把博客从 SAE 迁到阿里云，过程有些小磕碰，不过还是成功了，记录下。</p>
-<h4 id="迁移数据库"><a href="#迁移数据库" class="headerlink" title="迁移数据库"></a>迁移数据库</h4><p>SAE 数据库是 MySQL，由于我数据过于庞大，不能通过 phpMyAdmin 导出，所以我使用了 SAE 的 <a href="http://www.sinacloud.com/doc/sae/php/mysql.html#deferredjob" target="_blank" rel="external">DeferredJob</a> 功能进行数据库导出。 <a id="more"></a></p>
+<h4 id="迁移数据库"><a href="#迁移数据库" class="headerlink" title="迁移数据库"></a>迁移数据库</h4><p>SAE 数据库是 MySQL，由于我数据过于庞大，不能通过 phpMyAdmin 导出，所以我使用了 SAE 的 <a href="http://www.sinacloud.com/doc/sae/php/mysql.html#deferredjob" target="_blank" rel="noopener">DeferredJob</a> 功能进行数据库导出。 <a id="more"></a></p>
 <p>如果你使用的是自己的数据库导出就简单多了：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump -u USERNAME -p DATABASE_NAME &gt; OUTPUT.sql</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u USERNAME -p DATABASE_NAME &gt; OUTPUT.sql</span><br></pre></td></tr></table></figure>
 <p>可以用 <code>gzip</code> 压缩下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump -u USERNAME -p DATABASE_NAME | gzip &gt; OUTPUT.sql.gz</div></pre></td></tr></table></figure>
-<p>导出后上传到目标服务器，我用的是 <a href="https://www.digitalocean.com/community/tutorials/how-to-use-sftp-to-securely-transfer-files-with-a-remote-server" target="_blank" rel="external">sftp</a> 。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sftp username@host</div><div class="line">put saeOutput.sql</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u USERNAME -p DATABASE_NAME | gzip &gt; OUTPUT.sql.gz</span><br></pre></td></tr></table></figure>
+<p>导出后上传到目标服务器，我用的是 <a href="https://www.digitalocean.com/community/tutorials/how-to-use-sftp-to-securely-transfer-files-with-a-remote-server" target="_blank" rel="noopener">sftp</a> 。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sftp username@host</span><br><span class="line">put saeOutput.sql</span><br></pre></td></tr></table></figure>
 <p>然后在目标服务器 MySQL 导入，不过得先在 MySQL 命令界面创建个数据库来保存这份数据：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> wp;</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> wp;</span><br></pre></td></tr></table></figure>
 <p>最后导入数据，这是在 <code>sh</code> 界面：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u USERNAME -p TARGET_DATABASE_NAME &lt; saeOutput.sql</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u USERNAME -p TARGET_DATABASE_NAME &lt; saeOutput.sql</span><br></pre></td></tr></table></figure>
 <h4 id="迁移-wordpress-文件"><a href="#迁移-wordpress-文件" class="headerlink" title="迁移 wordpress 文件"></a>迁移 wordpress 文件</h4><p>把整个 wordpress 文件夹复制到目标服务器，在 <code>wp-config.php</code> 修改下数据库配置：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">define(<span class="string">'DB_NAME'</span>, MYSQL_DB);</div><div class="line"></div><div class="line"><span class="comment">/** MySQL database username */</span></div><div class="line">define(<span class="string">'DB_USER'</span>, MYSQL_USER);</div><div class="line"></div><div class="line"><span class="comment">/** MySQL database password */</span></div><div class="line">define(<span class="string">'DB_PASSWORD'</span>, MYSQL_PASS);</div><div class="line"></div><div class="line"><span class="comment">/** MySQL hostname */</span></div><div class="line">define(<span class="string">'DB_HOST'</span>, MYSQL_HOST_M.<span class="string">':'</span>.MYSQL_PORT);</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">'DB_NAME'</span>, MYSQL_DB);</span><br><span class="line"></span><br><span class="line"><span class="comment">/** MySQL database username */</span></span><br><span class="line">define(<span class="string">'DB_USER'</span>, MYSQL_USER);</span><br><span class="line"></span><br><span class="line"><span class="comment">/** MySQL database password */</span></span><br><span class="line">define(<span class="string">'DB_PASSWORD'</span>, MYSQL_PASS);</span><br><span class="line"></span><br><span class="line"><span class="comment">/** MySQL hostname */</span></span><br><span class="line">define(<span class="string">'DB_HOST'</span>, MYSQL_HOST_M.<span class="string">':'</span>.MYSQL_PORT);</span><br></pre></td></tr></table></figure>
 <h4 id="改-URL"><a href="#改-URL" class="headerlink" title="改 URL"></a>改 URL</h4><p>需要改域名的话在当前主题的 <code>functions.php</code> 下添加以下代码：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">update_option(<span class="string">'siteurl'</span>,<span class="string">'http://foo.bar'</span>);</div><div class="line">update_option(<span class="string">'home'</span>,<span class="string">'http://foo.bar'</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update_option(<span class="string">'siteurl'</span>,<span class="string">'http://foo.bar'</span>);</span><br><span class="line">update_option(<span class="string">'home'</span>,<span class="string">'http://foo.bar'</span>);</span><br></pre></td></tr></table></figure>
 <p>然后访问该 wordpress 目录在服务器的路径即可成功改域名，之后就可以把以上代码删掉了。</p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li><a href="http://www.sitepoint.com/move-wordpress-new-server-without-losing-anything/" target="_blank" rel="external">http://www.sitepoint.com/move-wordpress-new-server-without-losing-anything/</a></li>
+<li><a href="http://www.sitepoint.com/move-wordpress-new-server-without-losing-anything/" target="_blank" rel="noopener">http://www.sitepoint.com/move-wordpress-new-server-without-losing-anything/</a></li>
 </ul>
 
       
@@ -488,7 +488,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -505,7 +505,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

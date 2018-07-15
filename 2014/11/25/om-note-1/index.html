@@ -352,26 +352,26 @@
 <p>环境：Ubuntu 14.04</p>
 </blockquote>
 <h4 id="SSH-登陆"><a href="#SSH-登陆" class="headerlink" title="SSH 登陆"></a>SSH 登陆</h4><p>使用服务器商给你的公网 IP 进行登陆，然后会要求你输入密码，同样是服务器商提供给你的</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh root@ServerIP</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@ServerIP</span><br></pre></td></tr></table></figure>
 <p>还没安装 SSH 得先安装 SSH</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install openssh-client openssh-server</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install openssh-client openssh-server</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h4 id="修改-root-密码"><a href="#修改-root-密码" class="headerlink" title="修改 root 密码"></a>修改 root 密码</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd root</div></pre></td></tr></table></figure>
-<h4 id="添加新用户组和新用户"><a href="#添加新用户组和新用户" class="headerlink" title="添加新用户组和新用户"></a>添加新用户组和新用户</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">groupadd newgroup</div><div class="line">useradd -d /home/newuser -s /bin/bash -m youngdze -g newgroup</div></pre></td></tr></table></figure>
-<h4 id="添加新用户到-sudoers"><a href="#添加新用户到-sudoers" class="headerlink" title="添加新用户到 sudoers"></a>添加新用户到 sudoers</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">visudo</div></pre></td></tr></table></figure>
+<h4 id="修改-root-密码"><a href="#修改-root-密码" class="headerlink" title="修改 root 密码"></a>修改 root 密码</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+<h4 id="添加新用户组和新用户"><a href="#添加新用户组和新用户" class="headerlink" title="添加新用户组和新用户"></a>添加新用户组和新用户</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupadd newgroup</span><br><span class="line">useradd -d /home/newuser -s /bin/bash -m youngdze -g newgroup</span><br></pre></td></tr></table></figure>
+<h4 id="添加新用户到-sudoers"><a href="#添加新用户到-sudoers" class="headerlink" title="添加新用户到 sudoers"></a>添加新用户到 sudoers</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">visudo</span><br></pre></td></tr></table></figure>
 <p>在 <code>root ALL=(ALL:ALL) ALL</code> 下面添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">newuser ALL=(ALL:ALL) ALL</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newuser ALL=(ALL:ALL) ALL</span><br></pre></td></tr></table></figure>
 <p>保存文件并退出</p>
-<h4 id="切换到新用户"><a href="#切换到新用户" class="headerlink" title="切换到新用户"></a>切换到新用户</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su newuser</div></pre></td></tr></table></figure>
-<h4 id="更新包列表并更新包"><a href="#更新包列表并更新包" class="headerlink" title="更新包列表并更新包"></a>更新包列表并更新包</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update &amp;&amp; sudo apt-get upgrade</div></pre></td></tr></table></figure>
-<h4 id="安装基本包"><a href="#安装基本包" class="headerlink" title="安装基本包"></a>安装基本包</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install vim git subversion wget curl</div></pre></td></tr></table></figure>
-<h4 id="安装-zsh-optional"><a href="#安装-zsh-optional" class="headerlink" title="安装 zsh (optional)"></a>安装 zsh (optional)</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install zsh</div><div class="line">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh</div></pre></td></tr></table></figure>
+<h4 id="切换到新用户"><a href="#切换到新用户" class="headerlink" title="切换到新用户"></a>切换到新用户</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su newuser</span><br></pre></td></tr></table></figure>
+<h4 id="更新包列表并更新包"><a href="#更新包列表并更新包" class="headerlink" title="更新包列表并更新包"></a>更新包列表并更新包</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+<h4 id="安装基本包"><a href="#安装基本包" class="headerlink" title="安装基本包"></a>安装基本包</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vim git subversion wget curl</span><br></pre></td></tr></table></figure>
+<h4 id="安装-zsh-optional"><a href="#安装-zsh-optional" class="headerlink" title="安装 zsh (optional)"></a>安装 zsh (optional)</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install zsh</span><br><span class="line">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh</span><br></pre></td></tr></table></figure>
 <p>从 bash 切换到 zsh</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chsh -s $(<span class="built_in">which</span> zsh)</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></table></figure>
 <p>重启以使修改生效</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo shutdown -r 0</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo shutdown -r 0</span><br></pre></td></tr></table></figure>
 <p>然后重新使用 SSH 登陆，这次使用新的用户名和该用户的密码登陆</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh newuser@ServerIP</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh newuser@ServerIP</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -485,7 +485,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -502,7 +502,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

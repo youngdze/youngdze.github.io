@@ -349,15 +349,15 @@
       
 
       
-        <p><strong>CommonJS</strong> 被设计来针对服务端，不过现在可以通过 <strong><a href="http://browserify.org/" target="_blank" rel="external">Browserify</a></strong> 转变给客户端使用，如有这方面的需求，更建议使用 <strong><a href="http://webpack.github.io/" target="_blank" rel="external">webpack</a></strong>。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browserify .\main.js .\foo.js -o .\bundle.js</div></pre></td></tr></table></figure>
+        <p><strong>CommonJS</strong> 被设计来针对服务端，不过现在可以通过 <strong><a href="http://browserify.org/" target="_blank" rel="noopener">Browserify</a></strong> 转变给客户端使用，如有这方面的需求，更建议使用 <strong><a href="http://webpack.github.io/" target="_blank" rel="noopener">webpack</a></strong>。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">browserify .\main.js .\foo.js -o .\bundle.js</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p><strong>安装模块</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install uniq</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install uniq</span><br></pre></td></tr></table></figure>
 <p><strong>定义模块</strong> <code>foo.js</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> (<span class="params">arr</span>) </span>&#123;</div><div class="line">    arr.reverse();</div><div class="line">    <span class="built_in">console</span>.log(arr);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = foo;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> (<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    arr.reverse();</span><br><span class="line">    <span class="built_in">console</span>.log(arr);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = foo;</span><br></pre></td></tr></table></figure>
 <p><strong>使用模块</strong> <code>main.js</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> unique = <span class="built_in">require</span>(<span class="string">'uniq'</span>);</div><div class="line"><span class="keyword">var</span> foo = <span class="built_in">require</span>(<span class="string">'./foo.js'</span>);</div><div class="line"><span class="keyword">var</span> data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">0</span>];</div><div class="line">foo(data);</div><div class="line"><span class="built_in">console</span>.log(unique(data));</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> unique = <span class="built_in">require</span>(<span class="string">'uniq'</span>);</span><br><span class="line"><span class="keyword">var</span> foo = <span class="built_in">require</span>(<span class="string">'./foo.js'</span>);</span><br><span class="line"><span class="keyword">var</span> data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">0</span>];</span><br><span class="line">foo(data);</span><br><span class="line"><span class="built_in">console</span>.log(unique(data));</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -468,7 +468,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -485,7 +485,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

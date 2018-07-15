@@ -349,34 +349,34 @@
       
 
       
-        <h2 id="What-is-FormData"><a href="#What-is-FormData" class="headerlink" title="What is FormData"></a>What is FormData</h2><p><a href="https://developer.mozilla.org/en/docs/Web/API/FormData" target="_blank" rel="external">MDN</a></p>
+        <h2 id="What-is-FormData"><a href="#What-is-FormData" class="headerlink" title="What is FormData"></a>What is FormData</h2><p><a href="https://developer.mozilla.org/en/docs/Web/API/FormData" target="_blank" rel="noopener">MDN</a></p>
 <blockquote>
 <p>XMLHttpRequest Level 2 adds support for the new FormData interface. FormData objects provide a way to easily construct a set of key/value pairs representing form fields and their values, which can then be easily sent using the XMLHttpRequest send() method.</p>
 </blockquote>
 <a id="more"></a>
 <p><strong>XMLHttpRequest</strong> 第二版添加了对新接口 <strong>FormData</strong> 的支持。<strong>FormData</strong> 可以很方便地将表单字段和它们的值建立成键和值对应的成对形式，然后通过 <strong>XMLHttpRequest</strong> 的 <code>sent()</code> 方法发送表格数据。</p>
 <h2 id="Constructor"><a href="#Constructor" class="headerlink" title="Constructor"></a>Constructor</h2><h3 id="FormData"><a href="#FormData" class="headerlink" title="FormData()"></a>FormData()</h3><p>用于新建一个 <strong>FormData</strong> 对象：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> formData = <span class="keyword">new</span> FormData(form);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formData = <span class="keyword">new</span> FormData(form);</span><br></pre></td></tr></table></figure>
 <p>也可以先创建一个空 <strong>FormData</strong> 对象，之后再添加对应的键和值，<code>append()</code> 方法请看下面。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> formData = <span class="keyword">new</span> FormData();</div><div class="line">formData.append(<span class="string">'username'</span>, <span class="string">'Justin'</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> formData = <span class="keyword">new</span> FormData();</span><br><span class="line">formData.append(<span class="string">'username'</span>, <span class="string">'Justin'</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="FormData-append"><a href="#FormData-append" class="headerlink" title="FormData.append"></a>FormData.append</h3><p>本方法用于向已存在的键添加新的值，如该键不存在，新建之。</p>
-<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">formData.append(name, value);</div><div class="line">formData.append(name, value, filename);</div></pre></td></tr></table></figure>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">formData.append(name, value);</span><br><span class="line">formData.append(name, value, filename);</span><br></pre></td></tr></table></figure>
 <h4 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h4><ul>
 <li>name 键 (key)， 对应表单域</li>
 <li>value 表单域的值</li>
 <li>filename (optional) The filename reported to the server (a USVString), when a Blob or File is passed as the second parameter. The default filename for Blob objects is “blob”.</li>
 </ul>
 <h3 id="FormData-delete"><a href="#FormData-delete" class="headerlink" title="FormData.delete"></a>FormData.delete</h3><p>将一对键和值从 <strong>FormData</strong> 对象中删除。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">formData.delete(username);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formData.delete(username);</span><br></pre></td></tr></table></figure>
 <h3 id="FormData-get"><a href="#FormData-get" class="headerlink" title="FormData.get"></a>FormData.get</h3><p>返回给定键的第一个值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">formData.append(<span class="string">'username'</span>, <span class="string">'Justin'</span>);</div><div class="line">formData.append(<span class="string">'username'</span>, <span class="string">'Chris'</span>);</div><div class="line">formData.get(username);    <span class="comment">// "Justin"</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">formData.append(<span class="string">'username'</span>, <span class="string">'Justin'</span>);</span><br><span class="line">formData.append(<span class="string">'username'</span>, <span class="string">'Chris'</span>);</span><br><span class="line">formData.get(username);    <span class="comment">// "Justin"</span></span><br></pre></td></tr></table></figure>
 <h3 id="FormData-getAll"><a href="#FormData-getAll" class="headerlink" title="FormData.getAll"></a>FormData.getAll</h3><p>返回给定键的所有值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">formData.append(<span class="string">'username'</span>, <span class="string">'Justin'</span>);</div><div class="line">formData.append(<span class="string">'username'</span>, <span class="string">'Chris'</span>);</div><div class="line">formData.get(username);    <span class="comment">// ["Justin", "Chris"]</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">formData.append(<span class="string">'username'</span>, <span class="string">'Justin'</span>);</span><br><span class="line">formData.append(<span class="string">'username'</span>, <span class="string">'Chris'</span>);</span><br><span class="line">formData.get(username);    <span class="comment">// ["Justin", "Chris"]</span></span><br></pre></td></tr></table></figure>
 <h3 id="FormData-has"><a href="#FormData-has" class="headerlink" title="FormData.has"></a>FormData.has</h3><p>检查是否包含给定键，返回 <code>true</code> 或 <code>false</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">formData.has(username);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formData.has(username);</span><br></pre></td></tr></table></figure>
 <h3 id="FormData-set"><a href="#FormData-set" class="headerlink" title="FormData.set"></a>FormData.set</h3><p>设置给定键的值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">formData.set(name, value);</div><div class="line">formData.set(name, value, filename);</div></pre></td></tr></table></figure>
-<h2 id="浏览器兼容情况"><a href="#浏览器兼容情况" class="headerlink" title="浏览器兼容情况"></a>浏览器兼容情况</h2><p>来自 <a href="https://developer.mozilla.org/en/docs/Web/API/FormData" target="_blank" rel="external">MDN</a>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">formData.set(name, value);</span><br><span class="line">formData.set(name, value, filename);</span><br></pre></td></tr></table></figure>
+<h2 id="浏览器兼容情况"><a href="#浏览器兼容情况" class="headerlink" title="浏览器兼容情况"></a>浏览器兼容情况</h2><p>来自 <a href="https://developer.mozilla.org/en/docs/Web/API/FormData" target="_blank" rel="noopener">MDN</a>：</p>
 <p><strong>Desktop</strong></p>
 <table>
 <thead>
@@ -584,7 +584,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -601,7 +601,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>

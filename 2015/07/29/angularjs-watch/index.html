@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="理解 AngularJS 的 $watch()。 $watch(watchExpression, listener, [objectEquality])$watch() 可以接受两个函数作为参数，第一个参数数返回监控的 $scope 的变量，第二个函数操作该变量的旧值和新值，第三个参数是可选的，类型为 Boolean，true 则表明第一个参数返回的是一个对象，默认为 false，结构： 1234">
+<meta name="description" content="理解 AngularJS 的 $watch()。 $watch(watchExpression&amp;lt;string|Function(scope)&amp;gt;, listener, [objectEquality])$watch() 可以接受两个函数作为参数，第一个参数数返回监控的 $scope 的变量，第二个函数操作该变量的旧值和新值，第三个参数是可选的，类型为 Boolean，true 则表明第一">
 <meta name="keywords" content="AngularJS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AngularJS $watch()">
 <meta property="og:url" content="http://youngdze.co/2015/07/29/angularjs-watch/index.html">
 <meta property="og:site_name" content="Justin&#39;s Words">
-<meta property="og:description" content="理解 AngularJS 的 $watch()。 $watch(watchExpression, listener, [objectEquality])$watch() 可以接受两个函数作为参数，第一个参数数返回监控的 $scope 的变量，第二个函数操作该变量的旧值和新值，第三个参数是可选的，类型为 Boolean，true 则表明第一个参数返回的是一个对象，默认为 false，结构： 1234">
+<meta property="og:description" content="理解 AngularJS 的 $watch()。 $watch(watchExpression&amp;lt;string|Function(scope)&amp;gt;, listener, [objectEquality])$watch() 可以接受两个函数作为参数，第一个参数数返回监控的 $scope 的变量，第二个函数操作该变量的旧值和新值，第三个参数是可选的，类型为 Boolean，true 则表明第一">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2016-12-05T04:55:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS $watch()">
-<meta name="twitter:description" content="理解 AngularJS 的 $watch()。 $watch(watchExpression, listener, [objectEquality])$watch() 可以接受两个函数作为参数，第一个参数数返回监控的 $scope 的变量，第二个函数操作该变量的旧值和新值，第三个参数是可选的，类型为 Boolean，true 则表明第一个参数返回的是一个对象，默认为 false，结构： 1234">
+<meta name="twitter:description" content="理解 AngularJS 的 $watch()。 $watch(watchExpression&amp;lt;string|Function(scope)&amp;gt;, listener, [objectEquality])$watch() 可以接受两个函数作为参数，第一个参数数返回监控的 $scope 的变量，第二个函数操作该变量的旧值和新值，第三个参数是可选的，类型为 Boolean，true 则表明第一">
 
 
 
@@ -350,20 +350,20 @@
 
       
         <p>理解 <strong>AngularJS</strong> 的 <code>$watch()</code>。</p>
-<h3 id="watch-watchExpression-listener-objectEquality"><a href="#watch-watchExpression-listener-objectEquality" class="headerlink" title="$watch(watchExpression, listener, [objectEquality])"></a>$watch(watchExpression<string|function(scope)>, listener, [objectEquality])</string|function(scope)></h3><p><code>$watch()</code> 可以接受两个函数作为参数，第一个参数数返回监控的 <code>$scope</code> 的变量，第二个函数操作该变量的旧值和新值，第三个参数是可选的，类型为 <strong>Boolean</strong>，<code>true</code> 则表明第一个参数返回的是一个对象，默认为 <code>false</code>，结构：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$scope.$watch(<span class="function"><span class="keyword">function</span> (<span class="params">scope</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> scope.variable;</div><div class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">newValue, oldValue</span>) </span>&#123;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="watch-watchExpression-lt-string-Function-scope-gt-listener-objectEquality"><a href="#watch-watchExpression-lt-string-Function-scope-gt-listener-objectEquality" class="headerlink" title="$watch(watchExpression&lt;string|Function(scope)&gt;, listener, [objectEquality])"></a>$watch(watchExpression&lt;string|Function(scope)&gt;, listener, [objectEquality])</h3><p><code>$watch()</code> 可以接受两个函数作为参数，第一个参数数返回监控的 <code>$scope</code> 的变量，第二个函数操作该变量的旧值和新值，第三个参数是可选的，类型为 <strong>Boolean</strong>，<code>true</code> 则表明第一个参数返回的是一个对象，默认为 <code>false</code>，结构：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$scope.$watch(<span class="function"><span class="keyword">function</span> (<span class="params">scope</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> scope.variable;</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">newValue, oldValue</span>) </span>&#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$scope.$watch(<span class="function"><span class="keyword">function</span>(<span class="params">scope</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> scope.data.myVar</div><div class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">newValue, oldValue</span>) </span>&#123;</div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">""</span>).innerHTML = <span class="string">""</span> + newValue + <span class="string">""</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$scope.$watch(<span class="function"><span class="keyword">function</span>(<span class="params">scope</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> scope.data.myVar</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">newValue, oldValue</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">""</span>).innerHTML = <span class="string">""</span> + newValue + <span class="string">""</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>另一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scope = $rootScope;</div><div class="line">scope.name = <span class="string">'misko'</span>;</div><div class="line">scope.counter = <span class="number">0</span>;</div><div class="line"></div><div class="line">scope.$watch(<span class="string">'name'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue, oldValue</span>) </span>&#123;</div><div class="line">    scope.counter = scope.counter + <span class="number">1</span>;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">scope.$digest;</div></pre></td></tr></table></figure>
-<h3 id="watchGroup-watchExpressions-listener"><a href="#watchGroup-watchExpressions-listener" class="headerlink" title="$watchGroup(watchExpressions, listener);"></a>$watchGroup(watchExpressions<string|function(scope)>, listener);</string|function(scope)></h3><p>允许传入一个字符串数组或一个函数数组进行监控变化。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$scope.names = [<span class="string">'igor'</span>, <span class="string">'matias'</span>, <span class="string">'misko'</span>, <span class="string">'james'</span>];</div><div class="line">$scope.dataCount = <span class="number">4</span>;</div><div class="line"></div><div class="line">$scope.$watchCollection(<span class="string">'names'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newNames, oldNames</span>) </span>&#123;</div><div class="line">    $scope.dataCount = newNames.length;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = $rootScope;</span><br><span class="line">scope.name = <span class="string">'misko'</span>;</span><br><span class="line">scope.counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">scope.$watch(<span class="string">'name'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newValue, oldValue</span>) </span>&#123;</span><br><span class="line">    scope.counter = scope.counter + <span class="number">1</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">scope.$digest;</span><br></pre></td></tr></table></figure>
+<h3 id="watchGroup-watchExpressions-lt-string-Function-scope-gt-listener"><a href="#watchGroup-watchExpressions-lt-string-Function-scope-gt-listener" class="headerlink" title="$watchGroup(watchExpressions&lt;string|Function(scope)&gt;, listener);"></a>$watchGroup(watchExpressions&lt;string|Function(scope)&gt;, listener);</h3><p>允许传入一个字符串数组或一个函数数组进行监控变化。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$scope.names = [<span class="string">'igor'</span>, <span class="string">'matias'</span>, <span class="string">'misko'</span>, <span class="string">'james'</span>];</span><br><span class="line">$scope.dataCount = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">$scope.$watchCollection(<span class="string">'names'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">newNames, oldNames</span>) </span>&#123;</span><br><span class="line">    $scope.dataCount = newNames.length;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h3 id="apply"><a href="#apply" class="headerlink" title="$apply"></a>$apply</h3><p><code>$apply</code> 将数据变化和 <code>digest cycle</code> 连为一起。</p>
 <p><code>$apply</code> 可被看作一个连接机制。当被你设置了 <code>$watch</code> 的 <code>$scope</code> 属性改变时，Angular 都会知道，那是因为 Angular 已经知道去监控那些改变，所以如果这种情况在框架中发生时，digest cycle 都会被执行。</p>
 <p>然而有时候你会在 Angular 之外手动改变 <code>$scope</code> 的属性，比如某个 <code>scope</code> 属性通过 jQuery 的 <code>$.ajax()</code> 改变，这样的话 Angular 并不能随之执行 digest cycle，此时就得用到 <code>$apply</code>，</p>
 <p>参考：</p>
-<p><a href="http://tutorials.jenkov.com/angularjs/watch-digest-apply.html" target="_blank" rel="external">AngularJS $watch() , $digest() and $apply()</a></p>
+<p><a href="http://tutorials.jenkov.com/angularjs/watch-digest-apply.html" target="_blank" rel="noopener">AngularJS $watch() , $digest() and $apply()</a></p>
 
       
     </div>
@@ -483,7 +483,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -500,7 +500,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
@@ -562,7 +562,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#watch-watchExpression-listener-objectEquality"><span class="nav-number">1.</span> <span class="nav-text">$watch(watchExpression, listener, [objectEquality])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#watchGroup-watchExpressions-listener"><span class="nav-number">2.</span> <span class="nav-text">$watchGroup(watchExpressions, listener);</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apply"><span class="nav-number">3.</span> <span class="nav-text">$apply</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#watch-watchExpression-lt-string-Function-scope-gt-listener-objectEquality"><span class="nav-number">1.</span> <span class="nav-text">$watch(watchExpression&lt;string|Function(scope)&gt;, listener, [objectEquality])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#watchGroup-watchExpressions-lt-string-Function-scope-gt-listener"><span class="nav-number">2.</span> <span class="nav-text">$watchGroup(watchExpressions&lt;string|Function(scope)&gt;, listener);</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apply"><span class="nav-number">3.</span> <span class="nav-text">$apply</span></a></li></ol></div>
             
 
           </div>

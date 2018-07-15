@@ -349,7 +349,7 @@
       
 
       
-        <p>安装 <strong>FFmpeg</strong>，直奔<a href="https://www.ffmpeg.org/" target="_blank" rel="external">官网</a>。</p>
+        <p>安装 <strong>FFmpeg</strong>，直奔<a href="https://www.ffmpeg.org/" target="_blank" rel="noopener">官网</a>。</p>
 <h2 id="将-gif-转为-mp4"><a href="#将-gif-转为-mp4" class="headerlink" title="将 gif 转为 mp4"></a>将 gif 转为 mp4</h2><p><strong>Twitter</strong> 宣布支持 <code>gif</code> 图片，它其实是将 <code>gif</code> 转为 <code>mp4</code> 再通过 <code>&lt;video&gt;</code> 标签展示的，这样的好处有：</p>
 <ul>
 <li>不必等全部资源加载完成再进行展示</li>
@@ -358,19 +358,19 @@
 </ul>
 <a id="more"></a>
 <p>命令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -f gif -i origin.gif output.mp4</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -f gif -i origin.gif output.mp4</span><br></pre></td></tr></table></figure>
 <h2 id="多段视频合成一段"><a href="#多段视频合成一段" class="headerlink" title="多段视频合成一段"></a>多段视频合成一段</h2><p>创建一个文件保存多个视频路径：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># this is a comment</span></div><div class="line">file <span class="string">'/path/to/file1'</span></div><div class="line">file <span class="string">'/path/to/file2'</span></div><div class="line">file <span class="string">'/path/to/file3'</span></div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this is a comment</span></span><br><span class="line">file <span class="string">'/path/to/file1'</span></span><br><span class="line">file <span class="string">'/path/to/file2'</span></span><br><span class="line">file <span class="string">'/path/to/file3'</span></span><br></pre></td></tr></table></figure>
 <p>命令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -f concat -i mylist.txt -c copy output</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -f concat -i mylist.txt -c copy output</span><br></pre></td></tr></table></figure>
 <h2 id="mp4-转-mp3"><a href="#mp4-转-mp3" class="headerlink" title="mp4 转 mp3"></a>mp4 转 mp3</h2><p>命令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -i video.mp4 music.mp3</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mp4 music.mp3</span><br></pre></td></tr></table></figure>
 <p>指定比特率 Bitrate：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -i video.mp4 -b:a 256K -vn music.mp3</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -b:a 256K -vn music.mp3</span><br></pre></td></tr></table></figure>
 <h2 id="获取文件信息"><a href="#获取文件信息" class="headerlink" title="获取文件信息"></a>获取文件信息</h2><p>命令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -i video.mp4</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mp4</span><br></pre></td></tr></table></figure>
 <h2 id="转换视频格式"><a href="#转换视频格式" class="headerlink" title="转换视频格式"></a>转换视频格式</h2><p>命令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -i video.mkv video.mp4</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mkv video.mp4</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -490,7 +490,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -507,7 +507,7 @@
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
