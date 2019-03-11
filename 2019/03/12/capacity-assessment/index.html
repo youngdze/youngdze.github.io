@@ -1,0 +1,750 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="capacity,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Justin's Words" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="原来的容量评估各个团队给出的评估方案包括：  根据我们以往所能承受的最高峰值来评估。据我所知，我们业务最近承受过的最高峰值是在王者荣耀决赛的时候，那就拿那个时候的数据来评估，那个时候我们用了多少台机，世界杯期间就先部署多少台机，不够再加。这个方法就是简单粗暴，直接堆机器。 接口压测。直接对我们的接口进行压测，把机器压到爆，那么快把机器压到爆那个QPS，就是我们机器所能承受的最大QPS。但其实这种场">
+<meta name="keywords" content="capacity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="容量评估">
+<meta property="og:url" content="http://youngdze.co/2019/03/12/capacity-assessment/index.html">
+<meta property="og:site_name" content="Justin&#39;s Words">
+<meta property="og:description" content="原来的容量评估各个团队给出的评估方案包括：  根据我们以往所能承受的最高峰值来评估。据我所知，我们业务最近承受过的最高峰值是在王者荣耀决赛的时候，那就拿那个时候的数据来评估，那个时候我们用了多少台机，世界杯期间就先部署多少台机，不够再加。这个方法就是简单粗暴，直接堆机器。 接口压测。直接对我们的接口进行压测，把机器压到爆，那么快把机器压到爆那个QPS，就是我们机器所能承受的最大QPS。但其实这种场">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://youngdze.co/images/WX20190312-005613@2x.png">
+<meta property="og:image" content="http://youngdze.co/images/1533706619_38.png">
+<meta property="og:image" content="http://youngdze.co/images/1533706717_7.png">
+<meta property="og:image" content="http://youngdze.co/images/1533708293_20.png">
+<meta property="og:image" content="http://youngdze.co/images/1533708365_28.png">
+<meta property="og:image" content="http://youngdze.co/images/1533710992_11.png">
+<meta property="og:updated_time" content="2019-03-11T17:01:03.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="容量评估">
+<meta name="twitter:description" content="原来的容量评估各个团队给出的评估方案包括：  根据我们以往所能承受的最高峰值来评估。据我所知，我们业务最近承受过的最高峰值是在王者荣耀决赛的时候，那就拿那个时候的数据来评估，那个时候我们用了多少台机，世界杯期间就先部署多少台机，不够再加。这个方法就是简单粗暴，直接堆机器。 接口压测。直接对我们的接口进行压测，把机器压到爆，那么快把机器压到爆那个QPS，就是我们机器所能承受的最大QPS。但其实这种场">
+<meta name="twitter:image" content="http://youngdze.co/images/WX20190312-005613@2x.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://youngdze.co/2019/03/12/capacity-assessment/">
+
+
+
+
+
+  <title> 容量评估 | Justin's Words </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-55843150-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Justin's Words</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://youngdze.co/2019/03/12/capacity-assessment/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Justin Young">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/images/cat.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Justin's Words">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Justin's Words" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                容量评估
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-12T00:50:00+08:00">
+                2019-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Data/" itemprop="url" rel="index">
+                    <span itemprop="name">Data</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2019/03/12/capacity-assessment/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/12/capacity-assessment/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="原来的容量评估"><a href="#原来的容量评估" class="headerlink" title="原来的容量评估"></a>原来的容量评估</h2><p>各个团队给出的评估方案包括：</p>
+<ol>
+<li>根据我们以往所能承受的最高峰值来评估。据我所知，我们业务最近承受过的最高峰值是在王者荣耀决赛的时候，那就拿那个时候的数据来评估，那个时候我们用了多少台机，世界杯期间就先部署多少台机，不够再加。这个方法就是简单粗暴，直接堆机器。</li>
+<li>接口压测。直接对我们的接口进行压测，把机器压到爆，那么快把机器压到爆那个QPS，就是我们机器所能承受的最大QPS。但其实这种场景还是不够真实反映线上数据，因为压测往往只是压测几个接口，但是我们所有接口可没那么少，仅仅靠压测来评估还是欠缺准确性。</li>
+</ol>
+<a id="more"></a>
+<h2 id="真实的线上压测"><a href="#真实的线上压测" class="headerlink" title="真实的线上压测"></a>真实的线上压测</h2><p>什么是真实的线上压测。</p>
+<p>世界杯到了，海量的流量过来了，我们开始紧张地进行机器扩容，经过几次扩容，我们的机器终于能承受近期最高峰值了，QPS达到25W，那么是不是能用这个点的各项指标来做机器的容量评估呢？</p>
+<p>我们把QPS在25W的时候的机器负载全部查出来，主要是CPU占比、内存占比和出外网带宽，对比当时单机的QPS。现在数据都有了，还是简单粗暴一点，认为QPS和各项指标存在线性关系，是不是2倍的QPS过来CPU也会翻倍呢？很难说，怎么验证这个线性关系是个问题。</p>
+<h2 id="大量机器负载样本"><a href="#大量机器负载样本" class="headerlink" title="大量机器负载样本"></a>大量机器负载样本</h2><p>上面的方法还是不够有说服力啊。是不是样本太少了？我们决定把所有机器的负载和QPS全部跑出来看看。这里还是要感谢腾讯云提供了大部分机器负载数据供我们研究。还有我们的ELK上报系统，QPS数据就是从上面来的。</p>
+<p>我把我们几百台机器的负载数据和QPS全部跑了出来，其中包括ngnix虚拟机、nginx容器、node虚拟机和node容器，一共起来有几百台机器。</p>
+<p><img src="/images/WX20190312-005613@2x.png" alt="负载样本"></p>
+<p>负载样本都有了，我们想得出各种机器的QPS和它们各项负载指标的关系，该怎么做？</p>
+<p>尝试根据其中一个样本做个QPS和CPU的关系图：</p>
+<p><img src="/images/1533706619_38.png" alt="QPS和CPU关系图"></p>
+<p>我眼睛花了…</p>
+<h2 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h2><p>什么是最小二乘法？以下是<a href="https://zh.wikipedia.org/zh-hans/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95?oldformat=true" target="_blank" rel="noopener">维基百科</a>看到的定义：</p>
+<blockquote>
+<p>最小二乘法（又称最小平方法）是一种数学优化技术。它通过最小化误差的平方和寻找数据的最佳函数匹配。利用最小二乘法可以简便地求得未知的数据，并使得这些求得的数据与实际数据之间误差的平方和为最小。</p>
+</blockquote>
+<p><img src="/images/1533706717_7.png" alt="回归分析"></p>
+<p>具体原理我就不班门弄斧，这个方法看起来很适合帮我们做容量分析，因为我们已经有了大量样本的，需要的就是在这些样本中找到一个关系，一个公式。</p>
+<h2 id="最小二乘法和容量评估"><a href="#最小二乘法和容量评估" class="headerlink" title="最小二乘法和容量评估"></a>最小二乘法和容量评估</h2><p>Matlab、Python 和 Ruby 都有对应的函数可以提供最小二乘法计算，这里我挑了 Python 的版本来说明下怎么使用，首先说明我是 Python 小白，写得不好请多多指教。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/Cellar/python/3.7.0/bin/python3</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> excel <span class="keyword">import</span> getNginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取到 Nginx 机器数据</span></span><br><span class="line">cpu, qps, ram, bandWidth = getNginx()</span><br><span class="line"></span><br><span class="line">cpu = sum(cpu, [])</span><br><span class="line">qps = sum(qps, [])</span><br><span class="line">ram = sum(ram, [])</span><br><span class="line">bandWidth = sum(bandWidth, [])</span><br><span class="line"></span><br><span class="line"><span class="comment"># np.array 要求参数是 list，所以 qps 和 cpu 应该是一一对应的长度相同的 list</span></span><br><span class="line">x = np.array(qps)   <span class="comment"># x 轴</span></span><br><span class="line">y = np.array(cpu)   <span class="comment"># y 轴</span></span><br><span class="line"></span><br><span class="line">z1 = np.polyfit(x, y, <span class="number">1</span>)    <span class="comment"># 1 代表单项式拟合，如果是 n，则代表多项式拟合，我们这里先计算线性函数</span></span><br><span class="line">p1 = np.poly1d(z1)  <span class="comment"># 获取数据分析完成后的计算公式</span></span><br><span class="line"></span><br><span class="line">print(p1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">yvals = p1(x)</span><br><span class="line">plot1 = plt.plot(x, y, <span class="string">'*'</span>, label=<span class="string">'original values'</span>)</span><br><span class="line">plot2 = plt.plot(x, yvals, <span class="string">'r'</span>, label=<span class="string">'polyfit values'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'x axis'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'y axis'</span>)</span><br><span class="line">plt.legend(loc=<span class="number">4</span>)</span><br><span class="line">plt.title(<span class="string">'polyfitting'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>运行一次分析 QPS 和 CPU 的关系试试看：<br><img src="/images/1533708293_20.png" alt><br><img src="/images/1533708365_28.png" alt></p>
+<p>同时得到的计算公式是：<code>y = 0.002823 x + 0.9327</code></p>
+<p>再看下 QPS 和内存的关系：</p>
+<p><img src="/images/1533710992_11.png" alt></p>
+<p>所得到的公式是：<code>y = 2.553e-05 x + 6.32</code></p>
+<p>假设我们现在我们的 nginx 有 3W QPS 过来，计算得到 <code>0.002823 * 30000 + 0.9327 = 85.6227</code>，而内存是<code>2.553 * 10e-5 * 30000 + 6.32 = 13.979</code>，所以这个时候 CPU 负载会达到 85.6227%，内存负载会达到13.979%，其实已经和我们线上真实压测数据非常拟合了。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>这里通过最小二乘法来分析机器容量得到的公式已经非常接近我们的真实情况了，和机器学习一样，样本越多结果越可信，如果可以，每天收集样本一直跑下去，公式会越来越准确的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/capacity/" rel="tag"># capacity</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/11/fe-publishment-system/" rel="next" title="前端发布系统设计">
+                <i class="fa fa-chevron-left"></i> 前端发布系统设计
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/cat.png" alt="Justin Young">
+          <p class="site-author-name" itemprop="name">Justin Young</p>
+          <p class="site-description motion-element" itemprop="description">You Deserve A Better Life</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">107</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/youngdze" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/youngdze" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原来的容量评估"><span class="nav-number">1.</span> <span class="nav-text">原来的容量评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#真实的线上压测"><span class="nav-number">2.</span> <span class="nav-text">真实的线上压测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大量机器负载样本"><span class="nav-number">3.</span> <span class="nav-text">大量机器负载样本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小二乘法"><span class="nav-number">4.</span> <span class="nav-text">最小二乘法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小二乘法和容量评估"><span class="nav-number">5.</span> <span class="nav-text">最小二乘法和容量评估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Justin Young</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'youngdze';
+      var disqus_identifier = '2019/03/12/capacity-assessment/';
+
+      var disqus_title = "容量评估";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
